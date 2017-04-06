@@ -47,6 +47,8 @@ namespace TestSite02
 
             app.Run(async (context) =>
             {
+                var logger = loggerFactory.CreateLogger("Information");
+                logger.LogWarning("Hello world!");
                 await context.Response.WriteAsync(env.ApplicationName);
             });
         }
