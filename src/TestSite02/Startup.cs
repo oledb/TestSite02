@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,6 +31,7 @@ namespace TestSite02
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            var serv = services.ToList();
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -46,6 +49,13 @@ namespace TestSite02
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
+                RequestPath = new PathString("/static_image")
+            });
 
             app.UseMvc(routers =>
             {

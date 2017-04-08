@@ -17,7 +17,6 @@ namespace TestSite02
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
-            Console.WriteLine("Hello world!");
 
             host.Run();
         }

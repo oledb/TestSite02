@@ -4,6 +4,16 @@
 @{
 }
 <body>
-<h1 style="color: red">Hello world</h1>
+<h1 style="color: green">Hello world</h1>
 <p>This is test of Asp.Net Core</p>
+    @if (ViewBag.Random != null)
+    {
+        <p>Random is @ViewBag.Random</p>
+        
+    }
+<form method="post">
+    <input type="text" name="min"/>
+    <input type="text" name="max"/>
+    <input type="submit" value="random"/>
+</form>
 </body>
