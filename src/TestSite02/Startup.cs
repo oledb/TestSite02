@@ -50,12 +50,6 @@ namespace TestSite02
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions()
-            {
-                FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), @"Images")),
-                RequestPath = new PathString("/static_image")
-            });
 
             app.UseMvc(routers =>
             {

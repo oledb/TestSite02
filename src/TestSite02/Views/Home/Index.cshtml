@@ -1,19 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
-<body>
-<h1 style="color: green">Hello world</h1>
-<p>This is test of Asp.Net Core</p>
-    @if (ViewBag.Random != null)
-    {
-        <p>Random is @ViewBag.Random</p>
-        
-    }
-<form method="post">
-    <input type="text" name="min"/>
-    <input type="text" name="max"/>
-    <input type="submit" value="random"/>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello world</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/styles/my_site.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="//fonts.googleapis.com/css?family=Sofia" rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Ultra" rel='stylesheet'>
+</head>
+@*<body class="my_background" style="background-image: url('/static_images/prlx02.jpg'); height: auto">*@
+<body style="background-color: #319177">
+    <Header class="w3-center">
+        <div class="w3-padding-64 w3-container">
+            <img class="w3-circle w3-image w3-card-4" src="static_images/avatar.jpg" />
+            <h1 class="w3-text-white font-ultra">Color Fluffy</h1>
+            <h3 class="font-sofia">Marina Kuznetsova</h3>
+            <div class="w3-bar w3-blue w3-round">
+                <a href="#" class="w3-bar-item w3-button fa fa-vk"></a>
+                <a href="#" class="w3-bar-item w3-button fa fa-instagram"></a>
+                <a href="#" class="w3-bar-item w3-button fa fa-google-plus-official"></a>
+                <a href="#" class="w3-bar-item w3-button fa fa-facebook-official"></a>
+            </div>
+        </div>
+    </Header>
 </body>
+</html>
