@@ -13,6 +13,12 @@ namespace TestSite02.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            throw new NullReferenceException();
+            return View();
+        }
+
+        public IActionResult Error()
+        {
             return View();
         }
     }

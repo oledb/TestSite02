@@ -43,7 +43,8 @@ namespace TestSite02
                 throw new NullReferenceException();
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
+            app.UseExceptionHandler("/Home/Error");
 
             if (env.IsDevelopment())
             {
