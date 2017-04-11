@@ -9,10 +9,10 @@ namespace TestSite02.FaketModel
     public class FakeObjectives : IObjectives
     {
         private List<Objective> list;
-
+        private int id = 0;
         public FakeObjectives()
         {
-            int id = 0;
+            
             list = new List<Objective>(10)
             {
                 new Objective {ObjectiveId = id++, Name = "Test 01"},
@@ -26,9 +26,20 @@ namespace TestSite02.FaketModel
             return list;
         }
 
+        public void RemoveObjective(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveObjective(Objective obj)
         {
+            obj.ObjectiveId = obj.ObjectiveId == 0 ? id++ : obj.ObjectiveId;
             list.Add(obj);
+        }
+
+        public void UpdateObjective(Objective obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -24,11 +24,22 @@ namespace TestSite02.Controllers
             return View(_objectives.GetObjectives());
         }
 
+        //POST: Add new Objective
         [HttpPost]
-        public IActionResult Index(string name)
+        public IActionResult Modify(string name = null, int? id = null, string action = "Add")
         {
-            _objectives.SaveObjective(new Objective { Name = name });
+            DoAction("Add", action, string.IsNullOrWhiteSpace(name), () =>
+            {
+                _objectives.SaveObjective(new Objective { Name = name });
+            });
+            
             return Index();
+        }
+
+        private void DoAction(string action, string value, bool condition, Action act)
+        {
+            if (string.Compare(action, value, StringComparison.OrdinalIgnoreCase) == 0 && condition)
+                act();
         }
     }
 }

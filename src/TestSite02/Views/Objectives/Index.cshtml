@@ -6,17 +6,26 @@
 }
 
 <h2>Objectives</h2>
-
+<script>
+    $(document).ready(function() {
+        $("#newSubmit").click(function () {
+            newTask = $("#newField").val();
+            console.log(newTask);
+        });
+    });
+</script>
 
 <ul class="w3-ul w3-border">
     @foreach (var obj in Model)
     {
-        <li>@obj.Name</li>
+        <li>     
+            <div>
+                @obj.Name
+            </div>
+        </li>
     }
     <li>
-        <form method="post">
-            <input type="text" name="name"/>
-            <input type="submit"/>
-        </form>
+            <input id="newField" type="text" name="name"/>
+        <button id="newSubmit" class="w3-button w3-green">Add</button>
     </li>
 </ul>
