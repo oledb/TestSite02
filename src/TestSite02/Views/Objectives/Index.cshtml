@@ -1,0 +1,22 @@
+﻿@model IEnumerable<TestSite02.AbstractModel.Objective>
+
+@{
+    ViewBag.Title = "Objectives";
+    Layout = "_Layout";
+}
+
+<h2>Objectives</h2>
+
+
+<ul class="w3-ul w3-border">
+    @foreach (var obj in Model)
+    {
+        <li>@obj.Name</li>
+    }
+    <li>
+        <form method="post">
+            <input type="text" name="name"/>
+            <input type="submit"/>
+        </form>
+    </li>
+</ul>

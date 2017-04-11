@@ -12,6 +12,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TestSite02.AbstractModel;
+using TestSite02.FaketModel;
 
 namespace TestSite02
 {
@@ -23,6 +25,7 @@ namespace TestSite02
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional:true, reloadOnChange: true);
             builder.AddEnvironmentVariables();
+            
             Configuration = builder.Build();
         }
 
@@ -31,7 +34,7 @@ namespace TestSite02
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var serv = services.ToList();
+            services.AddSingleton<IObjectives, FakeObjectives>();
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -44,8 +47,6 @@ namespace TestSite02
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseExceptionHandler("/Home/Error");
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -56,7 +57,7 @@ namespace TestSite02
             {
                 routers.MapRoute(
                     name: "Default",
-                    template: "{controller=Home}/{Action=Index}/{id?}"
+                    template: "{controller=Default}/{Action=Index}/{id?}"
                 );
             });
         }

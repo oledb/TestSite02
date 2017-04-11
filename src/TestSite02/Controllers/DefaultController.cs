@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestSite02.Controllers
 {
-    public class HomeController : Controller
+    public class DefaultController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()
