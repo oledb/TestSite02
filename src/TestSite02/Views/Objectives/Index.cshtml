@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TestSite02.AbstractModel.Objective>
+﻿@*model IEnumerable<TestSite02.AbstractModel.Objective>*@
 
 @{
     ViewBag.Title = "Objectives";
@@ -6,26 +6,28 @@
 }
 
 <h2>Objectives</h2>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $("#newSubmit").click(function () {
-            newTask = $("#newField").val();
-            console.log(newTask);
+    var app = angular.module('ObjectivesList', []);
+    app.controller('objsList',
+        function($scope, $http) {
+            $http(
+            {
+                method: 'get',
+                url: '/api/ObjectivesApi/Get'
+            }).then(function successCallback(responce) {
+                console.log(responce);
+            });
         });
-    });
 </script>
-
-<ul class="w3-ul w3-border">
-    @foreach (var obj in Model)
-    {
-        <li>     
-            <div>
-                @obj.Name
-            </div>
-        </li>
-    }
-    <li>
+<div data-ng-app="ObjectivesList" data-ng-controller="objsList">
+    <ul class="w3-ul w3-border">
+        @*<li ng-repeat="x in objs">
+            
+        </li>*@
+        <li>
             <input id="newField" type="text" name="name"/>
-        <button id="newSubmit" class="w3-button w3-green">Add</button>
-    </li>
-</ul>
+            <button id="newSubmit" class="w3-button w3-green">Add</button>
+        </li>
+    </ul>
+</div>

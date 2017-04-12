@@ -28,7 +28,7 @@ namespace TestSite02.FaketModel
 
         public void RemoveObjective(int id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void SaveObjective(Objective obj)
@@ -39,7 +39,7 @@ namespace TestSite02.FaketModel
 
         public void UpdateObjective(Objective obj)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
