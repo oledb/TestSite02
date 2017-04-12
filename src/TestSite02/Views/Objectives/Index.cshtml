@@ -6,28 +6,42 @@
 }
 
 <h2>Objectives</h2>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.min.js"></script>
 <script>
     var app = angular.module('ObjectivesList', []);
     app.controller('objsList',
-        function($scope, $http) {
-            $http(
-            {
-                method: 'get',
-                url: '/api/ObjectivesApi/Get'
-            }).then(function successCallback(responce) {
-                console.log(responce);
-            });
-        });
-</script>
-<div data-ng-app="ObjectivesList" data-ng-controller="objsList">
-    <ul class="w3-ul w3-border">
-        @*<li ng-repeat="x in objs">
+        function ($scope, $http) {
             
-        </li>*@
+            loadList($scope, $http);
+            $scope.AddObjective = function () {
+                saveElement($scope.objectiveName, $http);
+            }
+        });
+
+    function loadList(scope, http) {
+        http({
+            method: 'get',
+            url: '/api/ObjectivesApi'
+        }).then(function successCallback(responce) {
+            scope.objs = responce.data;
+        });
+    }
+
+    function saveElement(objName, http) {
+        console.log(objName);
+        http.post(
+            '/api/ObjectivesApi',
+            JSON.stringify( {'Name': objName} )
+            );
+    }
+</script>
+
+<div ng-app="ObjectivesList" ng-controller="objsList">
+    <ul class="w3-ul w3-border">
+        <li ng-repeat="x in objs">{{x.name}}</li>
         <li>
-            <input id="newField" type="text" name="name"/>
-            <button id="newSubmit" class="w3-button w3-green">Add</button>
+            <input ng-model="objectiveName" type="text"/>
+            <button ng-click="AddObjective()" class="w3-button w3-green">Add</button>
         </li>
     </ul>
 </div>

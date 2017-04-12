@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using TestSite02.AbstractModel;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TestSite02.Controllers
 {
@@ -13,10 +12,12 @@ namespace TestSite02.Controllers
     public class ObjectivesApiController : Controller
     {
         private IObjectives _objectives;
+        private ILogger _logger;
 
-        public ObjectivesApiController(IObjectives objectives)
+        public ObjectivesApiController(IObjectives objectives, ILoggerFactory loggerFactory)
         {
             _objectives = objectives;
+            _logger = loggerFactory.CreateLogger("Api");
         }
 
         // GET: api/values
@@ -35,14 +36,19 @@ namespace TestSite02.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] Objective obj)
         {
+            if (obj == null)
+                _logger.LogCritical("Name is empty!!!");
+            else
+                _logger.LogWarning($"Name of Objective is {obj.Name}" );
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]string name)
         {
+            
         }
 
         // DELETE api/values/5
