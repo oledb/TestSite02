@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Runtime.InteropServices.ComTypes
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -13,8 +14,12 @@
 </head>
 <body>
 <div class="w3-bar w3-green">
-    @Html.ActionLink("Home", "Index", "Default", null, new { @class = "w3-bar-item w3-button" })
-    @Html.ActionLink("Objectives", "Index", "Objectives", null, new {@class = "w3-bar-item w3-button"})
+    @{
+        var NavBarClass = new {@class = "w3-bar-item w3-button"};
+    }
+    @Html.ActionLink("Home", "Index", "Default", null, NavBarClass)
+    @Html.ActionLink("Objectives", "Index", "Objectives", null, NavBarClass)
+    @Html.ActionLink("TypeScirpt", "Index", "TypeScript", null, NavBarClass)
 </div>
 <div class="w3-container w3-quarter">
     

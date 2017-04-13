@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -38,10 +39,9 @@ namespace TestSite02.Controllers
         [HttpPost]
         public void Post([FromBody] Objective obj)
         {
-            if (obj == null)
-                _logger.LogCritical("Name is empty!!!");
-            else
-                _logger.LogWarning($"Name of Objective is {obj.Name}" );
+            if (string.IsNullOrEmpty(obj?.Name))
+                throw new NullReferenceException("Objecitve is null");
+            _objectives.SaveObjective(obj);
         }
 
         // PUT api/values/5
