@@ -17,7 +17,7 @@ namespace TestSite02.FaketModel
             {
                 new Objective {ObjectiveId = id++, Name = "Test 01"},
                 new Objective {ObjectiveId = id++, Name = "Test 02"},
-                new Objective {ObjectiveId = id++, Name = "Test 03"}
+                new Objective {ObjectiveId = id++, Name = "Test 03"},
             };
         }
 
