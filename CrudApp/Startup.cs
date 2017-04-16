@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.AspNetCore.Mvc;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
@@ -27,15 +28,20 @@ namespace CrudApp
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseStaticFiles();
+
+            app.UseMvc(routers =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routers.MapRoute(
+                    name: "default",
+                    template: "pages/{controller=Default}/{action=Index}");
             });
         }
     }
