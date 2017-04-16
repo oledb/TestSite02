@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestSite02", "src\TestSite02\TestSite02.xproj", "{22C8AB69-12EE-432C-A676-C18AD4CC2DAE}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestSite02.AbstractModel", "TestSite02.AbstractModel\TestSite02.AbstractModel.xproj", "{7AD5DC33-18F5-46EA-A51A-3020807A0520}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TestSite02.FakeModel", "src\TestSite02.FakeModel\TestSite02.FakeModel.xproj", "{E8FF4804-A35B-4F6B-ACA0-6282DF42C8F7}"
@@ -22,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{22C8AB69-12EE-432C-A676-C18AD4CC2DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22C8AB69-12EE-432C-A676-C18AD4CC2DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22C8AB69-12EE-432C-A676-C18AD4CC2DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22C8AB69-12EE-432C-A676-C18AD4CC2DAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7AD5DC33-18F5-46EA-A51A-3020807A0520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7AD5DC33-18F5-46EA-A51A-3020807A0520}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AD5DC33-18F5-46EA-A51A-3020807A0520}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,7 +33,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{22C8AB69-12EE-432C-A676-C18AD4CC2DAE} = {D7DD4CC9-1438-407A-AF34-0708D21B6768}
 		{7AD5DC33-18F5-46EA-A51A-3020807A0520} = {D7DD4CC9-1438-407A-AF34-0708D21B6768}
 		{E8FF4804-A35B-4F6B-ACA0-6282DF42C8F7} = {D7DD4CC9-1438-407A-AF34-0708D21B6768}
 	EndGlobalSection

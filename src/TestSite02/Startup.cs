@@ -34,7 +34,7 @@ namespace TestSite02
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IObjectives, FakeObjectives>();
+            //services.AddSingleton<IObjectives, FakeObjectives>();
         }
 
         public IConfigurationRoot Configuration { get; }
