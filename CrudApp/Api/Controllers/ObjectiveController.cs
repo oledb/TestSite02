@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TestSite02.AbstractModel;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace CrudApp.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -16,7 +14,7 @@ namespace CrudApp.Api.Controllers
 
         public ObjectiveController(IObjectives obj)
         {
-            this._objectives = obj;
+            _objectives = obj;
         }
 
         // GET: api/values
@@ -28,20 +26,23 @@ namespace CrudApp.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Objective value)
         {
+            _objectives.SaveObjective(value);
         }
 
-        // PUT api/values/5
+        // PUT api/values/{Objective}
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put([FromBody]Objective value)
         {
+            _objectives.UpdateObjective(value);
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _objectives.RemoveObjective(id);
         }
     }
 }

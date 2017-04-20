@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TestSite02.AbstractModel;
+using System;
 
 namespace TestSite02.FaketModel
 {
@@ -25,7 +27,8 @@ namespace TestSite02.FaketModel
 
         public void RemoveObjective(int id)
         {
-            
+            var item = GetObjectiveById(id);
+            list.Remove(item);
         }
 
         public void SaveObjective(Objective obj)
@@ -36,7 +39,18 @@ namespace TestSite02.FaketModel
 
         public void UpdateObjective(Objective obj)
         {
-            
+            var item = GetObjectiveById(obj.ObjectiveId);
+            item.Name = obj.Name;
+        }
+
+        private Objective GetObjectiveById(int id)
+        {
+            var item = (from o in list
+                    where o.ObjectiveId == id
+                    select o).SingleOrDefault();
+            if (item == null)
+                throw new NullReferenceException();
+            return item;
         }
     }
 }
