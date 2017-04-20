@@ -11,6 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\js\core\main.ts" />
+    <None Include="wwwroot\js\file.ts" />
+    <Content Include="wwwroot\js\main.js" />
+    <Content Include="wwwroot\js\main.js.map" />
+    <Content Include="wwwroot\js\main.ts" />
+    <Content Include="wwwroot\XMLFile.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\src\TestSite02.FakeModel\TestSite02.FakeModel.csproj" />
     <ProjectReference Include="..\TestSite02.AbstractModel\TestSite02.AbstractModel.csproj" />
   </ItemGroup>
@@ -31,10 +40,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>
