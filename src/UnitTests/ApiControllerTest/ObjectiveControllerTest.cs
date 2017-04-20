@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Xunit.Extensions;
 using Xunit;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
@@ -10,7 +7,6 @@ using CrudApp.Api.Controllers;
 
 namespace UnitTests
 {
-    
     public class ObjectiveControllerTest
     {
         private ObjectiveController Initilize()
@@ -78,7 +74,7 @@ namespace UnitTests
             var controller = Initilize();
 
             //Act
-            controller.Delete(new Objective { ObjectiveId = 2});
+            controller.Delete(2);
             var list = (List<Objective>)controller.Get();
             var nullObjective = list.Where(o => o.ObjectiveId == 2).SingleOrDefault();
 

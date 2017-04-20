@@ -39,10 +39,10 @@ namespace CrudApp.Api.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete]
-        public void Delete(Objective value)
+        [HttpDelete("{id}")]
+        public void Delete(int id)
         {
-            _objectives.RemoveObjective(value.ObjectiveId);
+            _objectives.RemoveObjective(id);
         }
     }
 }
