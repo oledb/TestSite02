@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>TestSite02</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\TestSite02.AbstractModel\TestSite02.AbstractModel.csproj" />
     <ProjectReference Include="..\TestSite02.FakeModel\TestSite02.FakeModel.csproj" />
   </ItemGroup>
 

@@ -32,17 +32,17 @@ namespace CrudApp.Api.Controllers
         }
 
         // PUT api/values/{Objective}
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put([FromBody]Objective value)
         {
             _objectives.UpdateObjective(value);
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete(Objective value)
         {
-            _objectives.RemoveObjective(id);
+            _objectives.RemoveObjective(value.ObjectiveId);
         }
     }
 }

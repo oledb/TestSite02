@@ -78,12 +78,14 @@ namespace UnitTests
             var controller = Initilize();
 
             //Act
-            controller.Delete(2);
+            controller.Delete(new Objective { ObjectiveId = 2});
             var list = (List<Objective>)controller.Get();
             var nullObjective = list.Where(o => o.ObjectiveId == 2).SingleOrDefault();
 
             //Assert
             Assert.Equal(2, list.Count);
+            Assert.Equal(0, list[0].ObjectiveId);
+            Assert.Equal(1, list[1].ObjectiveId);
             Assert.Null(nullObjective);
         }
     }
