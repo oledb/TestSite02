@@ -1,4 +1,4 @@
-﻿/// <binding Clean='clean' />
+﻿/// <binding BeforeBuild='min:js' Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -13,6 +13,7 @@ var paths = {
 };
 
 paths.js = paths.webroot + "js/**/*.js";
+paths.jquery = paths.webroot + "lib/jQuery/dist/jquery.min.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.css = paths.webroot + "css/**/*.css";
 paths.minCss = paths.webroot + "css/**/*.min.css";
@@ -30,7 +31,7 @@ gulp.task("clean:css", function (cb) {
 gulp.task("clean", ["clean:js", "clean:css"]);
 
 gulp.task("min:js", function () {
-    return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
+    return gulp.src([paths.jquery, paths.js, "!" + paths.minJs], { base: "." })
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .on('error', gutil.log)

@@ -8,15 +8,25 @@
     <PackageId>CrudApp</PackageId>
     <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <ApplicationIcon />
+    <Win32Resource />
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\typescript-deferred\**" />
+    <Content Remove="wwwroot\lib\typescript-deferred\**" />
+    <EmbeddedResource Remove="wwwroot\lib\typescript-deferred\**" />
+    <None Remove="wwwroot\lib\typescript-deferred\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\js\core\main.ts" />
-    <None Include="wwwroot\js\file.ts" />
+    <Content Include="wwwroot\js\file.ts" />
+    <Content Include="wwwroot\js\index.d.ts" />
+    <Content Include="wwwroot\js\JavaScript.js" />
     <Content Include="wwwroot\js\main.js" />
     <Content Include="wwwroot\js\main.js.map" />
     <Content Include="wwwroot\js\main.ts" />
-    <Content Include="wwwroot\XMLFile.xml" />
   </ItemGroup>
 
   <ItemGroup>
