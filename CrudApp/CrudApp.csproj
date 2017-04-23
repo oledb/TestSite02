@@ -15,20 +15,13 @@
   <ItemGroup>
     <Compile Remove="wwwroot\js\core\**" />
     <Compile Remove="wwwroot\lib\typescript-deferred\**" />
-    <Content Remove="wwwroot\js\core\**" />
-    <Content Remove="wwwroot\lib\typescript-deferred\**" />
     <EmbeddedResource Remove="wwwroot\js\core\**" />
     <EmbeddedResource Remove="wwwroot\lib\typescript-deferred\**" />
     <None Remove="wwwroot\js\core\**" />
     <None Remove="wwwroot\lib\typescript-deferred\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Scripts\core\file.ts" />
-    <Content Include="Scripts\jquerydef\index.d.ts" />
-    <Content Include="wwwroot\js\file.ts" />
-    <Content Include="wwwroot\js\index.d.ts" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\src\TestSite02.FakeModel\TestSite02.FakeModel.csproj" />
