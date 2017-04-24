@@ -1,12 +1,12 @@
-﻿/// <reference path="../jquerydef/index.d.ts" />
+﻿/// <reference path="../jquerydef/index.d.ts"/>
 
-class testingo {
+class Testingo {
     public ChangeH1() {
-        $("h1").html("hello world jqwerd");
+        $("h1").text("Hello, it's the Testingo class");
     }
 }
 
-window.onload = () => { 
-    var t = new testingo();
+window.onload = () => {
+    var t = new Testingo();
     t.ChangeH1();
 }

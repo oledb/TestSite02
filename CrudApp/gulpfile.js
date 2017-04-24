@@ -1,48 +1,48 @@
-﻿/// <binding BeforeBuild='min:js' Clean='clean' />
+﻿/// <binding BeforeBuild='scripts_compile' Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),
     rimraf = require("rimraf"),
     concat = require("gulp-concat"),
-    cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
-    gutil = require("gulp-util");
+    gutil = require("gulp-util"),
+    ts = require("gulp-typescript");
 
 var paths = {
     webroot: "./wwwroot/"
 };
 
-paths.js = paths.webroot + "js/**/*.js";
+var input = {
+    typescript: "./Scripts/"
+};
+
+paths.js = input.typescript + "core/**/*.js";
 paths.jquery = paths.webroot + "lib/jQuery/dist/jquery.min.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
-paths.css = paths.webroot + "css/**/*.css";
-paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "site.min.js";
-paths.concatCssDest = paths.webroot + "site.min.css";
+paths.tsconfig = input.typescript + "tsconfig.json";
+paths.jsOutput = input.typescript + "core/";
+
+var tsProject = ts.createProject(paths.tsconfig); 
+
+gulp.task("ts_compile", function () {
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe(gulp.dest(paths.jsOutput));
+});
 
 gulp.task("clean:js", function (cb) {
     rimraf(paths.concatJsDest, cb);
 });
 
-gulp.task("clean:css", function (cb) {
-    rimraf(paths.concatCssDest, cb);
-});
-
-gulp.task("clean", ["clean:js", "clean:css"]);
+gulp.task("clean", ["clean:js"]);
 
 gulp.task("min:js", function () {
-    return gulp.src([paths.jquery, paths.js, "!" + paths.minJs], { base: "." })
+    return gulp.src([ paths.jquery, paths.js, "!" + paths.minJs], { base: "." })
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .on('error', gutil.log)
         .pipe(gulp.dest("."));
 });
 
-gulp.task("min:css", function () {
-    return gulp.src([paths.css, "!" + paths.minCss])
-        .pipe(concat(paths.concatCssDest))
-        .pipe(cssmin())
-        .pipe(gulp.dest("."));
-});
-
-gulp.task("min", ["min:js", "min:css"]);
+gulp.task("build", ['ts_compile', 'min:js']);
