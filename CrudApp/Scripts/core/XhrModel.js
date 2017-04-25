@@ -42,4 +42,3 @@ $("window").ready(function () {
         console.log(rslt);
     });
 });
-//# sourceMappingURL=XhrModel.js.map
