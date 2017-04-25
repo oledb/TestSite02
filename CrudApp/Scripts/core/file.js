@@ -6,8 +6,4 @@ var Testingo = (function () {
     };
     return Testingo;
 }());
-window.onload = function () {
-    var t = new Testingo();
-    t.ChangeH1();
-};
 //# sourceMappingURL=file.js.map
