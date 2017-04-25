@@ -1,7 +1,7 @@
 ﻿/// <reference path="../jquerydef/index.d.ts"/>
 
 class XhrModel {
-    constructor(protected Url: string, protected error: () => void) {
+    constructor(protected Url: string, protected error: (xhr, status, error) => void) {
     }
     private readonly timeout = 5000;
     public Get(success: (result) => void) {
@@ -29,17 +29,35 @@ class XhrModel {
             timeout: this.timeout
         });
     }
+
+    public Put(value: any, success: (result) => void){
+        $.ajax({
+            type: 'put',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            url: this.Url,
+            success: success,
+            error: this.error,
+            data: JSON.stringify(value),
+            timeout: this.timeout
+        });
+    }
 }
 
 $("window").ready(() => {
-    var t = new XhrModel("/api/Objective", () => {
+    var t = new XhrModel("/api/Objective", (xhr, status, error) => {
         console.log("Cannot execute request!!!");
+        console.log(xhr);
+        console.log(status);
+        console.log(error);
     });
-    t.Post({ Name: "Test task 007" }, () => {
-        console.log("Post success");
-    });
-    t.Get((rslt) => {
-        console.log("get query");
-        console.log(rslt);
+    t.Put({ ObjectiveId: 0, Name: "Test task 007" }, () => {
+        console.log("Put success");
+        t.Get((rslt) => {
+            console.log("get query");
+            console.log(rslt);
+        });
     });
 });
