@@ -6,4 +6,3 @@ var Testingo = (function () {
     };
     return Testingo;
 }());
-//# sourceMappingURL=file.js.map
