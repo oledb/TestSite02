@@ -42,6 +42,15 @@ var XhrModel = (function () {
             timeout: this.timeout
         });
     };
+    XhrModel.prototype.Delete = function (id, success) {
+        $.ajax({
+            type: 'delete',
+            url: this.Url + "/" + id.toString(),
+            success: success,
+            error: this.error,
+            timeout: this.timeout
+        });
+    };
     return XhrModel;
 }());
 $("window").ready(function () {
@@ -51,11 +60,12 @@ $("window").ready(function () {
         console.log(status);
         console.log(error);
     });
-    t.Put({ ObjectiveId: 0, Name: "Test task 007" }, function () {
-        console.log("Put success");
+    t.Delete(0, function () {
+        console.log("Delete success");
         t.Get(function (rslt) {
             console.log("get query");
             console.log(rslt);
         });
     });
 });
+//# sourceMappingURL=XhrModel.js.map

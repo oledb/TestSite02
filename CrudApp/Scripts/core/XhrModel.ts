@@ -44,6 +44,16 @@ class XhrModel {
             timeout: this.timeout
         });
     }
+
+    public Delete(id: number, success: (result) => void) {
+        $.ajax({
+            type: 'delete',
+            url: this.Url + "/" + id.toString(),
+            success: success,
+            error: this.error,
+            timeout: this.timeout
+        });
+    }
 }
 
 $("window").ready(() => {
@@ -53,8 +63,8 @@ $("window").ready(() => {
         console.log(status);
         console.log(error);
     });
-    t.Put({ ObjectiveId: 0, Name: "Test task 007" }, () => {
-        console.log("Put success");
+    t.Delete(0, () => {
+        console.log("Delete success");
         t.Get((rslt) => {
             console.log("get query");
             console.log(rslt);
