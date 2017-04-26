@@ -63,11 +63,4 @@ $("window").ready(() => {
         console.log(status);
         console.log(error);
     });
-    t.Delete(0, () => {
-        console.log("Delete success");
-        t.Get((rslt) => {
-            console.log("get query");
-            console.log(rslt);
-        });
-    });
 });

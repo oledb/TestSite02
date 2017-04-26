@@ -60,12 +60,5 @@ $("window").ready(function () {
         console.log(status);
         console.log(error);
     });
-    t.Delete(0, function () {
-        console.log("Delete success");
-        t.Get(function (rslt) {
-            console.log("get query");
-            console.log(rslt);
-        });
-    });
 });
 //# sourceMappingURL=XhrModel.js.map
