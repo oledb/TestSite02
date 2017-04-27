@@ -6,3 +6,28 @@
 }
 <h2>Default - index</h2>
 <div class="test_list"></div>
+<br />
+<div class="w3-container w3-twothird">
+    <ul class="w3-ul w3-card w3-teal">
+        <li class="">
+            <input class="test_list-newElement w3-margin-0 w3-input
+                   w3-teal w3-border-0" type="text"
+                   placeholder="Click to add new" style="outline: none; padding: 0px" />
+        </li>
+        @{int index = 0; }
+        @foreach (var task in new string[] { "Hello", "World", "Test" })
+        {
+            var id = index++;
+            var temp = task + " " + id.ToString();
+
+            <li class="tl-li w3-display-container" data-tlid=@id.ToString()>
+                @temp
+                <div class="tl-ctr w3-display-right">
+                    <span class="w3-button w3-transparent">Complete</span>
+                    <span class="tl-rm w3-button w3-transparent">Remove</span>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
