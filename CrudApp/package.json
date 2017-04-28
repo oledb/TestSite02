@@ -10,6 +10,10 @@
     "gulp-uglify": "2.0.1",
     "gulp-util": "3.0.8",
     "rimraf": "2.6.1",
-    "typescript": "2.2.2"
+    "typescript": "2.2.2",
+    "mocha": "3.3.0",
+    "chai": "3.5.0",
+    "jasmine": "2.6.0",
+    "@types/jasmine": "2.5.47"
   }
 }
