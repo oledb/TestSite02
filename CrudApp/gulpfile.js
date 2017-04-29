@@ -42,11 +42,15 @@ gulp.task("compile:ts_test", function () {
         .js.pipe(gulp.dest(paths.jsOutputTest));
 });
 
-gulp.task("clean:js", function (cb) {
+gulp.task("clean:jsmin", function (cb) {
     rimraf(paths.concatJsDest, cb);
 });
 
-gulp.task("clean", ["clean:js"]);
+gulp.task("clean:jsts", function (cb) {
+    rimraf(paths.js, cb);
+});
+
+gulp.task("clean", ["clean:jsmin", "clean:jsts"]);
 
 gulp.task("min:js", function () {
     return gulp.src([ paths.jquery, paths.js, "!" + paths.minJs], { base: "." })
