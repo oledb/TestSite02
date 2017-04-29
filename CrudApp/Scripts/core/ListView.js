@@ -71,4 +71,3 @@ $("window").ready(function () {
     var view = new ListView(".test_list", "w3-orange", "w3-hover-red");
     var controller = new ListController(view);
 });
-//# sourceMappingURL=ListView.js.map

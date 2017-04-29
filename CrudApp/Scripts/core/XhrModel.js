@@ -61,4 +61,3 @@ $("window").ready(function () {
         console.log(error);
     });
 });
-//# sourceMappingURL=XhrModel.js.map

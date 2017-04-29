@@ -13,22 +13,33 @@ var paths = {
 };
 
 var input = {
-    typescript: "./Scripts/"
+    typescript: "./Scripts/",
+    typescriptTest: "./Scripts.test/"
 };
 
 paths.js = input.typescript + "core/**/*.js";
 paths.jquery = paths.webroot + "lib/jQuery/dist/jquery.min.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.concatJsDest = paths.webroot + "site.min.js";
+//TS Prod
 paths.tsconfig = input.typescript + "tsconfig.json";
 paths.jsOutput = input.typescript + "core/";
+//TS Test
+paths.tsconfigTest = input.typescriptTest + "tsconfig.json";
+paths.jsOutputTest = input.typescriptTest;
 
-var tsProject = ts.createProject(paths.tsconfig); 
-
-gulp.task("ts_compile", function () {
+gulp.task("compile:ts", function () {
+    let tsProject = ts.createProject(paths.tsconfig); 
     return tsProject.src()
         .pipe(tsProject())
         .js.pipe(gulp.dest(paths.jsOutput));
+});
+
+gulp.task("compile:ts_test", function () {
+    let tsProject = ts.createProject(paths.tsconfigTest); 
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe(gulp.dest(paths.jsOutputTest));
 });
 
 gulp.task("clean:js", function (cb) {
@@ -45,4 +56,6 @@ gulp.task("min:js", function () {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("build", ['ts_compile', 'min:js']);
+gulp.task("build", ['compile:ts'], function () {
+    gulp.start("min:js");
+});
