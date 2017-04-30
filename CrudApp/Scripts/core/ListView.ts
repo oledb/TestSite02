@@ -1,6 +1,4 @@
-﻿/// <reference path="../jquerydef/index.d.ts"/>
-
-class ListView {
+﻿class ListView {
     public readonly listClass = "ListView";
     public readonly addButtonClass = "ListView-AddBtn";
     public readonly removeButtonClass = "ListView-RemoveBtn";
@@ -77,6 +75,11 @@ class ListController {
         });
     }
 }
+
+function myFunction(text: string) {
+    $(".fun").text(text);
+}
+
 
 $("window").ready(() => {
     var view = new ListView(".test_list", "w3-orange", "w3-hover-red");

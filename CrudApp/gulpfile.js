@@ -6,7 +6,9 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
     gutil = require("gulp-util"),
-    ts = require("gulp-typescript");
+    ts = require("gulp-typescript"),
+    jasmineBrowser = require('gulp-jasmine-browser'),
+    watch = require('gulp-watch');
 
 var paths = {
     webroot: "./wwwroot/"
@@ -27,6 +29,11 @@ paths.jsOutput = input.typescript + "core/";
 //TS Test
 paths.tsconfigTest = input.typescriptTest + "tsconfig.json";
 paths.jsOutputTest = input.typescriptTest;
+paths.jsJasmine = input.typescriptTest + "*_spec.js";
+
+var vendor = {
+    jQuery: "./wwwroot/lib/jquery/dist/jquery.min.js"
+};
 
 gulp.task("compile:ts", function () {
     let tsProject = ts.createProject(paths.tsconfig); 
@@ -62,4 +69,11 @@ gulp.task("min:js", function () {
 
 gulp.task("build", ['compile:ts'], function () {
     gulp.start("min:js");
+});
+
+gulp.task('jasmine', function () {
+    return gulp.src([vendor.jQuery, paths.jsJasmine, paths.js])
+        .pipe(watch(paths.jsJasmine))
+        .pipe(jasmineBrowser.specRunner())
+        .pipe(jasmineBrowser.server({ port: 80 }));
 });
