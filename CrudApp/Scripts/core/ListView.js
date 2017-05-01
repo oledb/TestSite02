@@ -1,12 +1,18 @@
 var ListView = (function () {
-    function ListView(app) {
-        this.app = app;
-        this.UlName = app + "_ul";
+    function ListView(App, color) {
+        if (color === void 0) { color = ""; }
+        this.App = App;
+        this.color = color;
+        this.list = [];
+        this.UlName = App + "_ul";
         this.ClassUlName = "." + this.UlName;
-        $("." + this.app).append(this.CreateList());
+        $("." + this.App).append(this.CreateList());
     }
     ListView.prototype.CreateList = function () {
-        return "<ul class=\"" + this.UlName + " w3-ul w3-card\"></ul>";
+        return "<ul class=\"" + this.UlName + " w3-ul w3-card " + this.color + "\"></ul>";
+    };
+    ListView.prototype.Add = function (text) {
+        this.list.push(new ListElementView(this, text));
     };
     return ListView;
 }());
@@ -20,10 +26,12 @@ var ListElementView = (function () {
         $(listView.ClassUlName).append(this.CreateElement(text));
     }
     ListElementView.prototype.CreateElement = function (text) {
-        return "<li class=\"" + this.LiName + "\">" + text + "</li>";
+        return "<li class=\"" + this.LiName + " w3-display-container\">" + text + "</li>";
     };
     return ListElementView;
 }());
 $("window").ready(function () {
-    var view = new ListView("test_list");
+    var view = new ListView("test_list", "w3-orange");
+    view.Add("Hello");
+    view.Add("World");
 });

@@ -1,15 +1,19 @@
 ﻿class ListView {
-    constructor(public app: string) {
-        this.UlName = app + "_ul";
+    constructor(public App: string, private color: string = "") {
+        this.UlName = App + "_ul";
         this.ClassUlName = "." + this.UlName;
-        $(`.${this.app}`).append(this.CreateList());
+        $(`.${this.App}`).append(this.CreateList());
     }
 
     public UlName: string;
     public ClassUlName: string;
-
+    private list: Array<ListElementView> = [];
     private CreateList(): string {
-        return `<ul class="${this.UlName} w3-ul w3-card"></ul>`
+        return `<ul class="${this.UlName} w3-ul w3-card ${this.color}"></ul>`
+    }
+
+    public Add(text: string) {
+        this.list.push(new ListElementView(this, text));
     }
 }
 
@@ -23,10 +27,12 @@ class ListElementView {
     public ClassLiName: string;
 
     private CreateElement(text:string): string {
-        return `<li class="${this.LiName}">${text}</li>`;
+        return `<li class="${this.LiName} w3-display-container">${text}</li>`;
     }
 }
 
 $("window").ready(() => {
-    let view = new ListView("test_list");
+    let view = new ListView("test_list", "w3-orange");
+    view.Add("Hello");
+    view.Add("World");
 });
