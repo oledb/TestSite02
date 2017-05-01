@@ -73,6 +73,8 @@ gulp.task("build", ['compile:ts'], function () {
     gulp.start("min:js");
 });
 
+gulp.task("test", ['compile:ts', "compile:ts_test"]);
+
 gulp.task('jasmine', function () {
     return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine, paths.js])
         .pipe(watch([paths.jsJasmine, paths.js]))
