@@ -11,7 +11,8 @@ var gulp = require("gulp"),
     watch = require('gulp-watch');
 
 var paths = {
-    webroot: "./wwwroot/"
+    webroot: "./wwwroot/",
+    webrootlib: "./wwwroot/lib/"
 };
 
 var input = {
@@ -32,7 +33,8 @@ paths.jsOutputTest = input.typescriptTest;
 paths.jsJasmine = input.typescriptTest + "*_spec.js";
 
 var vendor = {
-    jQuery: "./wwwroot/lib/jquery/dist/jquery.min.js"
+    jQuery: paths.webrootlib +   "/jquery/dist/jquery.min.js",
+    jasminjq: paths.webrootlib + "/jasmine-jquery/lib/jasmine-jquery.js"
 };
 
 gulp.task("compile:ts", function () {
@@ -72,8 +74,8 @@ gulp.task("build", ['compile:ts'], function () {
 });
 
 gulp.task('jasmine', function () {
-    return gulp.src([vendor.jQuery, paths.jsJasmine, paths.js])
-        .pipe(watch(paths.jsJasmine))
+    return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine, paths.js])
+        .pipe(watch([paths.jsJasmine, paths.js]))
         .pipe(jasmineBrowser.specRunner())
         .pipe(jasmineBrowser.server({ port: 80 }));
 });

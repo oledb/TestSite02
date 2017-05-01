@@ -6,10 +6,12 @@
 describe('jquery main test', () => {
     
     it('add some text to fun class', () => {
-        let input = '<div class="fun"></div>';
-        myFunction("Hello world text");
-        let output = $(input).append("Hello world text")[0].outerHTML;
-        expect(output === '<div class="fun">Hello world text</div>')
-            .toBeTruthy("It's alway false, HAHAHA!!");
+        //arrange
+        setFixtures('<div class="fun"></div>');
+        //act
+        var text = "Hello world text";
+        $(".fun").text(text);
+        //assert
+        expect(".fun").toHaveText(text);
     });
 });
