@@ -1,7 +1,7 @@
 ﻿/// <reference path="../jquerydef/index.d.ts"/>
 
-class XhrModel {
-    constructor(protected Url: string, protected error: (xhr, status, error) => void) {
+class XhrModel implements IXhrModel {
+    constructor(protected Url: string, public error: (xhr, status, error) => void) {
     }
     private readonly timeout = 5000;
     public Get(success: (result) => void) {

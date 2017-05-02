@@ -50,4 +50,8 @@ describe("ListController tests", function () {
             expect(view.Items.length == 0).toBeTruthy("View.Items is not empty!");
         });
     });
+    describe("Test controller with model", function () {
+        it("Should get 2 objective when controller is creating");
+        it("Should use model when add new element");
+    });
 });
