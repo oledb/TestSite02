@@ -8,6 +8,7 @@
 <script>
     $("window").ready(function () {
         let view = new ListView("test_list", "w3-orange", "w3-hover-red");
+        let controller = new ListController(view);
         view.Add(0, "Hello");
         view.Add(1, "World");
     });

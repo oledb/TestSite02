@@ -1,5 +1,5 @@
 describe("ListView tests", function () {
-    describe("Design only without animation and events", function () {
+    describe("Create and add elements", function () {
         it("should create a new ListView in a div container", function () {
             setFixtures('<div class="list_view"></div>');
             var color = "w3-green";

@@ -1,10 +1,10 @@
 ﻿class ListElementView {
-    constructor(public listView: ListView, public Id: number, public text: string = "") {
+    constructor(public listView: ListView, public Id: number, public Text: string = "") {
         this.LiName = listView.Ul + "_li";
         this.LiNameSelector = "." + this.LiName;
         this.LiId = this.LiName + "-" + Id.toString();
         this.LiIdSelector = "#" + this.LiId;
-        $(listView.UlSelector).append(this.GetElement(text));
+        $(listView.UlSelector).append(this.GetElement(this.Text));
     }
     public LiName: string;
     public LiNameSelector: string;

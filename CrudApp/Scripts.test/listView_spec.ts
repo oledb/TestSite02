@@ -4,7 +4,7 @@
 /// <reference path="../node_modules/@types/jasmine-jquery/index.d.ts"/>
 
 describe("ListView tests", () => {
-    describe("Design only without animation and events", () => {
+    describe("Create and add elements", () => {
         it("should create a new ListView in a div container", () => {
             setFixtures('<div class="list_view"></div>');
 

@@ -4,15 +4,13 @@
 /// <reference path="../node_modules/@types/jasmine/index.d.ts"/>
 /// <reference path="../node_modules/@types/jasmine-jquery/index.d.ts"/>
 
-describe("ListElementView test", () => {
-    describe("Element only", () => {
-        it("should create an elementView ", () => {
-            setFixtures('<div class="list_view"></div>');
+describe("ListElementView tests", () => {
+    it("should create an elementView ", () => {
+        setFixtures('<div class="list_view"></div>');
 
-            let view = new ListView("list_view");
-            let elementView = new ListElementView(view, 0);
+        let view = new ListView("list_view");
+        let elementView = new ListElementView(view, 0);
 
-            expect(view.UlSelector).toContainElement("li");
-        });
+        expect(view.UlSelector).toContainElement("li");
     });
 });

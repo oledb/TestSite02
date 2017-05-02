@@ -10,7 +10,7 @@
         $(this.UlSelector).append(this.GetInputElement());
     }
 
-    private list: Array<ListElementView> = [];
+    public Items: Array<ListElementView> = [];
 
     private GetList(): string {
         return `<ul class="${this.Ul} w3-ul w3-card ${this.color}"></ul>`
@@ -35,6 +35,6 @@
 
     private tempIndex = 0;
     public Add(id:number, text: string) {
-        this.list.push(new ListElementView(this, id, text));
+        this.Items.push(new ListElementView(this, id, text));
     }
 }
