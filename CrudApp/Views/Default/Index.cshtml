@@ -5,8 +5,15 @@
     Layout = "_Layout";
 }
 <h2>Default - index</h2>
+<script>
+    $("window").ready(function () {
+        let view = new ListView("test_list", "w3-orange", "w3-hover-red");
+        view.Add(0, "Hello");
+        view.Add(1, "World");
+    });
+</script>
 <div class="test_list w3-panel w3-twothird"></div>
-<br />
+@*<br />
 <div class="w3-container w3-twothird">
     <ul class="w3-ul w3-card w3-teal">
         <li class="w3-display-container">
@@ -30,4 +37,4 @@
             </li>
         }
         </ul>
-</div>
+</div>*@

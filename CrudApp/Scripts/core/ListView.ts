@@ -1,13 +1,13 @@
 ﻿class ListView {
     constructor(public App: string, private color: string = "", private hoverColor: string ="") {
         this.Ul = App + "_ul";
-        this.ClassUl = "." + this.Ul;
+        this.UlSelector = "." + this.Ul;
         this.Input = App + "_input";
-        this.ClassInput = "." + this.Input;
+        this.InputSelector = "." + this.Input;
         this.InputButton = App + "_inputButton";
-        this.ClassInputButton = "." + this.InputButton;
+        this.InputButtonSelector = "." + this.InputButton;
         $(`.${this.App}`).append(this.GetList());
-        $(this.ClassUl).append(this.GetInputElement());
+        $(this.UlSelector).append(this.GetInputElement());
     }
 
     private list: Array<ListElementView> = [];
@@ -27,33 +27,14 @@
     }
 
     public Ul: string;
-    public ClassUl: string;
+    public UlSelector: string;
     public Input: string;
-    public ClassInput: string;
+    public InputSelector: string;
     public InputButton: string;
-    public ClassInputButton: string;
+    public InputButtonSelector: string;
 
-    public Add(text: string) {
-        this.list.push(new ListElementView(this, text));
+    private tempIndex = 0;
+    public Add(id:number, text: string) {
+        this.list.push(new ListElementView(this, id, text));
     }
 }
-
-class ListElementView {
-    constructor(public listView: ListView, public text: string = "") {
-        this.LiName = listView.Ul + "_li";
-        this.ClassLiName = "." + this.LiName;
-        $(listView.ClassUl).append(this.GetElement(text));
-    }
-    public LiName: string;
-    public ClassLiName: string;
-
-    private GetElement(text:string): string {
-        return `<li class="${this.LiName} w3-display-container">${text}</li>`;
-    }
-}
-
-$("window").ready(() => {
-    let view = new ListView("test_list", "w3-orange", "w3-hover-red");
-    view.Add("Hello");
-    view.Add("World");
-});
