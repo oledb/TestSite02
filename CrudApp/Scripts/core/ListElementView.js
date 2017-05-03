@@ -5,9 +5,11 @@ var ListElementView = (function () {
         this.Id = Id;
         this.Text = Text;
         this.LiClass = listView.Ul + "_li";
-        this.LiClassSelector = "." + this.LiClass;
         this.LiId = this.LiClass + "-" + Id.toString();
-        this.LiIdSelector = "#" + this.LiId;
+        this.selector = {
+            liClass: "." + this.LiClass,
+            liId: "#" + this.LiId
+        };
         this.GetElement(this.Text).appendTo(listView.UlSelector);
     }
     ListElementView.prototype.GetElement = function (text) {

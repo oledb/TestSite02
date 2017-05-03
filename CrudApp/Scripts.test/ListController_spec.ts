@@ -88,7 +88,7 @@ describe("ListController tests", () => {
 
             expect(view.Items.length == 0).not.toBeTruthy("View.Items is empty");
             expect(view.Items.length == 2).toBeTruthy("View.Items has not 2 elements");
-            expect(view.Items[0].LiIdSelector).toHaveText(view.Items[0].Text);
+            expect(view.Items[0].selector.liId).toHaveText(view.Items[0].Text);
         });
 
         it("Should use model when add new element", () => {

@@ -64,7 +64,7 @@ describe("ListController tests", function () {
             var controller = new ListController(view, model);
             expect(view.Items.length == 0).not.toBeTruthy("View.Items is empty");
             expect(view.Items.length == 2).toBeTruthy("View.Items has not 2 elements");
-            expect(view.Items[0].LiIdSelector).toHaveText(view.Items[0].Text);
+            expect(view.Items[0].selector.liId).toHaveText(view.Items[0].Text);
         });
         it("Should use model when add new element", function () {
             setFixtures('<div class="list_view"></div>');
