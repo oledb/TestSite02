@@ -11,18 +11,17 @@
 
     public LiClass: string;
     public LiId: string;
-    public element: JQuery;
+    public root: JQuery;
     public selector: {
         liClass: string,
         liId: string
     }
 
     private GetElement(text: string): JQuery {
-        this.element = $("<li></li>")
-            .addClass(this.LiClass)
-            .addClass("w3-display-container")
+        this.root = $("<li></li>")
+            .addClass(`${this.LiClass} w3-display-container`)
             .text(text);
-        this.element.attr("id", this.LiId);
-        return this.element;
+        this.root.attr("id", this.LiId);
+        return this.root;
     }
 }

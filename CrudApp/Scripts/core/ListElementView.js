@@ -13,12 +13,11 @@ var ListElementView = (function () {
         this.GetElement(this.Text).appendTo(listView.UlSelector);
     }
     ListElementView.prototype.GetElement = function (text) {
-        this.element = $("<li></li>")
-            .addClass(this.LiClass)
-            .addClass("w3-display-container")
+        this.root = $("<li></li>")
+            .addClass(this.LiClass + " w3-display-container")
             .text(text);
-        this.element.attr("id", this.LiId);
-        return this.element;
+        this.root.attr("id", this.LiId);
+        return this.root;
     };
     return ListElementView;
 }());

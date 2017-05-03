@@ -20,9 +20,10 @@ describe("ListView tests", function () {
             setFixtures('<div class="list_view"></div>');
             var color = "w3-green";
             var view = new ListView("list_view", color);
-            expect("li").toContainElement("input");
-            expect("input").toHaveClass(view.Input);
-            expect(view.InputSelector).toHaveClass(color);
+            console.log(view);
+            expect(view.liInput).toContainElement("input");
+            expect(view.input).toHaveClass(view.inputClass);
+            expect(view.input).toHaveClass(color);
         });
         it("The input should have a button 'Add' with hover color", function () {
             setFixtures('<div class="list_view"></div>');
@@ -30,10 +31,10 @@ describe("ListView tests", function () {
             var color = "w3-green";
             var view = new ListView("list_view", color, hoverColor);
             expect("li").toContainElement("button");
-            expect("button").toHaveClass(view.InputButton);
-            expect(view.InputButtonSelector).toHaveClass(hoverColor);
-            expect(view.InputButtonSelector).toHaveClass(color);
-            expect(view.InputButtonSelector).toHaveText("Add");
+            expect("button").toHaveClass(view.inputButtonClass);
+            expect(view.inputAddButton).toHaveClass(hoverColor);
+            expect(view.inputAddButton).toHaveClass(color);
+            expect(view.inputAddButton).toHaveText("Add");
         });
     });
 });
