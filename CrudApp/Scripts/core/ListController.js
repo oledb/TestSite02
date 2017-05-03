@@ -20,7 +20,7 @@ var ListController = (function () {
     ListController.prototype.AddNewElementCommand = function () {
         var _this = this;
         this.LastCommand = "add";
-        var text = $(this.View.InputSelector).val().trim();
+        var text = $(this.View.input).val().trim();
         if (text != "") {
             if (this.model != undefined) {
                 this.model.Post(text, function (result) {
@@ -29,15 +29,15 @@ var ListController = (function () {
             }
             this.View.Add(0, text);
         }
-        $(this.View.InputSelector).val("");
+        $(this.View.input).val("");
     };
     ListController.prototype.SetEventsToAddButton = function () {
         var _this = this;
-        $(this.View.InputButtonSelector)
+        $(this.View.inputAddButton)
             .on('click', function () {
             _this.AddNewElementCommand();
         });
-        $(this.View.InputSelector).keypress(function (e) {
+        $(this.View.input).keypress(function (e) {
             var key = e.which;
             if (key == 13) {
                 _this.AddNewElementCommand();

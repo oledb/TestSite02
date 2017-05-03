@@ -18,7 +18,7 @@
 
     private AddNewElementCommand():void {
         this.LastCommand = "add";
-        let text = ($(this.View.InputSelector).val() as string).trim();
+        let text = ($(this.View.input).val() as string).trim();
         if (text != "") {
             if (this.model != undefined) {
                 this.model.Post(text, (result) => {
@@ -27,15 +27,15 @@
             }
             this.View.Add(0, text);
         }
-        $(this.View.InputSelector).val("");
+        $(this.View.input).val("");
     }
 
     private SetEventsToAddButton():void {
-        $(this.View.InputButtonSelector)
+        $(this.View.inputAddButton)
             .on('click', () => {
                 this.AddNewElementCommand();
             });
-        $(this.View.InputSelector).keypress((e) => {
+        $(this.View.input).keypress((e) => {
             let key = e.which;
             if (key == 13) {
                 this.AddNewElementCommand();

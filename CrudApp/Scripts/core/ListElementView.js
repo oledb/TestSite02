@@ -4,13 +4,13 @@ var ListElementView = (function () {
         this.listView = listView;
         this.Id = Id;
         this.Text = Text;
-        this.LiClass = listView.Ul + "_li";
+        this.LiClass = listView.ulName + "_li";
         this.LiId = this.LiClass + "-" + Id.toString();
         this.selector = {
             liClass: "." + this.LiClass,
             liId: "#" + this.LiId
         };
-        this.GetElement(this.Text).appendTo(listView.UlSelector);
+        this.GetElement(this.Text).appendTo(listView.root);
     }
     ListElementView.prototype.GetElement = function (text) {
         this.root = $("<li></li>")

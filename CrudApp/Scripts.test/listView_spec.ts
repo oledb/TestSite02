@@ -10,10 +10,9 @@ describe("ListView tests", () => {
 
             let color = "w3-green";
             let view = new ListView("list_view", color);
-            
-            expect(".list_view").toContainElement("ul");
-            expect("ul").toHaveClass("w3-green");
-            expect("ul").toHaveClass(view.Ul);
+
+            expect(".list_view").toContainElement(`ul, .${view.ulName}`);
+            expect(view.root).toHaveClass("w3-green");
             
         });
 
@@ -23,9 +22,9 @@ describe("ListView tests", () => {
 
             view.Add(0, "Hello world");
 
-            expect(view.UlSelector).toContainElement("li");
-            expect("li").toContainText("Hello world");
-            expect("#list_view_ul_li-0").toContainText("Hello world");
+            expect(view.Items.length == 1).toBeTruthy("view.Items is empty or overflow");
+            expect(view.Items[0].root).toContainText("Hello world");
+            expect(view.Items[0].root).toHaveId("list_view_ul_li-0");
         });
 
         it("The first element should be input", () => {
@@ -34,7 +33,7 @@ describe("ListView tests", () => {
             let view = new ListView("list_view", color);
 
             expect(view.liInput).toContainElement("input");
-            expect(view.input).toHaveClass(view.inputClass);
+            expect(view.input).toHaveClass(view.inputName);
             expect(view.input).toHaveClass(color);
         });
 
@@ -44,8 +43,8 @@ describe("ListView tests", () => {
             let color = "w3-green";
             let view = new ListView("list_view", color, hoverColor);
 
-            expect("li").toContainElement("button");
-            expect("button").toHaveClass(view.inputButtonClass);
+            expect(view.liInput).toContainElement("button");
+            expect(view.inputAddButton).toHaveClass(view.inputButtonName);
             expect(view.inputAddButton).toHaveClass(hoverColor);
             expect(view.inputAddButton).toHaveClass(color);
             expect(view.inputAddButton).toHaveText("Add");

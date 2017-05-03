@@ -1,14 +1,5 @@
 describe("ListController tests", function () {
     describe("Add new element", function () {
-        it("should rise event on clicking 'add' button", function () {
-            setFixtures('<div class="list_view"></div>');
-            var view = new ListView("list_view");
-            var controller = new ListController(view);
-            var spyEvent = spyOnEvent(view.InputButtonSelector, 'click');
-            $(view.InputButtonSelector).trigger('click');
-            expect('click').toHaveBeenTriggeredOn(view.InputButtonSelector);
-            expect(controller.LastCommand == 'add').toBeTruthy("Event click has not been triggered");
-        });
         it("should add new element on clicking 'add' button", function () {
             setFixtures('<div class="list_view"></div>');
             var view = new ListView("list_view");
@@ -21,10 +12,10 @@ describe("ListController tests", function () {
             setFixtures('<div class="list_view"></div>');
             var view = new ListView("list_view");
             var controller = new ListController(view);
-            $(view.InputSelector).val("New task 1");
+            $(view.input).val("New task 1");
             var keypress = $.Event("keypress");
             keypress.which = 13;
-            $(view.InputSelector).trigger(keypress);
+            $(view.input).trigger(keypress);
             expect(view.Items.length == 1).toBeTruthy("View.Items is empty");
             expect(view.Items[0].Text === "New task 1").toBeTruthy("Text is not correct");
         });
@@ -32,20 +23,20 @@ describe("ListController tests", function () {
             setFixtures('<div class="list_view"></div>');
             var view = new ListView("list_view");
             var controller = new ListController(view);
-            $(view.InputSelector).val("Test");
-            $(view.InputButtonSelector).trigger('click');
-            expect($(view.InputSelector).val() === "").toBeTruthy("Input is not empty after add");
+            $(view.input).val("Test");
+            $(view.inputAddButton).trigger('click');
+            expect($(view.input).val() === "").toBeTruthy("Input is not empty after add");
         });
         it("should not add if input is empty or has only spaces or tabs", function () {
             setFixtures('<div class="list_view"></div>');
             var view = new ListView("list_view");
             var controller = new ListController(view);
-            $(view.InputSelector).val("");
-            $(view.InputButtonSelector).trigger('click');
-            $(view.InputSelector).val("      ");
-            $(view.InputButtonSelector).trigger('click');
-            $(view.InputSelector).val("         ");
-            $(view.InputButtonSelector).trigger('click');
+            $(view.input).val("");
+            $(view.inputAddButton).trigger('click');
+            $(view.input).val("      ");
+            $(view.inputAddButton).trigger('click');
+            $(view.input).val("         ");
+            $(view.inputAddButton).trigger('click');
             expect(view.Items.length == 0).toBeTruthy("View.Items is not empty!");
         });
     });
@@ -78,6 +69,6 @@ describe("ListController tests", function () {
     });
 });
 function OnClickingButton(view, inputValue) {
-    $(view.InputSelector).val(inputValue);
-    $(view.InputButtonSelector).trigger('click');
+    $(view.input).val(inputValue);
+    $(view.inputAddButton).trigger('click');
 }

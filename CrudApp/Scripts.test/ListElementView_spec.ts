@@ -11,6 +11,6 @@ describe("ListElementView tests", () => {
         let view = new ListView("list_view");
         let elementView = new ListElementView(view, 0);
 
-        expect(view.UlSelector).toContainElement("li");
+        expect(view.root).toContainElement(`li, #${elementView.LiId}`);
     });
 });

@@ -1,12 +1,12 @@
 ﻿class ListElementView {
     constructor(public listView: ListView, public Id: number, public Text: string = "") {
-        this.LiClass = listView.Ul + "_li";
+        this.LiClass = listView.ulName + "_li";
         this.LiId = this.LiClass + "-" + Id.toString();
         this.selector = {
             liClass: "." + this.LiClass,
             liId: "#" + this.LiId
         };
-        this.GetElement(this.Text).appendTo(listView.UlSelector);
+        this.GetElement(this.Text).appendTo(listView.root);
     }
 
     public LiClass: string;
