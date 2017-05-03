@@ -1,17 +1,17 @@
 ﻿class ListElementView {
     constructor(public listView: ListView, public Id: number, public Text: string = "") {
-        this.LiName = listView.Ul + "_li";
-        this.LiNameSelector = "." + this.LiName;
-        this.LiId = this.LiName + "-" + Id.toString();
+        this.LiClass = listView.Ul + "_li";
+        this.LiClassSelector = "." + this.LiClass;
+        this.LiId = this.LiClass + "-" + Id.toString();
         this.LiIdSelector = "#" + this.LiId;
         $(listView.UlSelector).append(this.GetElement(this.Text));
     }
-    public LiName: string;
-    public LiNameSelector: string;
+    public LiClass: string;
+    public LiClassSelector: string;
     public LiId: string;
     public LiIdSelector: string;
 
     private GetElement(text: string): string {
-        return `<li id="${this.LiId}" class="${this.LiName} w3-display-container">${text}</li>`;
+        return `<li id="${this.LiId}" class="${this.LiClass} w3-display-container">${text}</li>`;
     }
 }

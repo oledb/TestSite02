@@ -13,8 +13,7 @@ describe("ListController tests", function () {
             setFixtures('<div class="list_view"></div>');
             var view = new ListView("list_view");
             var controller = new ListController(view);
-            $(view.InputSelector).val("New task 1");
-            $(view.InputButtonSelector).trigger('click');
+            OnClickingButton(view, "New task 1");
             expect(view.Items.length == 1).toBeTruthy("View.Items is empty");
             expect(view.Items[0].Text === "New task 1").toBeTruthy("Text is not correct");
         });
@@ -51,7 +50,34 @@ describe("ListController tests", function () {
         });
     });
     describe("Test controller with model", function () {
-        it("Should get 2 objective when controller is creating");
-        it("Should use model when add new element");
+        it("Should use model when controller created", function () {
+            setFixtures('<div class="list_view"></div>');
+            var view = new ListView("list_view");
+            var model = new XhrModelMock();
+            var controller = new ListController(view, model);
+            expect(model.getIndex == 1).toBeTruthy("Get method usage not equal 1");
+        });
+        it("Should get 2 objective when controller is creating", function () {
+            setFixtures('<div class="list_view"></div>');
+            var view = new ListView("list_view");
+            var model = new XhrModelMock();
+            var controller = new ListController(view, model);
+            expect(view.Items.length == 0).not.toBeTruthy("View.Items is empty");
+            expect(view.Items.length == 2).toBeTruthy("View.Items has not 2 elements");
+            expect(view.Items[0].LiIdSelector).toHaveText(view.Items[0].Text);
+        });
+        it("Should use model when add new element", function () {
+            setFixtures('<div class="list_view"></div>');
+            var view = new ListView("list_view");
+            var model = new XhrModelMock();
+            var controller = new ListController(view, model);
+            OnClickingButton(view, "Test task 007");
+            expect(model.postIndex == 1).toBeTruthy("Post did not used");
+            expect(model.postText == "Test task 007").toBeTruthy("Post text is not matching");
+        });
     });
 });
+function OnClickingButton(view, inputValue) {
+    $(view.InputSelector).val(inputValue);
+    $(view.InputButtonSelector).trigger('click');
+}

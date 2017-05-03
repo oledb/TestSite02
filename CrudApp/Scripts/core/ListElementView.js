@@ -4,14 +4,14 @@ var ListElementView = (function () {
         this.listView = listView;
         this.Id = Id;
         this.Text = Text;
-        this.LiName = listView.Ul + "_li";
-        this.LiNameSelector = "." + this.LiName;
-        this.LiId = this.LiName + "-" + Id.toString();
+        this.LiClass = listView.Ul + "_li";
+        this.LiClassSelector = "." + this.LiClass;
+        this.LiId = this.LiClass + "-" + Id.toString();
         this.LiIdSelector = "#" + this.LiId;
         $(listView.UlSelector).append(this.GetElement(this.Text));
     }
     ListElementView.prototype.GetElement = function (text) {
-        return "<li id=\"" + this.LiId + "\" class=\"" + this.LiName + " w3-display-container\">" + text + "</li>";
+        return "<li id=\"" + this.LiId + "\" class=\"" + this.LiClass + " w3-display-container\">" + text + "</li>";
     };
     return ListElementView;
 }());

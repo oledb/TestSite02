@@ -1,5 +1,6 @@
 ﻿/// <reference path="../Scripts/core/ListView.ts"/>
 /// <reference path="../Scripts/core/ListController.ts"/>
+/// <reference path="./Mocks/XhrModelMockts.ts"/>
 /// <reference path="../node_modules/@types/jquery/index.d.ts"/>
 /// <reference path="../node_modules/@types/jasmine/index.d.ts"/>
 /// <reference path="../node_modules/@types/jasmine-jquery/index.d.ts"/>
@@ -22,9 +23,8 @@ describe("ListController tests", () => {
             setFixtures('<div class="list_view"></div>');
             let view = new ListView("list_view");
             let controller = new ListController(view);
-
-            $(view.InputSelector).val("New task 1");
-            $(view.InputButtonSelector).trigger('click');
+            
+            OnClickingButton(view, "New task 1");
 
             expect(view.Items.length == 1).toBeTruthy("View.Items is empty");
             expect(view.Items[0].Text === "New task 1").toBeTruthy("Text is not correct");
@@ -71,10 +71,41 @@ describe("ListController tests", () => {
         });
     });
     describe("Test controller with model", () => {
-        it("Should use model when controller created");
+        it("Should use model when controller created", () => {
+            setFixtures('<div class="list_view"></div>');
+            let view = new ListView("list_view");
+            let model = new XhrModelMock();
+            let controller = new ListController(view, model);
 
-        it("Should get 2 objective when controller is creating");
+            expect(model.getIndex == 1).toBeTruthy("Get method usage not equal 1");
+        });
 
-        it("Should use model when add new element");
+        it("Should get 2 objective when controller is creating", () => {
+            setFixtures('<div class="list_view"></div>');
+            let view = new ListView("list_view");
+            let model = new XhrModelMock();
+            let controller = new ListController(view, model);
+
+            expect(view.Items.length == 0).not.toBeTruthy("View.Items is empty");
+            expect(view.Items.length == 2).toBeTruthy("View.Items has not 2 elements");
+            expect(view.Items[0].LiIdSelector).toHaveText(view.Items[0].Text);
+        });
+
+        it("Should use model when add new element", () => {
+            setFixtures('<div class="list_view"></div>');
+            let view = new ListView("list_view");
+            let model = new XhrModelMock();
+            let controller = new ListController(view, model);
+
+            OnClickingButton(view, "Test task 007");
+
+            expect(model.postIndex == 1).toBeTruthy("Post did not used");
+            expect(model.postText == "Test task 007").toBeTruthy("Post text is not matching");
+        });
     });
 });
+
+function OnClickingButton(view: ListView, inputValue: string) {
+    $(view.InputSelector).val(inputValue);
+    $(view.InputButtonSelector).trigger('click');
+}

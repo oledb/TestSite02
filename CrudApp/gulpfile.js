@@ -31,6 +31,7 @@ paths.jsOutput = input.typescript + "core/";
 paths.tsconfigTest = input.typescriptTest + "tsconfig.json";
 paths.jsOutputTest = input.typescriptTest;
 paths.jsJasmine = input.typescriptTest + "*_spec.js";
+paths.jsJasmineMocks = input.typescriptTest + "Mocks/*.js";
 
 var vendor = {
     jQuery: paths.webrootlib +   "/jquery/dist/jquery.min.js",
@@ -76,8 +77,9 @@ gulp.task("build", ['compile:ts'], function () {
 gulp.task("test", ['compile:ts', "compile:ts_test"]);
 
 gulp.task('jasmine', function () {
-    return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine, paths.js])
-        .pipe(watch([paths.jsJasmine, paths.js]))
+    return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine,
+        paths.jsJasmineMocks, paths.js])
+        .pipe(watch([paths.jsJasmine, paths.js, paths.jsJasmineMocks]))
         .pipe(jasmineBrowser.specRunner())
         .pipe(jasmineBrowser.server({ port: 80 }));
 });
