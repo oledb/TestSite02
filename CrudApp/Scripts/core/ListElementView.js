@@ -8,10 +8,15 @@ var ListElementView = (function () {
         this.LiClassSelector = "." + this.LiClass;
         this.LiId = this.LiClass + "-" + Id.toString();
         this.LiIdSelector = "#" + this.LiId;
-        $(listView.UlSelector).append(this.GetElement(this.Text));
+        this.GetElement(this.Text).appendTo(listView.UlSelector);
     }
     ListElementView.prototype.GetElement = function (text) {
-        return "<li id=\"" + this.LiId + "\" class=\"" + this.LiClass + " w3-display-container\">" + text + "</li>";
+        this.element = $("<li></li>")
+            .addClass(this.LiClass)
+            .addClass("w3-display-container")
+            .text(text);
+        this.element.attr("id", this.LiId);
+        return this.element;
     };
     return ListElementView;
 }());
