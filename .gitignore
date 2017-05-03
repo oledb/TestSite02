@@ -244,5 +244,7 @@ ModelManifest.xml
 *.db
 
 # JavaScript files, generated from TypeScript
-/src/TestSite02/Scripts/core/*.js
-/src/TestSite02/Scripts.test/*.js
+./src/TestSite02/Scripts/core/
+./src/TestSite02/Scripts.test/
+*.js
+*_spec.js
