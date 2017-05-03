@@ -242,3 +242,7 @@ ModelManifest.xml
 .fake/
 /src/TestSite02/wwwroot/static_image/Thumbs.db
 *.db
+
+# JavaScript files, generated from TypeScript
+/src/TestSite02/Scripts/core/*.js
+/src/TestSite02/Scripts.test/*.js
