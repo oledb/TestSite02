@@ -3,12 +3,13 @@
         this.LiClass = listView.ulName + "_li";
         this.LiId = this.LiClass + "-" + Id.toString();
         this.GetElement(this.Text).appendTo(listView.root);
+        this.SetAnimation();
     }
 
     public LiClass: string;
     public LiId: string;
     public root: JQuery;
-    public buttonsGroup: JQuery;
+    public buttonsContainer: JQuery;
     public textContainer: JQuery;
     public removeButton: JQuery;
     private GetElement(text: string): JQuery {
@@ -17,15 +18,26 @@
         this.textContainer = $("<span></span>")
             .text(text)
             .appendTo(this.root);
-        this.buttonsGroup = $("<div></div>")
+        this.buttonsContainer = $("<div></div>")
             .addClass("w3-display-right")
             .appendTo(this.root);
         this.removeButton = $("<button></button>")
             .addClass(this.listView.color)
             .addClass(this.listView.hoverColor)
+            .addClass("w3-button")
             .text("Remove")
-            .appendTo(this.buttonsGroup);
+            .appendTo(this.buttonsContainer);
         this.root.attr("id", this.LiId);
         return this.root;
+    }
+
+    private SetAnimation(): void {
+        this.buttonsContainer.hide();
+        $(this.root).on("mouseover", () => {
+            $(this.buttonsContainer).show();
+        });
+        $(this.root).on("mouseout", () => {
+            $(this.buttonsContainer).hide();
+        });
     }
 }

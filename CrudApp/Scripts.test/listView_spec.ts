@@ -16,7 +16,7 @@ describe("ListView tests", () => {
             
         });
 
-        it("should have element when Add(text)", () => {
+        it("should create element when Add(text)", () => {
             setFixtures('<div class="list_view"></div>');
             let view = new ListView("list_view");
 
@@ -48,6 +48,11 @@ describe("ListView tests", () => {
             expect(view.inputAddButton).toHaveClass(hoverColor);
             expect(view.inputAddButton).toHaveClass(color);
             expect(view.inputAddButton).toHaveText("Add");
+        });
+    });
+    describe("Remove elements", () => {
+        it("should remove element when Remove(id)", () => {
+
         });
     });
 });

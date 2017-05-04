@@ -45,7 +45,8 @@
     public inputButtonName: string;
 
     private tempIndex = 0;
-    public Add(id:number, text: string) {
+    public Add(id: number, text: string) {
+        console.log(`id: ${id} text ${text}`);
         this.Items.push(new ListElementView(this, id, text));
     }
 }

@@ -31,10 +31,11 @@ namespace TestSite02.FaketModel
             list.Remove(item);
         }
 
-        public void SaveObjective(Objective obj)
+        public int SaveObjective(Objective obj)
         {
             obj.ObjectiveId = obj.ObjectiveId == 0 ? id++ : obj.ObjectiveId;
             list.Add(obj);
+            return obj.ObjectiveId;
         }
 
         public void UpdateObjective(Objective obj)

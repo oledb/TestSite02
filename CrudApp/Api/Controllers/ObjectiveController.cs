@@ -26,9 +26,18 @@ namespace CrudApp.Api.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]Objective value)
+        public int Post([FromBody]Objective value)
         {
-            _objectives.SaveObjective(value);
+            if (value == null)
+                throw new NullReferenceException();
+            try
+            {
+                return _objectives.SaveObjective(value);
+            }
+            catch
+            {
+                return -100;
+            }
         }
 
         // PUT api/values/{Objective}

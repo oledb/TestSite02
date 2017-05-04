@@ -6,13 +6,27 @@
 }
 <h2>Default - index</h2>
 <script>
+    //Test with production Model
+    $("window").ready(function () {
+        let view = new ListView("test_list", "w3-orange", "w3-hover-red");
+        let model = new XhrModel("/api/Objective", function (xhr, status, error) {
+            console.log("ajax error!");
+            console.log(status);
+            console.log(error);
+        });
+        let controller = new ListController(view, model);
+    });
+</script>
+@*<script>
+    //Test without Model
     $("window").ready(function () {
         let view = new ListView("test_list", "w3-orange", "w3-hover-red");
         let controller = new ListController(view);
         view.Add(0, "Hello");
         view.Add(1, "World");
     });
-</script>
+</script>*@
+
 <div class="test_list w3-panel w3-twothird"></div>
 @*<br />
 <div class="w3-container w3-twothird">

@@ -10,13 +10,14 @@ var XhrModelMock = (function () {
     XhrModelMock.prototype.Get = function (success) {
         this.getIndex++;
         success([
-            { ObjectiveId: 4, Name: "Test 01" },
-            { ObjectiveId: 5, Name: "Test 02" }
+            { objectiveId: 4, name: "Test 01" },
+            { objectiveId: 5, name: "Test 02" }
         ]);
     };
     XhrModelMock.prototype.Post = function (value, success) {
         this.postIndex++;
-        this.postText = value;
+        this.postText = value.name;
+        success(this.postIndex);
     };
     XhrModelMock.prototype.Put = function (value, success) {
     };

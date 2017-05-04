@@ -25,7 +25,6 @@ class XhrModel implements IXhrModel {
             success: success,
             error: this.error,
             data: JSON.stringify(value),
-            dataType: "json",
             timeout: this.timeout
         });
     }

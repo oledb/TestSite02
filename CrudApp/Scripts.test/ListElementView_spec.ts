@@ -20,11 +20,33 @@ describe("ListElementView tests", () => {
         let view = new ListView("list_view");
         view.Add(0, "TestText");
         let elementView = view.Items[0];
-        
+
         expect(elementView.root).toContainElement("div > button");
+        expect(elementView.buttonsContainer).toHaveCss({ display: "none" });
     });
 
-    it("should show the Remove button when mouse on ");
+    it("should show the Remove button when mouse is over", () => {
+        setFixtures('<div class="list_view"></div>');
+        let view = new ListView("list_view");
+        view.Add(0, "TestText");
+        let elementView = view.Items[0];
 
-    it("should hide the Remove button when mouse over");
+        OnMouseAction(elementView, "mouseover");
+        expect(elementView.buttonsContainer).not.toHaveCss({ display: "none" });
+    });
+
+    it("should hide the Remove button when mouse is out", () => {
+        setFixtures('<div class="list_view"></div>');
+        let view = new ListView("list_view");
+        view.Add(0, "TestText");
+        let elementView = view.Items[0];
+
+        OnMouseAction(elementView, "mouseover");
+        OnMouseAction(elementView, "mouseout");
+        expect(elementView.buttonsContainer).toHaveCss({ display: "none" });
+    });
 });
+
+function OnMouseAction(element: ListElementView, action: string) {
+    $(element.root).trigger(action);
+}

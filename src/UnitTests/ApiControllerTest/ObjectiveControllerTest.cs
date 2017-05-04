@@ -37,14 +37,14 @@ namespace UnitTests
             var newObjective = new Objective { Name = "Test 04" };
 
             //Act
-            controller.Post(newObjective);
+            int result = controller.Post(newObjective);
             var list = (List<Objective>)controller.Get();
             newObjective = list.Last();
 
             //Assert
             Assert.Equal(4, list.Count);
             Assert.Equal("Test 04", newObjective.Name);
-            Assert.NotEqual(0, newObjective.ObjectiveId);
+            Assert.NotEqual(0, result);
         }
 
         [Fact]

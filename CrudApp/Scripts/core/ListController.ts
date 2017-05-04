@@ -11,7 +11,7 @@
     private GetAllElements(): void {
         this.model.Get((result) => {
             for (let obj of (result as any[])) {
-                this.View.Add(obj.ObjectiveId, obj.Name);
+                this.View.Add(obj.objectiveId, obj.name);
         }
         });
     }
@@ -21,11 +21,16 @@
         let text = ($(this.View.input).val() as string).trim();
         if (text != "") {
             if (this.model != undefined) {
-                this.model.Post(text, (result) => {
-                    this.View.Add(result.ObjectiveId, result.Name);
+                let data = { objectiveId: undefined, name: text };
+                this.model.Post(data, (result) => {
+                    //TODO get id
+                    console.log("result is " + result);
+                    this.View.Add(result, text);
                 });
             }
-            this.View.Add(0, text);
+            else {
+                this.View.Add(0, text);
+            }
         }
         $(this.View.input).val("");
     }

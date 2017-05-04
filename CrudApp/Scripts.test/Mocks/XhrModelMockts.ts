@@ -13,14 +13,15 @@ class XhrModelMock implements IXhrModel {
     public Get(success: (result: any) => void) {
         this.getIndex++;
         success([
-            { ObjectiveId: 4, Name: "Test 01" },
-            { ObjectiveId: 5, Name: "Test 02" }
+            { objectiveId: 4, name: "Test 01" },
+            { objectiveId: 5, name: "Test 02" }
         ]);
     }
 
     public Post(value: any, success: (result) => void) {
         this.postIndex++;
-        this.postText = value;
+        this.postText = value.name;
+        success(this.postIndex);
     }
 
     public Put(value: any, success: (result) => void) {
