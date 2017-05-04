@@ -61,7 +61,11 @@ gulp.task("clean:jsts", function (cb) {
     rimraf(paths.js, cb);
 });
 
-gulp.task("clean", ["clean:jsmin", "clean:jsts"]);
+gulp.task("clean:tests", function (cb) {
+    rimraf(paths.jsJasmine, cb);
+});
+
+gulp.task("clean", ["clean:jsmin", "clean:jsts", "clean:tests"]);
 
 gulp.task("min:js", function () {
     return gulp.src([ paths.jquery, paths.js, "!" + paths.minJs], { base: "." })

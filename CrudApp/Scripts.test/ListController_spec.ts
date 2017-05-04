@@ -70,6 +70,11 @@ describe("ListController tests", () => {
             expect(view.Items.length == 0).toBeTruthy("View.Items is not empty!");
         });
     });
+
+    describe("Remove elements", () => {
+        it("should remove the element when clicking the remove button");
+    });
+
     describe("Test controller with model", () => {
         it("Should use model when controller created", () => {
             setFixtures('<div class="list_view"></div>');
@@ -88,10 +93,10 @@ describe("ListController tests", () => {
 
             expect(view.Items.length == 0).not.toBeTruthy("View.Items is empty");
             expect(view.Items.length == 2).toBeTruthy("View.Items has not 2 elements");
-            expect(view.Items[0].selector.liId).toHaveText(view.Items[0].Text);
+            expect(view.Items[0].textContainer).toHaveText(view.Items[0].Text);
         });
 
-        it("Should use model when add new element", () => {
+        it("Should use model.post when adding new element", () => {
             setFixtures('<div class="list_view"></div>');
             let view = new ListView("list_view");
             let model = new XhrModelMock();
@@ -102,6 +107,8 @@ describe("ListController tests", () => {
             expect(model.postIndex == 1).toBeTruthy("Post did not used");
             expect(model.postText == "Test task 007").toBeTruthy("Post text is not matching");
         });
+
+        it("Should use model.remove when deleting the element");
     });
 });
 

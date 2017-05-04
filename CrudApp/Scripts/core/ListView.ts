@@ -1,5 +1,5 @@
 ﻿class ListView {
-    constructor(public App: string, private color: string = "", private hoverColor: string ="") {
+    constructor(public App: string, public color: string = "", public hoverColor: string ="") {
         this.ulName = App + "_ul";
         this.inputName = App + "_input";
         this.inputButtonName = App + "_inputButton";
