@@ -23,8 +23,6 @@
             if (this.model != undefined) {
                 let data = { objectiveId: undefined, name: text };
                 this.model.Post(data, (result) => {
-                    //TODO get id
-                    console.log("result is " + result);
                     this.View.Add(result, text);
                 });
             }

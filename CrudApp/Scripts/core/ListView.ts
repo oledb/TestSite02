@@ -44,9 +44,19 @@
     public inputName: string;
     public inputButtonName: string;
 
-    private tempIndex = 0;
     public Add(id: number, text: string) {
-        console.log(`id: ${id} text ${text}`);
         this.Items.push(new ListElementView(this, id, text));
+    }
+
+    public Remove(id: number) {
+        let element = this.Items.filter(obj => obj.Id == id);
+        if (element.length == 0)
+            throw `Element with ${id} not found`;
+        if (element.length > 1)
+            throw `Duplicated id ${id}`;
+        let index = this.Items.indexOf(element[0]);
+        console.log(element[0]);
+        element[0].root.remove();
+        this.Items.splice(index, 1);
     }
 }

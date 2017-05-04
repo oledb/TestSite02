@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 <h2>Default - index</h2>
-<script>
+@*<script>
     //Test with production Model
     $("window").ready(function () {
         let view = new ListView("test_list", "w3-orange", "w3-hover-red");
@@ -16,16 +16,17 @@
         });
         let controller = new ListController(view, model);
     });
-</script>
-@*<script>
+</script>*@
+<script>
     //Test without Model
     $("window").ready(function () {
         let view = new ListView("test_list", "w3-orange", "w3-hover-red");
         let controller = new ListController(view);
         view.Add(0, "Hello");
+        //view.Remove(0);
         view.Add(1, "World");
     });
-</script>*@
+</script>
 
 <div class="test_list w3-panel w3-twothird"></div>
 @*<br />

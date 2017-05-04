@@ -52,7 +52,18 @@ describe("ListView tests", () => {
     });
     describe("Remove elements", () => {
         it("should remove element when Remove(id)", () => {
+            setFixtures('<div class="list_view"></div>');
+            let view = new ListView("list_view");
+            view.Add(1, "Test task 01");
+            view.Add(4, "Test task 02");
+            view.Add(7, "Test task 03");
+            let elementId = view.Items[1].LiId;
 
+            view.Remove(4);
+
+            expect(view.Items.length == 2).toBeTruthy("Element was not removed");
+            expect(view.Items[1].Text == "Test task 03").toBeTruthy("Incorrect name");
+            expect($("#" + elementId).length == 0).toBeTruthy(`Element '#${elementId}' is exist`);
         });
     });
 });
