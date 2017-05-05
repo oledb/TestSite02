@@ -57,8 +57,12 @@ describe("ListController tests", () => {
             // It's possible to properly adding an element using controller but not view
             view.input.val("Test");
             view.inputAddButton.trigger('click');
+            let elementId = view.Items[0].LiId;
 
-            
+            view.Items[0].removeButton.trigger('click');
+            view.Items[0].root.remove(); //- if uncomment it, test will be passed
+
+            expect($("#" + elementId).length == 0).toBeTruthy(`Element '#${elementId}' is exist`);
         });
     });
 

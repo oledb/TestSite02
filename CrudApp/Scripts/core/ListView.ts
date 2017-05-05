@@ -1,4 +1,6 @@
-﻿class ListView {
+﻿/// <reference path="./UiDesigner.ts"/>
+
+class ListView {
     constructor(public App: string, public color: string = "", public hoverColor: string ="") {
         this.ulName = App + "_ul";
         this.inputName = App + "_input";
@@ -31,12 +33,12 @@
             .attr("placeholder", "Press Enter to add a task")
             .attr("type", "text")
             .css({ outline: "none", padding: "0px" });
-        this.inputAddButton = $("<button></button>")
-            .addClass(this.inputButtonName)
-            .addClass(this.color)
-            .addClass(this.hoverColor)
-            .addClass("w3-button w3-display-right")
-            .text("Add");
+        this.inputAddButton = UiDesigner.CreateButton("Add",
+            this.inputButtonName,
+            this.color,
+            this.hoverColor,
+            "w3-button w3-display-right"
+        );
         return this.liInput.append(this.input).append(this.inputAddButton);
     }
 

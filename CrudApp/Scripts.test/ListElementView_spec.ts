@@ -5,9 +5,11 @@
 /// <reference path="../node_modules/@types/jasmine-jquery/index.d.ts"/>
 
 describe("ListElementView tests", () => {
-    it("should create an elementView ", () => {
+    beforeEach(() => {
         setFixtures('<div class="list_view"></div>');
+    });
 
+    it("should create an elementView ", () => {
         let view = new ListView("list_view");
         let elementView = new ListElementView(view, 0);
 
@@ -15,8 +17,6 @@ describe("ListElementView tests", () => {
     });
 
     it("should have invisible Remove button", () => {
-        setFixtures('<div class="list_view"></div>');
-
         let view = new ListView("list_view");
         view.Add(0, "TestText");
         let elementView = view.Items[0];
@@ -26,27 +26,21 @@ describe("ListElementView tests", () => {
     });
 
     it("should show the Remove button when mouse is over", () => {
-        setFixtures('<div class="list_view"></div>');
         let view = new ListView("list_view");
         view.Add(0, "TestText");
         let elementView = view.Items[0];
 
-        OnMouseAction(elementView, "mouseover");
+        elementView.root.trigger("mouseover");
         expect(elementView.buttonsContainer).not.toHaveCss({ display: "none" });
     });
 
     it("should hide the Remove button when mouse is out", () => {
-        setFixtures('<div class="list_view"></div>');
         let view = new ListView("list_view");
         view.Add(0, "TestText");
         let elementView = view.Items[0];
 
-        OnMouseAction(elementView, "mouseover");
-        OnMouseAction(elementView, "mouseout");
+        elementView.root.trigger("mouseover");
+        elementView.root.trigger("mouseout");
         expect(elementView.buttonsContainer).toHaveCss({ display: "none" });
     });
 });
-
-function OnMouseAction(element: ListElementView, action: string) {
-    $(element.root).trigger(action);
-}
