@@ -11,26 +11,36 @@
     private GetAllElements(): void {
         this.model.Get((result) => {
             for (let obj of (result as any[])) {
-                this.View.Add(obj.objectiveId, obj.name);
+                this.addNewElement(obj);
         }
         });
     }
 
+    private tempId = 0;
+
     private AddNewElementCommand():void {
         this.LastCommand = "add";
-        let text = ($(this.View.input).val() as string).trim();
+        let text = (this.View.input.val() as string).trim();
         if (text != "") {
-            if (this.model != undefined) {
-                let data = { objectiveId: undefined, name: text };
-                this.model.Post(data, (result) => {
-                    this.View.Add(result, text);
-                });
-            }
-            else {
-                this.View.Add(0, text);
-            }
+            let data = { objectiveId: undefined, name: text };
+            if (this.model != undefined)
+                this.model.Post(data, (result) => data.objectiveId = result);
+            else
+                data.objectiveId = this.tempId++;
+            this.addNewElement(data);
         }
-        $(this.View.input).val("");
+        this.View.input.val("");
+    }
+
+    private RemoveElementCommand(element: ListElementView) {
+        this.LastCommand = "remove";
+        if (this.model != undefined) {
+            this.model.Delete(element.Id, () => {
+                this.View.Remove(element.Id);
+            })
+        }
+        else
+            this.View.Remove(element.Id);
     }
 
     private SetEventsToAddButton():void {
@@ -40,9 +50,20 @@
             });
         $(this.View.input).keypress((e) => {
             let key = e.which;
-            if (key == 13) {
+            if (key == 13) { // Enter
                 this.AddNewElementCommand();
             }
         });
+    }
+
+    private SetEventsToNewElement(element: ListElementView): void {
+        element.removeButton.on("click", () => {
+            this.RemoveElementCommand(element);
+        });
+    }
+
+    private addNewElement(data: any) {
+        let temp = this.View.Add(data.objectiveId, data.name);
+        this.SetEventsToNewElement(temp);
     }
 }

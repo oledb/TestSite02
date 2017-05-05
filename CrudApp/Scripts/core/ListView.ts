@@ -46,8 +46,10 @@ class ListView {
     public inputName: string;
     public inputButtonName: string;
 
-    public Add(id: number, text: string) {
-        this.Items.push(new ListElementView(this, id, text));
+    public Add(id: number, text: string): ListElementView {
+        let temp = new ListElementView(this, id, text);
+        this.Items.push(temp);
+        return temp;
     }
 
     public Remove(id: number) {
@@ -57,7 +59,6 @@ class ListView {
         if (element.length > 1)
             throw `Duplicated id ${id}`;
         let index = this.Items.indexOf(element[0]);
-        console.log(element[0]);
         element[0].root.remove();
         this.Items.splice(index, 1);
     }

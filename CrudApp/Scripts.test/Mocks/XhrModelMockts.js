@@ -6,6 +6,7 @@ var XhrModelMock = (function () {
         this.postIndex = 0;
         this.postText = "no text";
         this.error = function (xhr, status, error) { return _this.errorIndex++; };
+        this.removeId = -10000;
     }
     XhrModelMock.prototype.Get = function (success) {
         this.getIndex++;
@@ -22,6 +23,7 @@ var XhrModelMock = (function () {
     XhrModelMock.prototype.Put = function (value, success) {
     };
     XhrModelMock.prototype.Delete = function (id, success) {
+        this.removeId = id;
     };
     return XhrModelMock;
 }());

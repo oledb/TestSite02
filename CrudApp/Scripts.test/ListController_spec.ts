@@ -55,12 +55,13 @@ describe("ListController tests", () => {
 
         it("should remove the element when clicking the remove button", () => {
             // It's possible to properly adding an element using controller but not view
-            view.input.val("Test");
+            view.input.val("Test1");
+            view.inputAddButton.trigger('click');
+            view.input.val("Test2");
             view.inputAddButton.trigger('click');
             let elementId = view.Items[0].LiId;
 
             view.Items[0].removeButton.trigger('click');
-            view.Items[0].root.remove(); //- if uncomment it, test will be passed
 
             expect($("#" + elementId).length == 0).toBeTruthy(`Element '#${elementId}' is exist`);
         });
@@ -83,13 +84,36 @@ describe("ListController tests", () => {
         });
 
         it("Should use model.post when adding new element", () => {
-            view.input.val("Test task 007"); // Add text to input
-            view.inputAddButton.trigger('click'); // Click on button
+            view.input.val("Test task 007");
+            view.inputAddButton.trigger('click');
 
             expect(model.postIndex == 1).toBeTruthy("Post did not used");
-            expect(model.postText == "Test task 007").toBeTruthy("Post text is not matching");
+            expect(model.postText == "Test task 007")
+                .toBeTruthy("Post text is not matching");
         });
 
-        it("Should use model.remove when deleting the element");
+        it("Should use model.remove when deleting the element", () => {
+            view.input.val("Test task 1");
+            view.inputAddButton.trigger('click');
+            view.input.val("Test task 2");
+            view.inputAddButton.trigger('click');
+            let id = view.Items[3].Id;
+
+            view.Items[3].removeButton.trigger("click");
+            expect(controller.LastCommand == "remove")
+                .toBeTruthy("Controller did not use remove command");
+            expect(model.removeId == id)
+                .toBeTruthy(`Model.Remove. ${model.removeId} != ${id}`)
+        });
+
+        it("Should can remove element which was created by model", () => {
+            let id = view.Items[1].Id;
+
+            view.Items[1].removeButton.trigger("click");
+            expect(controller.LastCommand == "remove")
+                .toBeTruthy(`Last command should be remove not ${controller.LastCommand}`);
+            expect(model.removeId == id)
+                .toBeTruthy(`Model.Remove. ${model.removeId} != ${id}`)
+        });
     });
 });

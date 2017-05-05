@@ -28,7 +28,6 @@ class ListElementView {
             this.listView.hoverColor,
             "w3-button")
             .appendTo(this.buttonsContainer);
-
         this.root.attr("id", this.LiId);
         return this.root;
     }
