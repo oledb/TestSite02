@@ -47,6 +47,8 @@ class ListView {
     public inputButtonName: string;
 
     public Add(id: number, text: string): ListElementView {
+        if (id === undefined)
+            console.log("View.Add undefind");
         let temp = new ListElementView(this, id, text);
         this.Items.push(temp);
         return temp;

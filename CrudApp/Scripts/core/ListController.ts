@@ -10,9 +10,8 @@
 
     private GetAllElements(): void {
         this.model.Get((result) => {
-            for (let obj of (result as any[])) {
-                this.addNewElement(obj);
-        }
+            for (let obj of (result as any[]))
+                this.addNewElement(obj.objectiveId, obj.name);
         });
     }
 
@@ -24,10 +23,12 @@
         if (text != "") {
             let data = { objectiveId: undefined, name: text };
             if (this.model != undefined)
-                this.model.Post(data, (result) => data.objectiveId = result);
+                this.model.Post(data, (result) =>
+                {
+                    this.addNewElement(result, text);
+                });
             else
-                data.objectiveId = this.tempId++;
-            this.addNewElement(data);
+                this.addNewElement(this.tempId++, text);
         }
         this.View.input.val("");
     }
@@ -62,8 +63,8 @@
         });
     }
 
-    private addNewElement(data: any) {
-        let temp = this.View.Add(data.objectiveId, data.name);
+    private addNewElement(id: number, text: string) {
+        let temp = this.View.Add(id, text);
         this.SetEventsToNewElement(temp);
     }
 }
