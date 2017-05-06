@@ -9,38 +9,41 @@ describe("ListController tests", () => {
     let model: XhrModelMock;
     let view: ListView;
     let controller: ListController;
+    
     beforeEach(() => {
         setFixtures('<div class="list_view"></div>');
         view = new ListView("list_view");
     })
 
     describe("Element manipulation WITHOUT model", () => {
+        let taskName: string;
         beforeEach(() => {
             let controller = new ListController(view);
+            taskName = "New task 1";
+
+            // It's possible to properly adding an element using controller but not view.
+            // In this case used controller events
+            view.input.val("New task 1");
+            view.inputAddButton.trigger('click');
         });
 
         it("should add new element on clicking 'add' button", () => {
-            view.input.val("New task 1"); // Add text to input
-            view.inputAddButton.trigger('click'); // Click on button
-
             expect(view.Items.length == 1).toBeTruthy("View.Items is empty");
             expect(view.Items[0].Text === "New task 1").toBeTruthy("Text is not correct");
         });
 
         it("should add new element on pressing 'Enter' key", () => {
-            view.input.val("New task 1");
+            // There is an element in view yet, see beforeEach()
+            view.input.val("New task 2");
             let keypress = $.Event("keypress")
             keypress.which = 13;
             view.input.trigger(keypress);
 
-            expect(view.Items.length == 1).toBeTruthy("View.Items is empty");
-            expect(view.Items[0].Text === "New task 1").toBeTruthy("Text is not correct");
+            expect(view.Items.length == 2).toBeTruthy("View.Items is empty");
+            expect(view.Items[1].Text === "New task 2").toBeTruthy("Text is not correct");
         });
 
         it("should clear input field after adding", () => {
-            view.input.val("Test");
-            view.inputAddButton.trigger('click');
-
             expect($(view.input).val() === "").toBeTruthy("Input is not empty after add");
         });
 
@@ -50,13 +53,10 @@ describe("ListController tests", () => {
             view.input.val("      ");
             view.inputAddButton.trigger('click');
 
-            expect(view.Items.length == 0).toBeTruthy("View.Items is not empty!");
+            expect(view.Items.length == 1).toBeTruthy("View.Items is not empty!");
         });
 
         it("should remove the element when clicking the remove button", () => {
-            // It's possible to properly adding an element using controller but not view
-            view.input.val("Test1");
-            view.inputAddButton.trigger('click');
             view.input.val("Test2");
             view.inputAddButton.trigger('click');
             let elementId = view.Items[0].LiId;
@@ -64,6 +64,18 @@ describe("ListController tests", () => {
             view.Items[0].removeButton.trigger('click');
 
             expect($("#" + elementId).length == 0).toBeTruthy(`Element '#${elementId}' is exist`);
+        });
+        it("should element to be editable when edit button is clicked", () => {
+            let element = view.Items[0];
+            element.editButton.trigger("click");
+            expect(element.IsEdited).toBeTruthy(`IsEdit==${element.IsEdited} but shoul be false`);
+        });
+
+        it("should elemnt to be standard when edit button is clicked", () => {
+            let element = view.Items[0];
+            element.editButton.trigger("click");
+            element.saveButton.trigger("click");
+            expect(!element.IsEdited).toBeTruthy(`IsEdit==${element.IsEdited} but shoul be false`);
         });
     });
 
@@ -73,7 +85,7 @@ describe("ListController tests", () => {
             controller = new ListController(view, model);
         });
 
-        it("Should use model.get when controller created", () => {
+        it("Should use model.get when controller is created", () => {
             expect(model.getIndex == 1).toBeTruthy("Get method usage not equal 1");
         });
 
@@ -115,5 +127,7 @@ describe("ListController tests", () => {
             expect(model.removeId == id)
                 .toBeTruthy(`Model.Remove. ${model.removeId} != ${id}`)
         });
+
+        it("Should use model.put when updating the element");
     });
 });

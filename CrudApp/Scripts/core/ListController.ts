@@ -44,6 +44,16 @@
             this.View.Remove(element.Id);
     }
 
+    private EditElementCommand(element: ListElementView) {
+        this.LastCommand = "edit";
+        element.Edit();
+    }
+
+    private SaveElementCommand(element: ListElementView) {
+        this.LastCommand = "save";
+        element.Save();
+    }
+
     private SetEventsToAddButton():void {
         $(this.View.inputAddButton)
             .on('click', () => {
@@ -60,6 +70,12 @@
     private SetEventsToNewElement(element: ListElementView): void {
         element.removeButton.on("click", () => {
             this.RemoveElementCommand(element);
+        });
+        element.editButton.on("click", () => {
+            this.EditElementCommand(element);
+        })
+        element.saveButton.on("click", () => {
+            this.SaveElementCommand(element);
         });
     }
 
