@@ -3,8 +3,8 @@ var XhrModelMock = (function () {
         var _this = this;
         this.errorIndex = 0;
         this.getIndex = 0;
-        this.postIndex = 0;
         this.postText = "no text";
+        this.putText = "not text";
         this.error = function (xhr, status, error) { return _this.errorIndex++; };
         this.removeId = -10000;
     }
@@ -16,11 +16,11 @@ var XhrModelMock = (function () {
         ]);
     };
     XhrModelMock.prototype.Post = function (value, success) {
-        this.postIndex++;
         this.postText = value.name;
-        success(this.postIndex);
+        success(0);
     };
     XhrModelMock.prototype.Put = function (value, success) {
+        this.putText = value.name;
     };
     XhrModelMock.prototype.Delete = function (id, success) {
         this.removeId = id;

@@ -2,10 +2,10 @@
 
 class XhrModelMock implements IXhrModel {
 
-    public errorIndex: number = 0;
-    public getIndex: number = 0;
-    public postIndex: number = 0;
-    public postText: string = "no text";
+    public errorIndex = 0;
+    public getIndex = 0;
+    public postText = "no text";
+    public putText = "not text";
 
     public error: (xhr, status, error) => void =
         (xhr, status, error) => this.errorIndex++;
@@ -19,13 +19,12 @@ class XhrModelMock implements IXhrModel {
     }
 
     public Post(value: any, success: (result) => void) {
-        this.postIndex++;
         this.postText = value.name;
-        success(this.postIndex);
+        success(0);
     }
 
     public Put(value: any, success: (result) => void) {
-
+        this.putText = value.name;
     }
 
     public removeId = -10000;

@@ -47,19 +47,31 @@
     private EditElementCommand(element: ListElementView) {
         this.LastCommand = "edit";
         element.Edit();
+        element.editInput.keypress((e) => {
+            let key = e.which;
+            if (key == 13) { // Enter
+                this.SaveElementCommand(element);
+            }
+        });
     }
 
     private SaveElementCommand(element: ListElementView) {
         this.LastCommand = "save";
-        element.Save();
+        if (this.model != undefined) {
+            let data = { objectiveId: element.Id, name: element.editInput.val() };
+            this.model.Put(data, () => {
+                element.Save();
+            });
+        }
+        else
+            element.Save();
     }
 
     private SetEventsToAddButton():void {
-        $(this.View.inputAddButton)
-            .on('click', () => {
+        this.View.inputAddButton.on('click', () => {
                 this.AddNewElementCommand();
             });
-        $(this.View.input).keypress((e) => {
+        this.View.input.keypress((e) => {
             let key = e.which;
             if (key == 13) { // Enter
                 this.AddNewElementCommand();

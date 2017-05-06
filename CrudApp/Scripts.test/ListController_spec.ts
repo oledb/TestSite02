@@ -71,10 +71,21 @@ describe("ListController tests", () => {
             expect(element.IsEdited).toBeTruthy(`IsEdit==${element.IsEdited} but shoul be false`);
         });
 
-        it("should elemnt to be standard when edit button is clicked", () => {
+        it("should element to be standard when edit button is clicked", () => {
             let element = view.Items[0];
             element.editButton.trigger("click");
             element.saveButton.trigger("click");
+
+            expect(!element.IsEdited).toBeTruthy(`IsEdit==${element.IsEdited} but shoul be false`);
+        });
+
+        it("should element to be standard when Enter pressed", () => {
+            let element = view.Items[0];
+            element.editButton.trigger("click");
+            let keypress = $.Event("keypress")
+            keypress.which = 13;
+            element.editInput.trigger(keypress);
+
             expect(!element.IsEdited).toBeTruthy(`IsEdit==${element.IsEdited} but shoul be false`);
         });
     });
@@ -99,7 +110,6 @@ describe("ListController tests", () => {
             view.input.val("Test task 007");
             view.inputAddButton.trigger('click');
 
-            expect(model.postIndex == 1).toBeTruthy("Post did not used");
             expect(model.postText == "Test task 007")
                 .toBeTruthy("Post text is not matching");
         });
@@ -128,6 +138,13 @@ describe("ListController tests", () => {
                 .toBeTruthy(`Model.Remove. ${model.removeId} != ${id}`)
         });
 
-        it("Should use model.put when updating the element");
+        it("Should use model.put when updating the element", () => {
+            view.Items[1].editButton.trigger("click");
+            view.Items[1].editInput.val("New taskum");
+            view.Items[1].saveButton.trigger("click");
+
+            expect(model.putText == "New taskum")
+                .toBeTruthy(`Incorrect put text "${model.putText}"`);
+        });
     });
 });
