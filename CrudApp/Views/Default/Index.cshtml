@@ -1,44 +1,23 @@
-﻿@model dynamic
-
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+﻿@{
+    ViewBag.Title = "Welcome";
+    Layout = "_LayoutHome";
 }
-<h2>Default - index</h2>
-<script>
-    //Test with Model
-    $("window").ready(function () {
-        let view = new ListView("test_list", "w3-orange", "w3-hover-red");
-        let model = new XhrModel("/api/Objective", function (xhr, status, error) {
-            console.log("ajax error!");
-            console.log(status);
-            console.log(error);
-        });
-        let controller = new ListController(view, model);
-    });
-</script>
-@*<script>
-        //Test without Model
-        $("window").ready(function () {
-            let view = new ListView("test_list", "w3-orange", "w3-hover-red");
-            let controller = new ListController(view);
-            
-        });
-</script>*@
 
-<div class="test_list w3-panel w3-twothird"></div>
-
-@*<div class="w3-panel w3-twothird">
-    <ul class="test_list_ul w3-ul w3-card w3-orange">
-        <li class="test_list_ul_li w3-display-container">
-            <span class="w3-opacity ">
-                <input class="test_list_input w3-orange w3-margin-0 w3-input w3-border-0 w3-opacity "
-                       style="outline: none; padding: 0px;"
-                       value="text"/>
-            </span>
-            <div class="w3-display-right">
-                <button class="w3-orange w3-hover-red w3-button">+</button>
-            </div>
-        </li>
-    </ul>
-</div>*@
+<div class="my-site-padding-section w3-row">
+    <div class="w3-half w3-container">
+        <h2>Управляй своим временем!</h2>
+        <p>В этом мире столько возможностей, хватит упускать свой шанс! 
+        Начни уже сегодня, и за небольшое время достигни того, о чем только ты хотел желать.</p>
+    </div>
+    <div class="w3-half w3-container">
+        <form class="w3-container">
+            <label>Логин</label>
+            <input class="w3-input w3-border" type="text"/>
+            <br/>
+            <label>Пароль</label>
+            <input class="w3-input w3-border" type="password" />
+            <br/>
+            <input class="w3-btn" type="submit" />
+        </form>
+    </div>
+</div>

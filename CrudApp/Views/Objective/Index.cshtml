@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Objective";
+    Layout = "_Layout";
+}
+<h2>Задачи</h2>
+<script>
+    //Test with Model
+    $("window").ready(function () {
+        let view = new ListView("test_list", "w3-white", "w3-hover-lime");
+        let model = new XhrModel("/api/Objective", function (xhr, status, error) {
+            console.log("ajax error!");
+            console.log(status);
+            console.log(error);
+        });
+        let controller = new ListController(view, model);
+    });
+</script>
+
+@*<script>
+        //Test without Model
+        $("window").ready(function () {
+            let view = new ListView("test_list", "w3-orange", "w3-hover-red");
+            let controller = new ListController(view);
+            
+        });
+</script>*@
+
+<div class="test_list w3-container"></div>
+<p>Добавляй новые задачи, какие сочтешь нужным</p>
