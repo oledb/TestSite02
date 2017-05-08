@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Вход";
+    Layout = "_Layout";
+}
+
+<div class="w3-content">
+    <div class="my-site-container w3-white w3-padding-128 w3-card w3-margin">
+        <div class="my-site-padding-section w3-row">
+            <div class="w3-half w3-container">
+                <h2>Управляй своим временем!</h2>
+                <p>
+                    В этом мире столько возможностей, хватит упускать свой шанс!
+                    Начни уже сегодня, и за небольшое время достигни того, о чем только ты хотел желать.
+                </p>
+            </div>
+            <div class="w3-half w3-container">
+                <form class="w3-container">
+                    <label>Логин</label>
+                    <input class="w3-input w3-border" type="text" />
+                    <br />
+                    <label>Пароль</label>
+                    <input class="w3-input w3-border" type="password" />
+                    <br />
+                    <input class="w3-btn w3-lime " type="submit" value="Войти" />
+                    <input class="w3-btn w3-red" : type="button" value="Восстановить пароль" />
+                    <br />
+                    <a href="~/Pages/Account/Registry" class="">У меня нет учетной записи</a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("document").ready(function () {
+        $("body").addClass("my-site-image-back");
+    })
+</script>

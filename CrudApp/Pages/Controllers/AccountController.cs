@@ -26,7 +26,12 @@ namespace CrudApp.Pages.Controllers
             _signManager = signManager;
         }
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Registry()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
         {
             return View();
         }
