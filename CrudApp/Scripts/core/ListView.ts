@@ -18,7 +18,7 @@ class ListView {
     private createRoot(): JQuery {
         this.root = $("<ul></ul>")
             .addClass(this.ulName)
-            .addClass("w3-ul w3-card")
+            .addClass("w3-ul w3-border w3-border-lime")
             .addClass(this.color);
         return this.root;
     }
