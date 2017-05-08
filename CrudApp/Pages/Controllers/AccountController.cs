@@ -12,22 +12,21 @@ using CrudApp.Models;
 
 namespace CrudApp.Pages.Controllers
 {
-    public class DefaultController : Controller
+    
+    public class AccountController : Controller
     {
-        public DefaultController(
+        private UserManager<ApplicationUser> _userManager;
+        private SignInManager<ApplicationUser> _signManager;
+
+        public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signManager)
         {
-
+            _userManager = userManager;
+            _signManager = signManager;
         }
-
         // GET: /<controller>/
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Objective()
         {
             return View();
         }
