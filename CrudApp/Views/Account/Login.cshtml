@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LoginViewModel
+@{
     ViewBag.Title = "Вход";
     Layout = "_Layout";
 }
@@ -14,11 +15,11 @@
                 </p>
             </div>
             <div class="w3-half w3-container">
-                <form class="w3-container my-site-regform">
-                    <label>Email</label>
-                    <input class="w3-input w3-border" type="text" required/>
-                    <label>Пароль</label>
-                    <input class="w3-input w3-border" type="password" required/>
+                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="w3-container my-site-regform">
+                    <label asp-for="Email">Email</label>
+                    <input asp-for="Email" class="w3-input w3-border" type="text" required />
+                    <label asp-for="Password">Пароль</label>
+                    <input asp-for="Password" class="w3-input w3-border" type="password" required />
                     <input class="w3-btn w3-lime" type="submit" value="Войти" />
                     <a href="~/Pages/Account/ResetPassword" class="w3-btn w3-red">Восстановить пароль</a>
                     <br />
