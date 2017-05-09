@@ -27,6 +27,7 @@ namespace CrudApp.Pages.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Objective()
         {
             return View();

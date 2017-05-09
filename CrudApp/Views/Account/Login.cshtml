@@ -14,19 +14,16 @@
                 </p>
             </div>
             <div class="w3-half w3-container">
-                <form class="w3-container">
-                    <label>Логин</label>
-                    <input class="w3-input w3-border" type="text" />
-                    <br />
+                <form class="w3-container my-site-regform">
+                    <label>Email</label>
+                    <input class="w3-input w3-border" type="text" required/>
                     <label>Пароль</label>
-                    <input class="w3-input w3-border" type="password" />
-                    <br />
-                    <input class="w3-btn w3-lime " type="submit" value="Войти" />
-                    <input class="w3-btn w3-red" : type="button" value="Восстановить пароль" />
+                    <input class="w3-input w3-border" type="password" required/>
+                    <input class="w3-btn w3-lime" type="submit" value="Войти" />
+                    <a href="~/Pages/Account/ResetPassword" class="w3-btn w3-red">Восстановить пароль</a>
                     <br />
                     <a href="~/Pages/Account/Registry" class="">У меня нет учетной записи</a>
                 </form>
-
             </div>
         </div>
     </div>
