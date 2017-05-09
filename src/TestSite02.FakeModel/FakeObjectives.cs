@@ -14,9 +14,10 @@ namespace TestSite02.FaketModel
             
             list = new List<Objective>(10)
             {
-                new Objective {ObjectiveId = id++, Name = "Test 01"},
-                new Objective {ObjectiveId = id++, Name = "Test 02"},
-                new Objective {ObjectiveId = id++, Name = "Test 03"},
+                new Objective {ObjectiveId = id++, Name = "Read a book", UserId = "e8769835-3c14-4243-99a7-970cf91d4816"},
+                new Objective {ObjectiveId = id++, Name = "Write a letter", UserId = "e8769835-3c14-4243-99a7-970cf91d4816"},
+                new Objective {ObjectiveId = id++, Name = "Send a message", UserId = "b7130bd3-9eff-44a6-a164-20b6878891ca"},
+                new Objective {ObjectiveId = id++, Name = "Learn something", UserId = "b7130bd3-9eff-44a6-a164-20b6878891ca"}
             };
         }
 

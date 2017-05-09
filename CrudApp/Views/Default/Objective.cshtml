@@ -1,7 +1,10 @@
-﻿@{
+﻿@inject UserManager<ApplicationUser> UserManager
+@{
     ViewBag.Title = "Objective";
     Layout = "_Layout";
+    var userId = UserManager.GetUserId(User);
 }
+
 <h2>Задачи</h2>
 <script>
     //Test with Model
@@ -25,5 +28,6 @@
         });
 </script>*@
 
+<p>User ID @userId</p>
 <div class="test_list w3-container"></div>
 <p>Добавляй новые задачи, какие сочтешь нужным</p>
