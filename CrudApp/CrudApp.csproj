@@ -29,6 +29,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\CrudApp.Model\CrudApp.Model.csproj" />
     <ProjectReference Include="..\src\TestSite02.FakeModel\TestSite02.FakeModel.csproj" />
     <ProjectReference Include="..\TestSite02.AbstractModel\TestSite02.AbstractModel.csproj" />
   </ItemGroup>
