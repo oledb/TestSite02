@@ -5,7 +5,7 @@
     <AssemblyName>UnitTests</AssemblyName>
     <PackageId>UnitTests</PackageId>
     <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50;portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+    <PackageReference Include="Moq" Version="4.7.10" />
     <PackageReference Include="xunit" Version="2.3.0-beta1-build3642" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0-beta1-build1309" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta1-build3642" />

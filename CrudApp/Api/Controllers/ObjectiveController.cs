@@ -16,11 +16,16 @@ namespace CrudApp.Api.Controllers
     {
         private IObjectives _objectives;
         private UserManager<ApplicationUser> _userManager;
-
+        public string FakeUserId { get; set; }
         public ObjectiveController(IObjectives obj, UserManager<ApplicationUser> userManager)
         {
             _objectives = obj;
             _userManager = userManager;
+        }
+
+        private string GetUserId()
+        {
+            return _userManager == null ? FakeUserId : _userManager.GetUserId(User);
         }
 
         // GET: api/values
@@ -28,7 +33,7 @@ namespace CrudApp.Api.Controllers
         [Authorize]
         public IEnumerable<Objective> Get()
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = GetUserId();
             return _objectives.GetObjectives().Where(obj => obj.UserId == userId);
         }
 
@@ -41,7 +46,7 @@ namespace CrudApp.Api.Controllers
                 throw new NullReferenceException();
             try
             {
-                value.UserId = _userManager.GetUserId(User);
+                value.UserId = GetUserId();
                 return _objectives.SaveObjective(value);
             }
             catch
@@ -55,7 +60,7 @@ namespace CrudApp.Api.Controllers
         [Authorize]
         public void Put([FromBody]Objective value)
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = GetUserId();
             var temp = _objectives.GetObjectives().Where(obj => obj.ObjectiveId == value.ObjectiveId).SingleOrDefault(); ;
             if (temp != null && temp.UserId == userId)
                 _objectives.UpdateObjective(value);
@@ -66,7 +71,7 @@ namespace CrudApp.Api.Controllers
         [Authorize]
         public void Delete(int id)
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = GetUserId();
             var temp = _objectives.GetObjectives().Where(obj => obj.ObjectiveId == id).SingleOrDefault(); ;
             if (temp != null && temp.UserId == userId)
                 _objectives.RemoveObjective(id);

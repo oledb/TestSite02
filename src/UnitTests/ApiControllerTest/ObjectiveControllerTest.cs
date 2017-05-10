@@ -4,6 +4,13 @@ using Xunit;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
 using CrudApp.Api.Controllers;
+using CrudApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Moq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace UnitTests
 {
@@ -12,7 +19,11 @@ namespace UnitTests
         private ObjectiveController Initilize()
         {
             IObjectives obj = new FakeObjectives();
-            return new ObjectiveController(obj, null);
+            return new ObjectiveController(obj, null)
+            {
+                FakeUserId = "e8769835-3c14-4243-99a7-970cf91d4816"
+            };
+            
         }
 
         [Fact]
@@ -22,11 +33,11 @@ namespace UnitTests
             var controller = Initilize();
 
             //Act
-            var list = (List<Objective>)controller.Get();
+            var list = controller.Get().ToList();
 
             //Assert
-            Assert.Equal(3, list.Count);
-            Assert.Equal("Test 02", list[1].Name);
+            Assert.Equal(2, list.Count);
+            Assert.Equal("Write a letter", list[1].Name);
         }
 
         [Fact]
@@ -38,11 +49,11 @@ namespace UnitTests
 
             //Act
             int result = controller.Post(newObjective);
-            var list = (List<Objective>)controller.Get();
+            var list = controller.Get().ToList();
             newObjective = list.Last();
 
             //Assert
-            Assert.Equal(4, list.Count);
+            Assert.Equal(3, list.Count);
             Assert.Equal("Test 04", newObjective.Name);
             Assert.NotEqual(0, result);
         }
@@ -55,7 +66,7 @@ namespace UnitTests
             var objective = new Objective
             {
                 Name = "Updated Test",
-                ObjectiveId = 2
+                ObjectiveId = 1
             };
 
             //Act
@@ -64,7 +75,7 @@ namespace UnitTests
 
             //Assert
             Assert.Equal("Updated Test", objective.Name);
-            Assert.Equal(2, objective.ObjectiveId);
+            Assert.Equal(1, objective.ObjectiveId);
         }
 
         [Fact]
@@ -75,7 +86,7 @@ namespace UnitTests
 
             //Act
             controller.Delete(2);
-            var list = (List<Objective>)controller.Get();
+            var list = controller.Get().ToList();
             var nullObjective = list.Where(o => o.ObjectiveId == 2).SingleOrDefault();
 
             //Assert
