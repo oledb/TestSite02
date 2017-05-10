@@ -12,7 +12,7 @@ namespace UnitTests
         private ObjectiveController Initilize()
         {
             IObjectives obj = new FakeObjectives();
-            return new ObjectiveController(obj);
+            return new ObjectiveController(obj, null);
         }
 
         [Fact]
