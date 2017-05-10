@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudApp", "CrudApp\CrudApp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "src\UnitTests\UnitTests.csproj", "{9F686E17-E1C0-48DC-ABED-ADDABF6BB942}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSite02.Model", "TestSite02.Model\TestSite02.Model.csproj", "{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,18 @@ Global
 		{9F686E17-E1C0-48DC-ABED-ADDABF6BB942}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F686E17-E1C0-48DC-ABED-ADDABF6BB942}.Release|x64.ActiveCfg = Release|Any CPU
 		{9F686E17-E1C0-48DC-ABED-ADDABF6BB942}.Release|x86.ActiveCfg = Release|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Debug|x86.Build.0 = Debug|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Release|x64.Build.0 = Release|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{F348DD52-E911-4DDF-9DE1-A09C3681D2FF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
