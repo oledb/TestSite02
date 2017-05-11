@@ -21,12 +21,15 @@ namespace CrudApp.Model
 
         public void RemoveObjective(int id)
         {
-            throw new NotImplementedException();
+            _context.Objectives.Remove(new Objective() { ObjectiveId = id });
+            _context.SaveChanges();
         }
 
         public int SaveObjective(Objective obj)
         {
-            throw new NotImplementedException();
+            var result = _context.Objectives.Add(obj);
+            _context.SaveChanges();
+            return result.Entity.ObjectiveId;
         }
 
         public void UpdateObjective(Objective obj)

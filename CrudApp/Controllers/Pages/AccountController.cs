@@ -18,7 +18,6 @@ namespace CrudApp.Controllers.Pages
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger _logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,

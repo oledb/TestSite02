@@ -8,15 +8,20 @@ namespace UnitTests
 {
     class CrudDbContextInMemory : CrudDbContext
     {
+        private string _dbName;
         protected override void SetOptions(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: "Add_writes_to_database");
+            optionsBuilder.UseInMemoryDatabase(databaseName: _dbName);
         }
 
-
-        public static void Use(Action<CrudDbContextInMemory> use)
+        public CrudDbContextInMemory(string dbName)
         {
-            using(var context = new CrudDbContextInMemory())
+            _dbName = dbName;
+        }
+
+        public static void Use(Action<CrudDbContextInMemory> use, string dbName)
+        {
+            using(var context = new CrudDbContextInMemory(dbName))
             {
                 use(context);
             }
