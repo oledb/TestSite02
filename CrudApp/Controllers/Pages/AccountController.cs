@@ -11,7 +11,7 @@ using Microsoft.Extensions.Options;
 using CrudApp.Models;
 using CrudApp.Models.Account;
 
-namespace CrudApp.Pages.Controllers
+namespace CrudApp.Controllers.Pages
 {
     
     public class AccountController : Controller

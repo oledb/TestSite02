@@ -3,7 +3,7 @@ using System.Linq;
 using Xunit;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
-using CrudApp.Api.Controllers;
+using CrudApp.Controllers.Api;
 using CrudApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Moq;
@@ -23,7 +23,6 @@ namespace UnitTests
             {
                 FakeUserId = "e8769835-3c14-4243-99a7-970cf91d4816"
             };
-            
         }
 
         [Fact]

@@ -1,4 +1,4 @@
-/// <binding BeforeBuild='build' Clean='clean' />
+/// <binding Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),

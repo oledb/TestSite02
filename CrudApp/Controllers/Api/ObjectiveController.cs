@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using CrudApp.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace CrudApp.Api.Controllers
+namespace CrudApp.Controllers.Api
 {
     
     [Route("api/[controller]")]

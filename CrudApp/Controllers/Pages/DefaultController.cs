@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using CrudApp.Models;
 
-namespace CrudApp.Pages.Controllers
+namespace CrudApp.Controllers.Pages
 {
     public class DefaultController : Controller
     {
