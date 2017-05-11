@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
+using CrudApp.Model;
 
 namespace CrudApp
 {
@@ -47,7 +48,9 @@ namespace CrudApp
 
             services.AddMvc();
 
-            services.AddSingleton<IObjectives, FakeObjectives>();
+            //services.AddSingleton<IObjectives, FakeObjectives>();
+            services.AddDbContext<CrudDbContext>();
+            services.AddTransient<IObjectives, Objectives>();
         }
 
         public IConfigurationRoot Configuration { get; }

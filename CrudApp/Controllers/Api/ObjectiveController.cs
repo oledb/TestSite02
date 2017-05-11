@@ -61,7 +61,8 @@ namespace CrudApp.Controllers.Api
         public void Put([FromBody]Objective value)
         {
             var userId = GetUserId();
-            var temp = _objectives.GetObjectives().Where(obj => obj.ObjectiveId == value.ObjectiveId).SingleOrDefault(); ;
+            var temp = _objectives.GetObjectives().Where(obj => obj.ObjectiveId == value.ObjectiveId).SingleOrDefault();
+            value.UserId = userId;
             if (temp != null && temp.UserId == userId)
                 _objectives.UpdateObjective(value);
         }

@@ -18,16 +18,13 @@ namespace UnitTests
         public void GetObjectives_AllObjectives_Success()
         {
             //Arrange
-            Objectives obj = Create("694d7a74-84c2-45c8-9f4e-c64b472398f2");
-            CrudDbContextInMemory.Use(context =>
+            var bd = "694d7a74-84c2-45c8-9f4e-c64b472398f2";
+            Objectives obj = Create(bd);
+            AddObjectiveToDb(new Objective
             {
-                context.Objectives.Add(new Objective
-                {
-                    Name = "Test task",
-                    UserId = UserIdA
-                });
-                context.SaveChanges();
-            }, "694d7a74-84c2-45c8-9f4e-c64b472398f2");
+                Name = "GetObjectives_AllObjectives",
+                UserId = UserIdA
+            }, bd);
 
             //Act
             var list = obj.GetObjectives().ToList();
@@ -67,7 +64,7 @@ namespace UnitTests
             Objectives obj = Create("745cd443-75aa-4f9c-b7a1-8a1a65d5f71b");
             Objective newObj = new Objective
             {
-                Name = "New One",
+                Name = "SaveObjectve_ReturnId",
                 UserId = UserIdA
             };
 
@@ -84,17 +81,11 @@ namespace UnitTests
             //Arrange
             var bd = "34890c83-2e02-4602-8457-8c80bd9a0541";
             Objectives obj = Create(bd);
-            var id = 0;
-            CrudDbContextInMemory.Use(context =>
-            {
-                var result = context.Objectives.Add(new Objective
+            var id = AddObjectiveToDb(new Objective
                 {
-                    Name = "Test task",
+                    Name = "RemoveObjective_ById",
                     UserId = UserIdA
-                });
-                context.SaveChanges();
-                id = result.Entity.ObjectiveId;
-            }, bd);
+                }, bd);
 
             //Act, Assert
             obj.RemoveObjective(id);
@@ -102,6 +93,48 @@ namespace UnitTests
             {
                 Assert.Empty(context.Objectives.ToList());
             }, bd);
+        }
+
+        [Fact]
+        public void UpdateObjective_NewName_Success()
+        {
+            //Arrange
+            var bd = "179d257a-33e7-48ba-90e7";
+            Objectives obj = Create(bd);
+            var id = AddObjectiveToDb( new Objective {
+                Name = "Old task",
+                UserId = UserIdA
+            }, bd);
+
+            //Act
+            obj.UpdateObjective(new Objective
+            {
+                ObjectiveId = id,
+                Name = "New task",
+                UserId = UserIdA
+            });
+
+            //Assert
+            CrudDbContextInMemory.Use(context =>
+            {
+                var objective = context.Objectives.Where(o => o.ObjectiveId == id).SingleOrDefault();
+                Assert.NotNull(objective);
+                Assert.Equal("New task", objective.Name);
+                Assert.Equal(UserIdA, objective.UserId);
+            }, bd);
+        }
+
+        //Helpers
+        private int AddObjectiveToDb(Objective obj, string dbSignature)
+        {
+            var id = -1;
+            CrudDbContextInMemory.Use(context =>
+            {
+                var result = context.Objectives.Add(obj);
+                context.SaveChanges();
+                id = result.Entity.ObjectiveId;
+            }, dbSignature);
+            return id;
         }
     }
 }
