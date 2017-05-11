@@ -24,13 +24,10 @@ namespace UnitTests
                 obj = new FakeObjectives(new List<Objective>());
             else
                 obj = new FakeObjectives(objs.ToList());
-            return new ObjectiveController(obj, () => _userId);
-        }
-
-        private ObjectiveController Initilize()
-        {
-            obj = new FakeObjectives();
-            return new ObjectiveController(obj, () => _userId);
+            return new ObjectiveController(obj, null)
+            {
+                UserId = () => _userId
+            };  
         }
 
         [Fact]

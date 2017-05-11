@@ -16,22 +16,16 @@ namespace CrudApp.Controllers.Api
     {
         private IObjectives _objectives;
         private UserManager<ApplicationUser> _userManager;
-        private Func<string> _getUserId;
+        public Func<string> UserId { get; set; }
         public ObjectiveController(IObjectives obj, UserManager<ApplicationUser> userManager)
         {
             _objectives = obj;
             _userManager = userManager;
         }
 
-        public ObjectiveController(IObjectives obj, Func<string> getUserId)
-        {
-            _objectives = obj;
-            _getUserId = getUserId;
-        }
-
         private string GetUserId()
         {
-            return _userManager == null ? _getUserId() : _userManager.GetUserId(User);
+            return _userManager == null ? UserId() : _userManager.GetUserId(User);
         }
 
         // GET: api/values
