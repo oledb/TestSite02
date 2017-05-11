@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using TestSite02.AbstractModel;
+using System.Linq;
 
 namespace CrudApp.Model
 {
@@ -9,17 +9,14 @@ namespace CrudApp.Model
     {
         private CrudDbContext _context;
 
-        public Objectives()
+        public Objectives(CrudDbContext context)
         {
-
+            _context = context;
         }
 
         public IEnumerable<Objective> GetObjectives()
         {
-            yield return new Objective()
-            {
-                UserId = "e8769835-3c14-4243-99a7-970cf91d4816"
-            };
+            return _context.Objectives.ToList();
         }
 
         public void RemoveObjective(int id)

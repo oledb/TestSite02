@@ -10,7 +10,7 @@ namespace UnitTests
         private readonly string UserIdA = "e8769835-3c14-4243-99a7-970cf91d4816";
         private Objectives Create()
         {
-            return new Objectives();
+            return new Objectives(new CrudDbContextInMemory());
         }
 
         [Fact]
@@ -18,6 +18,15 @@ namespace UnitTests
         {
             //Arrange
             Objectives obj = Create();
+            CrudDbContextInMemory.Use(context =>
+            {
+                context.Objectives.Add(new Objective
+                {
+                    Name = "Test task",
+                    UserId = UserIdA
+                });
+                context.SaveChanges();
+            });
 
             //Act
             var list = obj.GetObjectives().ToList();
