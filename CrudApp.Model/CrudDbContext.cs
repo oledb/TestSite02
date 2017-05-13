@@ -7,18 +7,17 @@ namespace CrudApp.Model
 {
     public class CrudDbContext : DbContext
     {
+        public CrudDbContext(DbContextOptions option) : base(option)
+        {
+
+        }
+
         protected virtual void SetOptions(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CrudAppModel0001;Trusted_Connection=True;");
+            // Do nothing
         }
 
         public DbSet<Objective> Objectives { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            SetOptions(optionsBuilder);
-        }
-
-       
     }
 }

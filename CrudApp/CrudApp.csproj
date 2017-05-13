@@ -11,6 +11,8 @@
     <ApplicationIcon />
     <Win32Resource />
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    
+    <UserSecretsId>42fd032c-9d57-4def-88b2-2d70379dc4b8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -61,10 +63,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0" />
     <PackageReference Include="Moq" Version="4.7.10" />
-  </ItemGroup>
 
+  </ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
+    
   </ItemGroup>
 
 </Project>

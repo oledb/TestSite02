@@ -14,7 +14,7 @@ namespace UnitTests
             optionsBuilder.UseInMemoryDatabase(databaseName: _dbName);
         }
 
-        public CrudDbContextInMemory(string dbName)
+        public CrudDbContextInMemory(string dbName, DbContextOptions option = null) : base(option)
         {
             _dbName = dbName;
         }

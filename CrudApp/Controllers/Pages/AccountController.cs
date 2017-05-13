@@ -46,7 +46,7 @@ namespace CrudApp.Controllers.Pages
                    
                     await _signInManager.SignInAsync(user, isPersistent: false);
                    // _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal("~/Pages/Default/Objective");
+                    return RedirectToLocal("~/Default/Objective");
                 }
             }
 
@@ -77,7 +77,7 @@ namespace CrudApp.Controllers.Pages
                 if (result.Succeeded)
                 {
                    // _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal("~/Pages/Default/Objective");
+                    return RedirectToLocal("~/Default/Objective");
                 }
             }
             else
@@ -95,7 +95,7 @@ namespace CrudApp.Controllers.Pages
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToLocal("~/pages/default/index");
+            return RedirectToLocal("~/default/index");
         }
 
         [HttpGet]

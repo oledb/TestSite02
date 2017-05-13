@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
 using CrudApp.Model;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace CrudApp
 {
@@ -20,14 +21,10 @@ namespace CrudApp
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
 
-        if (env.IsDevelopment())
-            {
-               // builder.AddUserSecrets<Startup>();
-            }
-
-            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -43,13 +40,14 @@ namespace CrudApp
             services.Configure<IdentityOptions>(option =>
             {
                 option.Cookies.ApplicationCookie.LoginPath =
-                new PathString("/pages/account/login");
+                new PathString("/account/login");
             });
 
             services.AddMvc();
 
             //services.AddSingleton<IObjectives, FakeObjectives>();
-            services.AddDbContext<CrudDbContext>();
+            services.AddDbContext<CrudDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("CrudDbConnection")));
             services.AddTransient<IObjectives, Objectives>();
         }
 
@@ -57,13 +55,16 @@ namespace CrudApp
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
+
 
             app.UseStaticFiles();
 
@@ -72,8 +73,8 @@ namespace CrudApp
             app.UseMvc(routers =>
             {
                 routers.MapRoute(
-                    name: "default",
-                    template: "pages/{controller=Default}/{action=Index}");
+                    name: "Default",
+                    template: "{controller=Default}/{action=Index}");
             });
         }
     }
