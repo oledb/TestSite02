@@ -12,15 +12,14 @@ class NotificationView {
         this.root = $(`
         <div class="w3-modal w3-animate-opacity">
             <div class="w3-modal-content w3-card-4">
-                <header class="w3-red ">
-                    ${this.closeButton[0].outerHTML}
-                    ${this.caption[0].outerHTML}
+                <header id="modalheader" class="w3-red ">
                 </header>
-                <div class="w3-container w3-padding-32">
-                    ${this.textContainer[0].outerHTML}
+                <div id="modaltextcontainer"class="w3-container w3-padding-32">
                 </div>
             </div>
         </div>`).appendTo("#" + selector);
+        $("#modalheader").append(this.closeButton, this.caption);
+        $("#modaltextcontainer").append(this.textContainer);
         this.closeButton.on("click", () => {
             console.log("click");
             this.root.hide();
