@@ -23,7 +23,6 @@ describe("ListView tests", () => {
 
             expect(view.Items.length == 1).toBeTruthy("view.Items is empty or overflow");
             expect(view.Items[0].root).toContainText("Hello world");
-            expect(view.Items[0].root).toHaveId("list_view_ul_li-0");
         });
 
         it("The first element should be input", () => {
@@ -46,7 +45,8 @@ describe("ListView tests", () => {
             view.Add(1, "Test task 01");
             view.Add(4, "Test task 02");
             view.Add(7, "Test task 03");
-            let elementId = view.Items[1].LiId;
+            let elementId = "testremove001";
+            view.Items[1].root.attr("id", elementId);
 
             view.Remove(4);
 

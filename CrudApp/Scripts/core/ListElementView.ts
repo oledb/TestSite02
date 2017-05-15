@@ -2,14 +2,10 @@
 
 class ListElementView {
     constructor(public listView: ListView, public Id: number, public Text: string = "") {
-        this.LiClass = listView.ulName + "_li";
-        this.LiId = this.LiClass + "-" + Id.toString();
         this.GetElement(this.Text).appendTo(listView.root);
         this.SetAnimation();
     }
-
-    public LiClass: string;
-    public LiId: string;
+    
     public root: JQuery;
     public buttonsContainer: JQuery;
     public textContainer: JQuery;
@@ -19,20 +15,19 @@ class ListElementView {
     public editInput: JQuery;
     private GetElement(text: string): JQuery {
         this.root = $("<li></li>")
-            .addClass(`${this.LiClass} w3-display-container`);
-        this.textContainer = $("<span></span>")
-            .text(text)
-            .appendTo(this.root);
-        this.buttonsContainer = $("<div></div>")
-            .addClass("w3-display-right")
-            .appendTo(this.root);
-        this.saveButton = this.GetButton("Save")
-            .appendTo(this.buttonsContainer).hide();
-        this.editButton = this.GetButton("Edit")
-            .appendTo(this.buttonsContainer);
-        this.removeButton = this.GetButton("Remove")
-            .appendTo(this.buttonsContainer);
-        this.root.attr("id", this.LiId);
+            .addClass(`w3-display-container`);
+            this.textContainer = $("<span></span>")
+                .text(text)
+                .appendTo(this.root);
+            this.buttonsContainer = $("<div></div>")
+                .addClass("w3-display-right")
+                .appendTo(this.root);
+                this.saveButton = this.GetButton("Save")
+                    .appendTo(this.buttonsContainer).hide();
+                this.editButton = this.GetButton("Edit")
+                    .appendTo(this.buttonsContainer);
+                this.removeButton = this.GetButton("Remove")
+                    .appendTo(this.buttonsContainer);
         return this.root;
     }
 

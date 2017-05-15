@@ -7,15 +7,7 @@ namespace CrudApp.Model
 {
     public class CrudDbContext : DbContext
     {
-        public CrudDbContext(DbContextOptions option) : base(option)
-        {
-
-        }
-
-        protected virtual void SetOptions(DbContextOptionsBuilder optionsBuilder)
-        {
-            // Do nothing
-        }
+        public CrudDbContext(DbContextOptions option) : base(option) { }
 
         public DbSet<Objective> Objectives { get; set; }
 

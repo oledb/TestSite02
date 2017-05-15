@@ -59,7 +59,8 @@ describe("ListController tests", () => {
         it("should remove the element when clicking the remove button", () => {
             view.input.val("Test2");
             view.inputAddButton.trigger('click');
-            let elementId = view.Items[0].LiId;
+            let elementId = "testremove";
+            view.Items[0].root.attr("id", elementId);
 
             view.Items[0].removeButton.trigger('click');
 
