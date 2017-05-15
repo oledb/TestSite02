@@ -11,7 +11,6 @@
     <ApplicationIcon />
     <Win32Resource />
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    
     <UserSecretsId>42fd032c-9d57-4def-88b2-2d70379dc4b8</UserSecretsId>
   </PropertyGroup>
 
@@ -65,9 +64,9 @@
     <PackageReference Include="Moq" Version="4.7.10" />
 
   </ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
-  <ItemGroup>
     
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
   </ItemGroup>
 
 </Project>
