@@ -1,7 +1,9 @@
 ﻿/// <reference path="Components/List/ListController.ts" />
 /// <reference path="Components/List/ListElementView.ts" />
 /// <reference path="Components/List/ListView.ts" />
+/// <reference path="Components/List/ListApp.ts" />
 /// <reference path="Components/Design/UiDesigner.ts" />
+/// <reference path="Components/App/app.ts" />
 /// <reference path="Models/XhrModel.ts" />
 /// <reference path="Models/IXhrModel.ts" />
 

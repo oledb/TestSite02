@@ -8,15 +8,16 @@
 <h2>Задачи</h2>
 <script>
     //Test with Model
-    $("window").ready(function () {
-        let view = new ListView("test_list", "w3-white", "w3-hover-lime");
-        let model = new XhrModel("/api/Objective", function (xhr, status, error) {
-            console.log("ajax error!");
-            console.log(status);
-            console.log(error);
-        });
-        let controller = new ListController(view, model);
-    });
+    //$("window").ready(function () {
+    //    let view = new ListView("test_list", "w3-white", "w3-hover-lime");
+    //    let model = new XhrModel("/api/Objective", function (xhr, status, error) {
+    //        console.log("ajax error!");
+    //        console.log(status);
+    //        console.log(error);
+    //    });
+    //    let controller = new ListController(view, model);
+    //});
+    var app = new App();
 </script>
 
 @*<script>
