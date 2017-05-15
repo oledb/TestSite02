@@ -65,23 +65,23 @@ gulp.task("clean:tests", function (cb) {
     rimraf(paths.jsJasmine, cb);
 });
 
-gulp.task("clean", ["clean:jsmin", "clean:jsts", "clean:tests"]);
+gulp.task("_clean", ["clean:jsmin", "clean:jsts", "clean:tests"]);
 
 gulp.task("min:js", function () {
-    return gulp.src([ paths.jquery, paths.js, "!" + paths.minJs], { base: "." })
+    return gulp.src([ paths.js, "!" + paths.minJs], { base: "." })
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .on('error', gutil.log)
         .pipe(gulp.dest("."));
 });
 
-gulp.task("build", ['compile:ts'], function () {
+gulp.task("_build", ['compile:ts'], function () {
     gulp.start("min:js");
 });
 
-gulp.task("test", ['compile:ts', "compile:ts_test"]);
+gulp.task("_test", ['compile:ts', "compile:ts_test"]);
 
-gulp.task('jasmine', function () {
+gulp.task('_jasmine', function () {
     return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine,
         paths.jsJasmineMocks, paths.js])
         .pipe(watch([paths.jsJasmine, paths.js, paths.jsJasmineMocks]))

@@ -13,7 +13,7 @@ describe("ListView tests", () => {
     });
     describe("Create and add elements", () => {
         it("should create a new ListView in a div container", () => {
-            expect(".list_view").toContainElement(`ul, .${view.ulName}`);
+            expect(".list_view").toContainElement(`ul`);
             expect(view.root).toHaveClass("w3-green");
             
         });
@@ -26,14 +26,12 @@ describe("ListView tests", () => {
         });
 
         it("The first element should be input", () => {
-            expect(view.liInput).toContainElement("input");
-            expect(view.input).toHaveClass(view.inputName);
+            expect(view.root).toContainElement("li:first > input");
             expect(view.input).toHaveClass(color);
         });
 
         it("The input should have a button 'Add' with hover color", () => {
             expect(view.liInput).toContainElement("button");
-            expect(view.inputAddButton).toHaveClass(view.inputButtonName);
             expect(view.inputAddButton).toHaveClass(hoverColor);
             expect(view.inputAddButton).toHaveClass(color);
             expect(view.inputAddButton).toHaveText("Add");
