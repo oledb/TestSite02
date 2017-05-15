@@ -3,6 +3,7 @@ using System.Linq;
 using TestSite02.AbstractModel;
 using CrudApp.Model;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests
 {
@@ -11,7 +12,7 @@ namespace UnitTests
         private readonly string UserIdA = "e8769835-3c14-4243-99a7-970cf91d4816";
         private Objectives Create(string dbName)
         {
-            return new Objectives(new CrudDbContextInMemory(dbName));
+            return new Objectives(new CrudDbContextInMemory(dbName, null));
         }
 
         [Fact]
