@@ -4,6 +4,7 @@
 /// <reference path="Components/List/ListApp.ts" />
 /// <reference path="Components/Design/UiDesigner.ts" />
 /// <reference path="Components/App/app.ts" />
+/// <reference path="Components/Notification/NotificationView.ts" />
 /// <reference path="Models/XhrModel.ts" />
 /// <reference path="Models/IXhrModel.ts" />
 
