@@ -12,6 +12,7 @@ using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
 using CrudApp.Model;
 using Microsoft.AspNetCore.HttpOverrides;
+using System;
 
 namespace CrudApp
 {
@@ -45,10 +46,14 @@ namespace CrudApp
 
             services.AddMvc();
 
-            //services.AddSingleton<IObjectives, FakeObjectives>();
+            if (Convert.ToBoolean(Configuration["UseFake"]))
+                services.AddSingleton<IObjectives, FakeObjectives>();
+            else
+                services.AddTransient<IObjectives, Objectives>();
+
             services.AddDbContext<CrudDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CrudDbConnection")));
-            services.AddTransient<IObjectives, Objectives>();
+            
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -63,7 +68,7 @@ namespace CrudApp
             loggerFactory.AddConsole();
             loggerFactory.AddDebug();
 
-                app.UseDeveloperExceptionPage();
+            app.UseDeveloperExceptionPage();
 
 
             app.UseStaticFiles();
