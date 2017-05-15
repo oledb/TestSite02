@@ -1,4 +1,4 @@
-﻿/// <reference path="./UiDesigner.ts"/>
+﻿/// <reference path="../../references.ts"/>
 
 class ListView {
     constructor(public App: string, public color: string = "", public hoverColor: string ="") {

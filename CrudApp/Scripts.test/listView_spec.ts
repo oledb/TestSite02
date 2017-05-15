@@ -1,4 +1,4 @@
-﻿/// <reference path="../Scripts/core/ListView.ts"/>
+﻿/// <reference path="../Scripts/references.ts"/>
 /// <reference path="../node_modules/@types/jquery/index.d.ts"/>
 /// <reference path="../node_modules/@types/jasmine/index.d.ts"/>
 /// <reference path="../node_modules/@types/jasmine-jquery/index.d.ts"/>

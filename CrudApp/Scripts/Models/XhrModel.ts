@@ -1,4 +1,4 @@
-﻿/// <reference path="../jquerydef/index.d.ts"/>
+﻿/// <reference path="../references.ts"/>
 
 class XhrModel implements IXhrModel {
     constructor(protected Url: string, public error: (xhr, status, error) => void) {

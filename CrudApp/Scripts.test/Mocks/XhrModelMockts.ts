@@ -1,4 +1,4 @@
-﻿/// <reference path="../../Scripts/core/IXhrModel.ts"/>
+﻿/// <reference path="../../Scripts/references.ts"/>
 
 class XhrModelMock implements IXhrModel {
 

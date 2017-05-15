@@ -21,13 +21,14 @@ var input = {
     typescriptTest: "./Scripts.test/"
 };
 
-paths.js = input.typescript + "core/**/*.js";
+paths.js = input.typescript + "Components/**/*.js";
+paths.jsModel = input.typescript + "Models/*.js";
 paths.jquery = paths.webroot + "lib/jQuery/dist/jquery.min.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.concatJsDest = paths.webroot + "site.min.js";
 //TS Prod
 paths.tsconfig = input.typescript + "tsconfig.json";
-paths.jsOutput = input.typescript + "core/";
+paths.jsOutput = input.typescript;
 //TS Test
 paths.tsconfigTest = input.typescriptTest + "tsconfig.json";
 paths.jsOutputTest = input.typescriptTest;
@@ -68,7 +69,7 @@ gulp.task("clean:tests", function (cb) {
 gulp.task("_clean", ["clean:jsmin", "clean:jsts", "clean:tests"]);
 
 gulp.task("min:js", function () {
-    return gulp.src([ paths.js, "!" + paths.minJs], { base: "." })
+    return gulp.src([paths.js, paths.jsModel, "!" + paths.minJs], { base: "." })
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .on('error', gutil.log)
@@ -83,8 +84,8 @@ gulp.task("_test", ['compile:ts', "compile:ts_test"]);
 
 gulp.task('_jasmine', function () {
     return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine,
-        paths.jsJasmineMocks, paths.js])
-        .pipe(watch([paths.jsJasmine, paths.js, paths.jsJasmineMocks]))
+        paths.jsJasmineMocks, paths.js, paths.jsModel])
+        .pipe(watch([paths.jsJasmine, paths.js, paths.jsModel, paths.jsJasmineMocks]))
         .pipe(jasmineBrowser.specRunner())
         .pipe(jasmineBrowser.server({ port: 80 }));
 });

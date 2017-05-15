@@ -1,4 +1,4 @@
-﻿/// <reference path="./UiDesigner.ts"/>
+﻿/// <reference path="../../references.ts"/>
 
 class ListElementView {
     constructor(public listView: ListView, public Id: number, public Text: string = "") {
