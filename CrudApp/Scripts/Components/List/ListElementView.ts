@@ -15,7 +15,7 @@ class ListElementView {
     public editInput: JQuery;
     private GetElement(text: string): JQuery {
         this.root = $("<li></li>")
-            .addClass(`w3-display-container`);
+            .addClass(`w3-display-container w3-animate-opacity`);
             this.textContainer = $("<span></span>")
                 .text(text)
                 .appendTo(this.root);
@@ -28,7 +28,7 @@ class ListElementView {
                     .appendTo(this.buttonsContainer);
                 this.removeButton = this.GetButton("Remove")
                     .appendTo(this.buttonsContainer);
-        return this.root;
+                return this.root;
     }
 
     private GetButton(text: string): JQuery {
