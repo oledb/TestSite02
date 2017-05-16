@@ -2,9 +2,10 @@
 
 class NotificationView {
     constructor(public selector: string) {
+        console.log("version 0");
         this.closeButton = UiDesigner.CreateButton("x", "w3-button w3-display-topright");
         this.caption = UiDesigner
-            .CreateTag("h2", "w3-margin")
+            .CreateTag("h2", "w3-margin-left")
             .text("Error");
         this.textContainer = UiDesigner
             .CreateContainer()
@@ -14,7 +15,7 @@ class NotificationView {
             <div class="w3-modal-content w3-card-4">
                 <header id="modalheader" class="w3-red ">
                 </header>
-                <div id="modaltextcontainer"class="w3-container w3-padding-32">
+                <div id="modaltextcontainer"class="w3-container w3-center w3-padding-32">
                 </div>
             </div>
         </div>`).appendTo("#" + selector);

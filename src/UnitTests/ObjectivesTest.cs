@@ -2,6 +2,7 @@
 using System.Linq;
 using TestSite02.AbstractModel;
 using CrudApp.Model;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,7 +55,7 @@ namespace UnitTests
                 var list = context.Objectives.ToList();
                 Assert.NotEmpty(list);
                 Assert.Equal("New One", list[0].Name);
-            }, bd); 
+            }, bd);
         }
 
         [Fact]
@@ -81,10 +82,10 @@ namespace UnitTests
             var bd = "34890c83-2e02-4602-8457-8c80bd9a0541";
             Objectives obj = Create(bd);
             var id = AddObjectiveToDb(new Objective
-                {
-                    Name = "RemoveObjective_ById",
-                    UserId = UserIdA
-                }, bd);
+            {
+                Name = "RemoveObjective_ById",
+                UserId = UserIdA
+            }, bd);
 
             //Act, Assert
             obj.RemoveObjective(id, UserIdA);
@@ -100,7 +101,8 @@ namespace UnitTests
             //Arrange
             var bd = "179d257a-33e7-48ba-90e7";
             Objectives obj = Create(bd);
-            var id = AddObjectiveToDb( new Objective {
+            var id = AddObjectiveToDb(new Objective
+            {
                 Name = "Old task",
                 UserId = UserIdA
             }, bd);
