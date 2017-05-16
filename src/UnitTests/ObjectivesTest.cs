@@ -28,7 +28,7 @@ namespace UnitTests
             }, bd);
 
             //Act
-            var list = obj.GetObjectives().ToList();
+            var list = obj.GetObjectives(UserIdA).ToList();
 
             //Assert
             Assert.Equal(UserIdA, list[0].UserId);
@@ -42,12 +42,11 @@ namespace UnitTests
             Objectives obj = Create(bd);
             Objective newObj = new Objective
             {
-                Name = "New One",
-                UserId = UserIdA
+                Name = "New One"
             };
 
             //Act
-            obj.SaveObjective(newObj);
+            obj.SaveObjective(newObj, UserIdA);
 
             //Assert
             CrudDbContextInMemory.Use(context =>
@@ -65,12 +64,11 @@ namespace UnitTests
             Objectives obj = Create("745cd443-75aa-4f9c-b7a1-8a1a65d5f71b");
             Objective newObj = new Objective
             {
-                Name = "SaveObjectve_ReturnId",
-                UserId = UserIdA
+                Name = "SaveObjectve_ReturnId"
             };
 
             //Act
-            int id = obj.SaveObjective(newObj);
+            int id = obj.SaveObjective(newObj, UserIdA);
 
             //Assert
             Assert.NotEqual(0, id);
@@ -89,7 +87,7 @@ namespace UnitTests
                 }, bd);
 
             //Act, Assert
-            obj.RemoveObjective(id);
+            obj.RemoveObjective(id, UserIdA);
             CrudDbContextInMemory.Use(context =>
             {
                 Assert.Empty(context.Objectives.ToList());
@@ -113,7 +111,7 @@ namespace UnitTests
                 ObjectiveId = id,
                 Name = "New task",
                 UserId = UserIdA
-            });
+            }, UserIdA);
 
             //Assert
             CrudDbContextInMemory.Use(context =>

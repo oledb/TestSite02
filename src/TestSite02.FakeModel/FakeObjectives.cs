@@ -25,34 +25,36 @@ namespace TestSite02.FaketModel
             _list = list;
         }
 
-        public IEnumerable<Objective> GetObjectives()
+        public IEnumerable<Objective> GetObjectives(string userId)
         {
-            return _list;
+            return _list.Where(u => u.UserId == userId);
         }
 
-        public void RemoveObjective(int id)
+        public void RemoveObjective(int id, string userId)
         {
-            var item = GetObjectiveById(id);
+            var item = GetObjectiveById(id, userId);
             _list.Remove(item);
         }
 
-        public int SaveObjective(Objective obj)
+        public int SaveObjective(Objective obj, string userId)
         {
+            obj.UserId = userId;
             obj.ObjectiveId = obj.ObjectiveId == 0 ? id++ : obj.ObjectiveId;
             _list.Add(obj);
             return obj.ObjectiveId;
         }
 
-        public void UpdateObjective(Objective obj)
+        public void UpdateObjective(Objective obj, string userId)
         {
-            var item = GetObjectiveById(obj.ObjectiveId);
+            obj.UserId = userId;
+            var item = GetObjectiveById(obj.ObjectiveId, obj.UserId);
             item.Name = obj.Name;
         }
 
-        private Objective GetObjectiveById(int id)
+        private Objective GetObjectiveById(int id, string userId)
         {
             var item = (from o in _list
-                    where o.ObjectiveId == id
+                    where o.ObjectiveId == id && o.UserId == userId
                     select o).SingleOrDefault();
             if (item == null)
                 throw new NullReferenceException();

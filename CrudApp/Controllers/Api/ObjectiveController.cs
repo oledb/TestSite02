@@ -34,7 +34,7 @@ namespace CrudApp.Controllers.Api
         public IEnumerable<Objective> Get()
         {
             var userId = GetUserId();
-            return _objectives.GetObjectives().Where(obj => obj.UserId == userId);
+            return _objectives.GetObjectives(userId);
         }
 
         // POST api/values
@@ -46,8 +46,7 @@ namespace CrudApp.Controllers.Api
                 throw new NullReferenceException();
             try
             {
-                value.UserId = GetUserId();
-                return _objectives.SaveObjective(value);
+                return _objectives.SaveObjective(value, GetUserId());
             }
             catch
             {
@@ -61,10 +60,7 @@ namespace CrudApp.Controllers.Api
         public void Put([FromBody]Objective value)
         {
             var userId = GetUserId();
-            var temp = _objectives.GetObjectives().Where(obj => obj.ObjectiveId == value.ObjectiveId).SingleOrDefault();
-            value.UserId = userId;
-            if (temp != null && temp.UserId == userId)
-                _objectives.UpdateObjective(value);
+            _objectives.UpdateObjective(value, userId);
         }
 
         // DELETE api/values/5
@@ -73,9 +69,7 @@ namespace CrudApp.Controllers.Api
         public void Delete(int id)
         {
             var userId = GetUserId();
-            var temp = _objectives.GetObjectives().Where(obj => obj.ObjectiveId == id).SingleOrDefault(); ;
-            if (temp != null && temp.UserId == userId)
-                _objectives.RemoveObjective(id);
+            _objectives.RemoveObjective(id, userId);
         }
     }
 }
