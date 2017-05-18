@@ -13,22 +13,23 @@ class ListElementView {
     public editButton: JQuery;
     public saveButton: JQuery;
     public editInput: JQuery;
+    public completeButton: JQuery;
+
     private GetElement(text: string): JQuery {
-        this.root = $("<li></li>")
-            .addClass(`w3-display-container w3-animate-opacity`);
-            this.textContainer = $("<span></span>")
-                .text(text)
-                .appendTo(this.root);
-            this.buttonsContainer = $("<div></div>")
-                .addClass("w3-display-right")
-                .appendTo(this.root);
-                this.saveButton = this.GetButton("Save")
-                    .appendTo(this.buttonsContainer).hide();
-                this.editButton = this.GetButton("Edit")
-                    .appendTo(this.buttonsContainer);
-                this.removeButton = this.GetButton("Remove")
-                    .appendTo(this.buttonsContainer);
-                return this.root;
+        this.root = $(`<li class="w3-display-container w3-animate-opacity"></li>`)
+        this.textContainer = $("<span></span>").text(text)
+        this.buttonsContainer = $(`<div class="w3- display - right"></div>`)
+        this.completeButton = $(`<input class="w3-check" type="checkbox">`);
+        this.saveButton = this.GetButton("Save").hide();
+        this.editButton = this.GetButton("Edit");
+        this.removeButton = this.GetButton("Remove");
+
+        this.root.append(this.textContainer, this.buttonsContainer);
+        this.buttonsContainer.append(
+            this.saveButton,
+            this.editButton,
+            this.removeButton);
+       return this.root;
     }
 
     private GetButton(text: string): JQuery {

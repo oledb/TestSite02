@@ -2,9 +2,6 @@
 using System.Linq;
 using TestSite02.AbstractModel;
 using CrudApp.Model;
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests
 {

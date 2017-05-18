@@ -1,0 +1,49 @@
+﻿.my-site-gray {
+    background-color: #2D2D2D;
+    color: #cddc39;
+}
+
+h1, h2, h3, h4, h5, h6, .my-site-font-russo {
+    font-family: 'Russo One', sans-serif;
+}
+
+*, .my-site-font-podkova {
+    font-family: 'Podkova', serif;
+}
+
+.my-site-container{
+    max-width: 900px;
+}
+
+.my-site-box{
+    padding: 16px;
+}
+
+@media screen and (max-width: 820px) {
+    .my-site-box {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+.my-site-padding-section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+}
+
+
+
+.my-site-image-back {
+    background-image: url("images/back01.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+form.my-site-regform > input.w3-input{
+    margin-bottom: 8px;
+}
+
+.w3-button {
+    border-radius: 6px;
+}

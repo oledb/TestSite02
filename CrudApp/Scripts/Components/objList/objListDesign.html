@@ -1,0 +1,69 @@
+<!DOCTYPE>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="mycss.css">
+<link rel="stylesheet" href="animate.css">
+<script src="script.js"></script>
+
+<div class="ov-App w3-container my-site-container w3-margin-top">
+    <ul class="w3-ul w3-white">
+        <!--input-->
+        <li class="ov-element">
+            <input id="maininput" class="w3-white ov-input" placeholder="New task" type="text">
+            <div id="buttons" style="display: none;">
+                <button class="w3-button w3-red">Save</button>
+                <button class="w3-button w3-white">Cancel</button>
+            </div>
+        </li>
+        <!--element-->
+        <li class="ov-element w3-animate-opacity">
+            <table class="ov-table">
+                <tr class="">
+                    <td class="ov-icon material-icons">check_box_outline_blank</td>
+                    <td class="ov-text">Text</td>
+                    <td class="ov-menu dropdown">
+                        <a class="material-icons">more_horiz</a>
+                        <div class="dropdown-content">
+                            <button class="w3-button w3-block w3-left-align">Назначить проект</button>
+                            <button class="w3-button w3-block w3-left-align">В процессе</button>
+                            <button class="w3-button w3-block w3-left-align">Отложенно</button>
+                            <button class="w3-button w3-block w3-left-align">Новая</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <!--editable-->
+        <li id="el-root" class="ov-element w3-animate-opacity">
+            <!--view-->
+            <table id="el-view" class="ov-table">
+                <tr class="">
+                    <td id="el-complete" class="ov-icon material-icons">check_box_outline_blank</td>
+                    <td id="el-view-text" class="ov-text">Net task</td>
+                    <td class="ov-menu dropdown">
+                        <a class="material-icons">more_horiz</a>
+                        <div class="dropdown-content w3-card-2">
+                            <button id="el-edit-btn" class="content-button">Редактировать</button>
+                            <button class="content-button">Назначить проект</button>
+                            <hr/>
+                            <button id="el-wip-btn" class="content-button">В процессе</button>
+                            <button id="el-wait-btn" class="content-button">Ожидание</button>
+                            <button id="el-cancel-btn" class="content-button">Отложенно</button>
+                            <button id="el-new-btn" class="content-button">Новая</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!--edit-->
+            <div id="el-edit" class="ov-edit" style="display: none;">
+                <input id="el-edit-input" class="w3-white ov-input" placeholder="New task" type="text">
+                <div id="buttons">
+                    <button id="el-edit-save" class="w3-button w3-red">Save</button>
+                    <button class="w3-button w3-white">Cancel</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

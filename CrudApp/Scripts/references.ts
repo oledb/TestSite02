@@ -2,6 +2,7 @@
 /// <reference path="Components/List/ListElementView.ts" />
 /// <reference path="Components/List/ListView.ts" />
 /// <reference path="Components/List/ListApp.ts" />
+/// <reference path="Components/objList/objListElement.ts"/>
 /// <reference path="Components/Design/UiDesigner.ts" />
 /// <reference path="Components/App/app.ts" />
 /// <reference path="Components/Notification/NotificationView.ts" />
