@@ -91,6 +91,6 @@ input.ov-input:focus {
   display: block;
 }
 
-.el-edit > * {
+.el-edit {
     margin: 4px;
 }
