@@ -5,29 +5,11 @@
     var userId = UserManager.GetUserId(User);
 }
 
-<h2>Задачи</h2>
 <script>
-    //Test with Model
-    //$("window").ready(function () {
-    //    let view = new ListView("test_list", "w3-white", "w3-hover-lime");
-    //    let model = new XhrModel("/api/Objective", function (xhr, status, error) {
-    //        console.log("ajax error!");
-    //        console.log(status);
-    //        console.log(error);
-    //    });
-    //    let controller = new ListController(view, model);
-    //});
     var app = new App();
 </script>
 
-@*<script>
-        //Test without Model
-        $("window").ready(function () {
-            let view = new ListView("test_list", "w3-orange", "w3-hover-red");
-            let controller = new ListController(view);
-            
-        });
-</script>*@
 <div class="test_list w3-container my-site-container"></div>
-<p>Добавляй новые задачи, какие сочтешь нужным</p>
+<div id="objList" class="ov-App w3-container my-site-container w3-margin-top"></div>
+
 <div id="notif"></div>

@@ -1,15 +1,17 @@
 ﻿/// <reference path="../../references.ts"/>
 
 class ObjListElement {
-    constructor(
-        public changeStatus: (status: number) => boolean,
-        public changeText: (text: string) => boolean,
-        public completeObj: () => boolean
-    ) {
+    constructor(public objective: IObjective) {
         this.createView();
-        this.setAnimation();
+        this.setEvents();
     }
 
+    // Events
+    public eventChangeStatus: (obj: IObjective) => boolean;
+    public eventChangeText: (obj: IObjective) => boolean;
+    public eventCompleteObj: (obj: IObjective) => boolean;
+
+    // JQuery fields
     public root = $(`<li class="ov-element w3-animate-opacity"></li>`);
 
     //view
@@ -19,7 +21,7 @@ class ObjListElement {
     private rootTableDrop = $(`<td class="ov-menu dropdown"></td>`);
     private rootTableDropBtns = {
         editBtn: $(`<button class="content-button">Редактировать</button>`),
-        removeBtn: $(`<button class="content-button">Редактировать</button>`),
+        removeBtn: $(`<button class="content-button">Удалить</button>`),
         setProjectBtn: $(`<button class="content-button">Назначить проект</button>`),
         hr: $(`<hr/>`),
         wipBtn: $(`<button class="content-button">В процессе</button>`),
@@ -41,6 +43,7 @@ class ObjListElement {
         let editBtns = $(`<div></div>`);
         let cancelBtn = $(`<button class="content-button">Отмена</button>`);
 
+        //Appends
         this.root.append(this.rootTable, this.rootEdit);
         //Table
         this.rootTable.append(tr);
@@ -55,7 +58,7 @@ class ObjListElement {
         editBtns.append(this.rootEditSaveBtn, cancelBtn);
     }
 
-    private setAnimation() {
+    private setEvents() {
 
     }
 

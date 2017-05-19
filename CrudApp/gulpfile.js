@@ -8,7 +8,8 @@ var gulp = require("gulp"),
     gutil = require("gulp-util"),
     ts = require("gulp-typescript"),
     jasmineBrowser = require('gulp-jasmine-browser'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    concatCss = require('gulp-concat-css'); 
 
 
 var paths = {
@@ -18,7 +19,7 @@ var paths = {
 
 var input = {
     typescript: "./Scripts/",
-    typescriptTest: "./Scripts.test/"
+    typescriptTest: "./Scripts.test/",
 };
 
 paths.js = input.typescript + "Components/**/*.js";
@@ -26,6 +27,8 @@ paths.jsModel = input.typescript + "Models/*.js";
 paths.jquery = paths.webroot + "lib/jQuery/dist/jquery.min.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.concatJsDest = paths.webroot + "site.min.js";
+paths.concatCssDest = paths.webroot + "site.css";
+paths.css = "./Styles/*.css";
 //TS Prod
 paths.tsconfig = input.typescript + "tsconfig.json";
 paths.jsOutput = input.typescript;
@@ -54,6 +57,12 @@ gulp.task("compile:ts_test", function () {
         .js.pipe(gulp.dest(paths.jsOutputTest));
 });
 
+gulp.task("concat:css", function () {
+    return gulp.src(paths.css)
+        .pipe(concatCss(paths.concatCssDest))
+        .pipe(gulp.dest("."));
+});
+
 gulp.task("clean:jsmin", function (cb) {
     rimraf(paths.concatJsDest, cb);
 });
@@ -76,7 +85,7 @@ gulp.task("min:js", function () {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("_build", ['compile:ts'], function () {
+gulp.task("_build", ['compile:ts', "concat:css"], function () {
     gulp.start("min:js");
 });
 

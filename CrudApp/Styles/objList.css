@@ -1,96 +1,115 @@
 .status.wip {
-  background-color: #b7d7e8 !important;
-}
-.status.cancel {
-  background-color: #ff6f69 !important;
-}
-.status.complete {
-  background-color: #96ceb4 !important;
-}
-.status.wait {
-  background-color: #ffeead !important;
-}
-.status.new {
-  background-color: white !important;
-}
-li.ov-element .ov-menu {
-  display: none;
-}
-li.ov-element:hover .ov-menu {
-  display: inline-block;
-}
-.material-icons:hover {
-  color: #cddc39;
-  cursor: pointer;
-}
-li.ov-element tr td.ov-icon {
-  width: 24px;
-}
-li.ov-element tr td.ov-icon:hover {
-  color: #cddc39;
-}
-li.ov-element tr td.ov-text {
-  width: 100%;
-  max-width: 500px;
-}
-li.ov-element tr td.ov-menu {
-  width: 24px;
-}
-input.ov-input {
-  width: 100%;
-  border-style: none;
-  outline: none;
-  padding: 6px;
-  margin: 4px;
-}
-input.ov-input:focus {
-  border-style: solid;
-  border-color: #cddc39;
-  border-width: 1px;
-  margin-bottom: 4px;
-}
-.ov--App {
-  max-width: 500px;
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  background-color: #f9f9f9;
-  display: none;
-  min-width: 160px;
-  position: absolute;
-  right: 0;
-  z-index: 1;
-}
-.dropdown-content button.content-button {
-  background-color: inherit;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  display: block;
-  margin: 2px;
-  outline: 0;
-  overflow: hidden;
-  padding: 8px 16px;
-  text-align: left;
-  text-decoration: none;
-  white-space: nowrap;
-  width: 100%;
-}
-.dropdown-content hr {
-  margin: 0px;
-  color: black;
-}
-.dropdown-content button.content-button:hover {
-  background-color: #cddc39;
-  color: black!important;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
+    background-color: #b7d7e8 !important;
 }
 
-.el-edit {
+.status.cancel {
+    background-color: #ff6f69 !important;
+}
+
+.status.complete {
+    background-color: #96ceb4 !important;
+}
+
+.status.wait {
+    background-color: #ffeead !important;
+}
+
+.status.new {
+    background-color: white !important;
+}
+
+li.ov-element .ov-menu {
+    display: none;
+}
+
+.material-icons {
+    display: block !important;
+}
+
+li.ov-element:hover .ov-menu {
+    display: list-item;
+}
+
+.material-icons:hover {
+    color: #cddc39;
+    cursor: pointer;
+}
+
+li.ov-element tr td.ov-icon:hover {
+    color: #cddc39;
+}
+
+li.ov-element tr td.ov-text {
+    width: 100%;
+    max-width: 500px;
+}
+
+input.ov-input {
+    width: 100%;
+    border-style: none;
+    outline: none;
+    padding: 6px;
+}
+
+.el-edit > * {
     margin: 4px;
+}
+
+.w3-button {
+    border-radius: 6px;
+}
+
+input.ov-input:focus {
+    border-style: solid;
+    border-color: #cddc39;
+    border-width: 1px;
+    margin-bottom: 4px;
+}
+
+.ov-App {
+    max-width: 500px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    background-color: #f9f9f9;
+    display: none;
+    min-width: 160px;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+}
+
+    .dropdown-content button.content-button {
+        background-color: inherit;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        display: block;
+        margin: 2px;
+        outline: 0;
+        overflow: hidden;
+        padding: 8px 16px;
+        text-align: left;
+        text-decoration: none;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .dropdown-content hr {
+        margin: 0px;
+        color: black;
+    }
+
+    .dropdown-content button.content-button:hover {
+        background-color: #cddc39;
+        color: black !important;
+    }
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }

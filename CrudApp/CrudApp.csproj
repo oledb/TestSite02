@@ -25,7 +25,8 @@
 
   <ItemGroup>
     <Content Include="Styles\site.css" />
-    <Content Include="wwwroot\site.css" />
+    <Content Include="wwwroot\animate.css" />
+    <Content Include="wwwroot\site1.css" />
   </ItemGroup>
 
 
@@ -68,6 +69,10 @@
     
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <None Include="wwwroot\objListDesign.html" />
   </ItemGroup>
 
 </Project>

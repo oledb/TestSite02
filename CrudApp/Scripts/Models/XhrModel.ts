@@ -54,12 +54,3 @@ class XhrModel implements IXhrModel {
         });
     }
 }
-
-$("window").ready(() => {
-    var t = new XhrModel("/api/Objective", (xhr, status, error) => {
-        console.log("Cannot execute request!!!");
-        console.log(xhr);
-        console.log(status);
-        console.log(error);
-    });
-});

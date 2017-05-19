@@ -1,11 +1,12 @@
 ﻿interface IObjective {
     id: number,
-    userId: string,
+    userId?: string,
     name: string,
-    status: ObjectiveStatus
+    status?: ObjectiveStatus
 }
 
 enum ObjectiveStatus {
+    New,
     WorkInProgress,
     Waiting,
     Cancel,
