@@ -4,6 +4,8 @@
 /// <reference path="Components/List/ListApp.ts" />
 /// <reference path="Components/objList/objListElement.ts"/>
 /// <reference path="Components/objList/objList.ts"/>
+/// <reference path="Components/objList/objListController.ts" />
+/// <reference path="Components/objList/objListApp.ts" />
 /// <reference path="Components/Design/UiDesigner.ts" />
 /// <reference path="Components/App/app.ts" />
 /// <reference path="Components/Notification/NotificationView.ts" />

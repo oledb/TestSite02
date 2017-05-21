@@ -92,6 +92,7 @@ gulp.task("_build", ['compile:ts', "concat:css"], function () {
 gulp.task("_test", ['compile:ts', "compile:ts_test"]);
 
 gulp.task('_jasmine', function () {
+    console.log(paths.js);
     return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine,
         paths.jsJasmineMocks, paths.js, paths.jsModel])
         .pipe(watch([paths.jsJasmine, paths.js, paths.jsModel, paths.jsJasmineMocks]))

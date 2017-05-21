@@ -3,38 +3,69 @@
 class ObjList {
     constructor(
         public idSelector: string,
-        public riseError: (text: string) => void
+        public riseError: (text: string) => void = (text) => { throw text; }
     ) {
+        if (this.idSelector == "")
+            this.riseError("idSelector is not define");
         this.createView();
         this.setAnimation();
+        this.setEvents();
     }
+    // Events
+    public eventAddNewElement: (text: string) => void;
+    public eventIsValidText: (text: string) => boolean;
+    public eventCreate: () => void;
 
+    //Fields
+    public elements: ObjListElement[] = [];
     // JQuery
     public root = $(`<ul class="w3-ul w3-white"></ul>`);
     
-    private firstLi = $(`<li class="ov-element"></li>`);
-    public inputNew = $(`<input class="w3-white ov-input" placeholder="Новая задача" type="text">`);
-    private firstLiBtns = $(`<div id="buttons" style="display: none;"></div>`);
-    private firstLiSave = $(`<button class="w3-button w3-red">Сохранить</button>`);
-    private firstLiCancel = $(`<button class="w3-button w3-red">Отмена</button>`);
-
-    public addNewObj: (obj: IObjective) => boolean;
+    private newElement = $(`<li class="ov-element"></li>`);
+    public newElementInput = $(`<input class="w3-white ov-input" placeholder="Новая задача" type="text">`);
+    private newElementBtns = $(`<div id="buttons" style="display: none;"></div>`);
+    public SaveNewBtn = $(`<button class="w3-button w3-red">Сохранить</button>`);
+    private CancelNewBtn = $(`<button class="w3-button w3-white w3-margin-left">Отмена</button>`);
 
     private createView() {
-        console.log("v.001");
-        this.firstLi.append(this.inputNew, this.firstLiBtns);
-        this.firstLiBtns.append(this.firstLiSave, this.firstLiCancel);
-        this.root.append(this.firstLi);
-
+        console.log("v.003");
+        this.newElement.append(this.newElementInput, this.newElementBtns);
+        this.newElementBtns.append(this.SaveNewBtn, this.CancelNewBtn);
+        this.root.append(this.newElement);
         $(this.idSelector).append(this.root);
     }
 
+    private saveNewElement() {
+        let text = this.newElementInput.val();
+        this.eventAddNewElement(text);
+        this.newElementInput.val("");
+    }
+
     private setAnimation() {
-        
+        this.newElement.on("focusin", () => {
+                this.newElementBtns.show();
+        });
+        this.newElement.on("focusout", () => {
+                this.newElementBtns.hide();
+        });
+    }
+
+    private setEvents() {
+        // Add new
+        this.SaveNewBtn.on("click", () => {
+            this.saveNewElement();
+        });
+        this.newElementInput.keypress((e) => {
+            let key = e.which;
+            if (key == 13) { // Enter
+                this.saveNewElement();
+            }
+        });
     }
 
     public addElement(obj: IObjective) {
         let element = new ObjListElement(obj);
+        this.elements.push(element);
         this.root.append(element.root);
     }
 }

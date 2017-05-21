@@ -2,7 +2,6 @@
 
 class NotificationView {
     constructor(public selector: string) {
-        console.log("version 0");
         this.closeButton = UiDesigner.CreateButton("x", "w3-button w3-display-topright");
         this.caption = UiDesigner
             .CreateTag("h2", "w3-margin-left")
