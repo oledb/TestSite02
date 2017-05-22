@@ -9,9 +9,11 @@ class ObjListController {
         })
     }
 
+    /// View events
+
     public onaddNewElement = (text: string) => {
         if (this.isValidText(text)) {
-            let temp = this.getObjective(text);
+            let temp = this.getNewObjective(text);
             if (temp !== undefined) {
                 this.model.Post(temp, (id) => {
                     temp.id = id;
@@ -21,8 +23,16 @@ class ObjListController {
         }
     }
 
-    public onchangeStatus = (obj: IObjective) => {
+    private isValidText(text: string): boolean {
         return true;
+    }
+
+    /// View Eleemnts event
+
+    public onchangeStatus = (obj: IObjective) => {
+        let res = false;
+        this.model.Put(obj, () => { res = true; });
+        return res;
     }
 
     public ondestroyElement = (obj: IObjective) => {
@@ -34,11 +44,9 @@ class ObjListController {
         element.eventDestroyElement = this.ondestroyElement;
     }
 
-    public isValidText(text: string): boolean {
-        return true;
-    }
 
-    public getObjective(text: string): IObjective {
+
+    private getNewObjective(text: string): IObjective {
         return { id: 1, name: text };
     }
 }

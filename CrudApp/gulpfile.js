@@ -94,7 +94,7 @@ gulp.task("_test", ['compile:ts', "compile:ts_test"]);
 gulp.task('_jasmine', function () {
     console.log(paths.js);
     return gulp.src([vendor.jQuery, vendor.jasminjq, paths.jsJasmine,
-        paths.jsJasmineMocks, paths.js, paths.jsModel])
+        paths.js, paths.jsJasmineMocks, paths.jsModel])
         .pipe(watch([paths.jsJasmine, paths.js, paths.jsModel, paths.jsJasmineMocks]))
         .pipe(jasmineBrowser.specRunner())
         .pipe(jasmineBrowser.server({ port: 80 }));

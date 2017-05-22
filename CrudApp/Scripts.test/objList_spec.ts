@@ -64,7 +64,8 @@ describe("ObjList test", () => {
             expect(model.postText).toEqual("Test post task");
         });
         it("should use put when change the status of an element", () => {
-            //expect((<IObjective>model.putValue).status !== undefined).toBeTruthy("value is not IObjective");
+            view.triggerEvenetCompleteElement();
+            expect((<IObjective>model.putValue).status !== undefined).toBeTruthy("value is not IObjective");
         });
         it("should use put when change the name");
         it("should use delete when remove an element");

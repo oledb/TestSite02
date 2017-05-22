@@ -7,7 +7,9 @@ class ObjListElement {
         this.text = objective.name;
     }
 
-    // JQuery fields
+    ///
+    /// Fields
+    ///
     public root = $(`<li class="ov-element w3-animate-opacity"></li>`);
 
     //view
@@ -31,6 +33,10 @@ class ObjListElement {
     private rootEditInput = $(`<input class="w3-white ov-input" type="text">`);
     private rootEditSaveBtn = $(`<button class="w3-button w3-red">Save</button>`);
 
+
+    ///
+    /// Properties
+    ///
     public get text(): string{
         return this.rootTableText.text();
     }
@@ -39,6 +45,19 @@ class ObjListElement {
         this.rootTableText.text(value);
     }
 
+    ///
+    /// Events
+    ///
+    public eventChangeStatus: (obj: IObjective) => boolean;
+    public eventChangeText: (obj: IObjective) => boolean;
+    public eventDestroyElement: (obj: IObjective) => void;
+    public eventRemoveObj: (id: number) => boolean;
+
+    ///
+    /// Methods
+    ///
+
+    //// Private Methods
     private createView(): void {
         //locals
         let tr = $("<tr></tr>");
@@ -62,24 +81,25 @@ class ObjListElement {
         editBtns.append(this.rootEditSaveBtn, cancelBtn);
     }
 
-    // Events
-    public eventChangeStatus: (obj: IObjective) => boolean;
-    public eventChangeText: (obj: IObjective) => boolean;
-    public eventDestroyElement:(obj: IObjective) => void;
-    public eventRemoveObj: (id: number) => boolean;
-
     private setEvents() {
-        this.rootTableIcon.on("click", () => {
-            if (!this.eventChangeStatus(this.objective))
-                return;
-            this.rootTableIcon.text("check_box");
-            this.root.addClass("animated fadeOut");
-            setTimeout(() => {
-                this.root.hide();
-                this.eventDestroyElement(this.objective); 
-            }, 500);
-        });
+        this.rootTableIcon.on("click", this.changeStatusToCompelte);
     }
 
-    public isEditable: boolean;
+    // Actions
+    private changeStatusToCompelte = () => {
+        if (!this.eventChangeStatus(this.objective))
+            return;
+        this.animateFadeOut();
+        setTimeout(this.hide, 500);
+    }
+
+    private animateFadeOut() {
+        this.rootTableIcon.text("check_box");
+        this.root.addClass("animated fadeOut");
+    }
+
+    private hide = () => {
+        this.root.hide();
+        this.eventDestroyElement(this.objective);
+    }
 }

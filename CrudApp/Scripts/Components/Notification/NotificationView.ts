@@ -21,7 +21,6 @@ class NotificationView {
         $("#modalheader").append(this.closeButton, this.caption);
         $("#modaltextcontainer").append(this.textContainer);
         this.closeButton.on("click", () => {
-            console.log("click");
             this.root.hide();
         });
     }
