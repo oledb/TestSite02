@@ -28,7 +28,6 @@ class ObjList {
     private CancelNewBtn = $(`<button class="w3-button w3-white w3-margin-left">Отмена</button>`);
 
     private createView() {
-        console.log("v.003");
         this.newElement.append(this.newElementInput, this.newElementBtns);
         this.newElementBtns.append(this.SaveNewBtn, this.CancelNewBtn);
         this.root.append(this.newElement);
@@ -52,7 +51,7 @@ class ObjList {
 
     private setEvents() {
         // Add new
-        this.SaveNewBtn.on("click", () => {
+        this.SaveNewBtn.on("mousedown", () => {
             this.saveNewElement();
         });
         this.newElementInput.keypress((e) => {

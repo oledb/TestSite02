@@ -10,10 +10,15 @@ var XhrModelMock = (function () {
     }
     XhrModelMock.prototype.Get = function (success) {
         this.getIndex++;
-        success([
-            { objectiveId: 4, name: "Test 01" },
-            { objectiveId: 5, name: "Test 02" }
-        ]);
+        var result;
+        if (this.setResult !== undefined)
+            result = this.setResult();
+        else
+            result = [
+                { id: 4, name: "Test 01", status: ObjectiveStatus.New },
+                { id: 5, name: "Test 02", status: ObjectiveStatus.New }
+            ];
+        success(result);
     };
     XhrModelMock.prototype.Post = function (value, success) {
         this.postText = value.name;

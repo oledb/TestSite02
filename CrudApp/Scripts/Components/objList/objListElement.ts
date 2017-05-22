@@ -4,6 +4,7 @@ class ObjListElement {
     constructor(public objective: IObjective) {
         this.createView();
         this.setEvents();
+        this.text = objective.name;
     }
 
     // Events
@@ -17,7 +18,7 @@ class ObjListElement {
     //view
     private rootTable = $(`<table class="ov-table"></table`);
     private rootTableIcon = $(`<td class="ov-icon material-icons">check_box_outline_blank</td>`);
-    private rootTableText = $(`<td class="ov-text">Net task</td>`);
+    private rootTableText = $(`<td class="ov-text"></td>`);
     private rootTableDrop = $(`<td class="ov-menu dropdown"></td>`);
     private rootTableDropBtns = {
         editBtn: $(`<button class="content-button">Редактировать</button>`),
@@ -34,6 +35,14 @@ class ObjListElement {
     private rootEdit = $(`<div class="ov-edit" style="display: none;"></div>`);
     private rootEditInput = $(`<input class="w3-white ov-input" type="text">`);
     private rootEditSaveBtn = $(`<button class="w3-button w3-red">Save</button>`);
+
+    public get text(): string{
+        return this.rootTableText.text();
+    }
+
+    public set text(value: string) {
+        this.rootTableText.text(value);
+    }
 
     private createView(): void {
         //locals
