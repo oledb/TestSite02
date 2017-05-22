@@ -8,7 +8,7 @@ class ObjListApp {
             err = (xhr, status, error) => { console.log(error); };
         else
             err = (xhr, status, error) => { notify.ShowError(error); };
-        this.model = new XhrModel("", err);
+        this.model = new XhrModel("/api/Objective", err);
         this.controller = new ObjListController(this.view, this.model);
     }
 

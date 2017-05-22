@@ -28,7 +28,7 @@ namespace CrudApp.Model
         public void RemoveObjective(int id, string userId)
         {
             var temp = _context.Objectives
-                .Where(o => o.ObjectiveId == id && o.UserId == userId)
+                .Where(o => o.Id == id && o.UserId == userId)
                 .SingleOrDefault();
             if (temp == null)
                 throw new NullReferenceException($"Element with id {id} not found");
@@ -41,14 +41,14 @@ namespace CrudApp.Model
             obj.UserId = userId;
             var result = _context.Objectives.Add(obj);
             _context.SaveChanges();
-            return result.Entity.ObjectiveId;
+            return result.Entity.Id;
         }
 
         public void UpdateObjective(Objective obj, string userId)
         {
             // State is Detached in Memory
             var temp = _context.Objectives
-                .Where(o => o.ObjectiveId == obj.ObjectiveId
+                .Where(o => o.Id == obj.Id
                 && o.UserId == userId).SingleOrDefault();
             if (temp == null)
                 throw new NullReferenceException($"Element with id {obj.UserId} not found");

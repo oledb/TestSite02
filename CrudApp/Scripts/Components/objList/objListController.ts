@@ -5,16 +5,33 @@ class ObjListController {
         view.eventAddNewElement = this.onaddNewElement;
         model.Get((result) => {
             for (let elem of result)
-                view.addElement(<IObjective>elem);
+                this.setEventsToElement(view.addElement(<IObjective>elem));
         })
     }
 
     public onaddNewElement = (text: string) => {
         if (this.isValidText(text)) {
             let temp = this.getObjective(text);
-            if (temp !== undefined)
-                this.view.addElement(temp);
+            if (temp !== undefined) {
+                this.model.Post(temp, (id) => {
+                    temp.id = id;
+                    this.setEventsToElement(this.view.addElement(temp));
+                });
+            }
         }
+    }
+
+    public onchangeStatus = (obj: IObjective) => {
+        return true;
+    }
+
+    public ondestroyElement = (obj: IObjective) => {
+        this.view.removeElement(obj);
+    }
+
+    private setEventsToElement(element: ObjListElement) {
+        element.eventChangeStatus = this.onchangeStatus;
+        element.eventDestroyElement = this.ondestroyElement;
     }
 
     public isValidText(text: string): boolean {

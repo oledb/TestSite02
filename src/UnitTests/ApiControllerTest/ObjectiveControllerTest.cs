@@ -35,8 +35,8 @@ namespace UnitTests
         {
             //Arrange
             var controller = Initilize( new Objective[] {
-                new Objective { ObjectiveId = 1, Name = "Read" , UserId =_userId},
-                new Objective { ObjectiveId = 2, Name = "Write", UserId = "user"}
+                new Objective { Id = 1, Name = "Read" , UserId =_userId},
+                new Objective { Id = 2, Name = "Write", UserId = "user"}
                 });
 
             //Act
@@ -70,12 +70,12 @@ namespace UnitTests
         {
             //Arrange
             var controller = Initilize(new Objective[] {
-                new Objective{ObjectiveId = 1, Name = "Old", UserId = _userId}
+                new Objective{Id = 1, Name = "Old", UserId = _userId}
             });
             var objective = new Objective
             {
                 Name = "New",
-                ObjectiveId = 1
+                Id = 1
             };
 
             //Act
@@ -84,7 +84,7 @@ namespace UnitTests
 
             //Assert
             Assert.Equal("New", objective.Name);
-            Assert.Equal(1, objective.ObjectiveId);
+            Assert.Equal(1, objective.Id);
         }
 
         [Fact]
@@ -92,8 +92,8 @@ namespace UnitTests
         {
             //Arrange
             var controller = Initilize(new Objective[] {
-                new Objective { ObjectiveId = 1, Name = "Read" , UserId = _userId},
-                new Objective { ObjectiveId = 2, Name = "Write", UserId = _userId}
+                new Objective { Id = 1, Name = "Read" , UserId = _userId},
+                new Objective { Id = 2, Name = "Write", UserId = _userId}
                 }); ;
 
             //Act

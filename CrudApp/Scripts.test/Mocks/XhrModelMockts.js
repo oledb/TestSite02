@@ -26,6 +26,7 @@ var XhrModelMock = (function () {
     };
     XhrModelMock.prototype.Put = function (value, success) {
         this.putText = value.name;
+        this.putValue = value;
     };
     XhrModelMock.prototype.Delete = function (id, success) {
         this.removeId = id;

@@ -7,11 +7,6 @@ class ObjListElement {
         this.text = objective.name;
     }
 
-    // Events
-    public eventChangeStatus: (obj: IObjective) => boolean;
-    public eventChangeText: (obj: IObjective) => boolean;
-    public eventCompleteObj: (obj: IObjective) => boolean;
-
     // JQuery fields
     public root = $(`<li class="ov-element w3-animate-opacity"></li>`);
 
@@ -20,7 +15,7 @@ class ObjListElement {
     private rootTableIcon = $(`<td class="ov-icon material-icons">check_box_outline_blank</td>`);
     private rootTableText = $(`<td class="ov-text"></td>`);
     private rootTableDrop = $(`<td class="ov-menu dropdown"></td>`);
-    private rootTableDropBtns = {
+    private rootMenu = {
         editBtn: $(`<button class="content-button">Редактировать</button>`),
         removeBtn: $(`<button class="content-button">Удалить</button>`),
         setProjectBtn: $(`<button class="content-button">Назначить проект</button>`),
@@ -58,8 +53,8 @@ class ObjListElement {
         this.rootTable.append(tr);
         tr.append(this.rootTableIcon, this.rootTableText, this.rootTableDrop);
         this.rootTableDrop.append(dropIcon, dropContent);
-        for (let elem in this.rootTableDropBtns) {
-            dropContent.append(this.rootTableDropBtns[elem]);
+        for (let elem in this.rootMenu) {
+            dropContent.append(this.rootMenu[elem]);
         }
 
         //Edit
@@ -67,8 +62,23 @@ class ObjListElement {
         editBtns.append(this.rootEditSaveBtn, cancelBtn);
     }
 
-    private setEvents() {
+    // Events
+    public eventChangeStatus: (obj: IObjective) => boolean;
+    public eventChangeText: (obj: IObjective) => boolean;
+    public eventDestroyElement:(obj: IObjective) => void;
+    public eventRemoveObj: (id: number) => boolean;
 
+    private setEvents() {
+        this.rootTableIcon.on("click", () => {
+            if (!this.eventChangeStatus(this.objective))
+                return;
+            this.rootTableIcon.text("check_box");
+            this.root.addClass("animated fadeOut");
+            setTimeout(() => {
+                this.root.hide();
+                this.eventDestroyElement(this.objective); 
+            }, 500);
+        });
     }
 
     public isEditable: boolean;

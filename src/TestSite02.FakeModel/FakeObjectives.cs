@@ -13,10 +13,10 @@ namespace TestSite02.FaketModel
         {
             _list = new List<Objective>(10)
             {
-                new Objective {ObjectiveId = id++, Name = "Read a book", UserId = "e8769835-3c14-4243-99a7-970cf91d4816"},
-                new Objective {ObjectiveId = id++, Name = "Write a letter", UserId = "e8769835-3c14-4243-99a7-970cf91d4816"},
-                new Objective {ObjectiveId = id++, Name = "Send a message", UserId = "b7130bd3-9eff-44a6-a164-20b6878891ca"},
-                new Objective {ObjectiveId = id++, Name = "Learn something", UserId = "b7130bd3-9eff-44a6-a164-20b6878891ca"}
+                new Objective {Id = id++, Name = "Read a book", UserId = "e8769835-3c14-4243-99a7-970cf91d4816"},
+                new Objective {Id = id++, Name = "Write a letter", UserId = "e8769835-3c14-4243-99a7-970cf91d4816"},
+                new Objective {Id = id++, Name = "Send a message", UserId = "b7130bd3-9eff-44a6-a164-20b6878891ca"},
+                new Objective {Id = id++, Name = "Learn something", UserId = "b7130bd3-9eff-44a6-a164-20b6878891ca"}
             };
         }
 
@@ -39,22 +39,22 @@ namespace TestSite02.FaketModel
         public int SaveObjective(Objective obj, string userId)
         {
             obj.UserId = userId;
-            obj.ObjectiveId = obj.ObjectiveId == 0 ? id++ : obj.ObjectiveId;
+            obj.Id = obj.Id == 0 ? id++ : obj.Id;
             _list.Add(obj);
-            return obj.ObjectiveId;
+            return obj.Id;
         }
 
         public void UpdateObjective(Objective obj, string userId)
         {
             obj.UserId = userId;
-            var item = GetObjectiveById(obj.ObjectiveId, obj.UserId);
+            var item = GetObjectiveById(obj.Id, obj.UserId);
             item.Name = obj.Name;
         }
 
         private Objective GetObjectiveById(int id, string userId)
         {
             var item = (from o in _list
-                    where o.ObjectiveId == id && o.UserId == userId
+                    where o.Id == id && o.UserId == userId
                     select o).SingleOrDefault();
             if (item == null)
                 throw new NullReferenceException();

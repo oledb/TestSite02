@@ -62,9 +62,20 @@ class ObjList {
         });
     }
 
-    public addElement(obj: IObjective) {
+    public addElement(obj: IObjective): ObjListElement{
         let element = new ObjListElement(obj);
         this.elements.push(element);
         this.root.append(element.root);
+        return element; 
+    }
+
+    public removeElement(obj: IObjective): void {
+        let element = this.elements
+            .filter(o => o.objective.id == obj.id);
+        if (element.length == 0 || element.length > 1)
+            throw `Internal error with objective ${obj.id} ${obj.name}`;
+        let index = this.elements.indexOf(element[0]);
+        element[0].root.remove();
+        this.elements.splice(index, 1);
     }
 }

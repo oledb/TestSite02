@@ -107,7 +107,7 @@ namespace UnitTests
             //Act
             obj.UpdateObjective(new Objective
             {
-                ObjectiveId = id,
+                Id = id,
                 Name = "New task",
                 UserId = UserIdA
             }, UserIdA);
@@ -115,7 +115,7 @@ namespace UnitTests
             //Assert
             CrudDbContextInMemory.Use(context =>
             {
-                var objective = context.Objectives.Where(o => o.ObjectiveId == id).SingleOrDefault();
+                var objective = context.Objectives.Where(o => o.Id == id).SingleOrDefault();
                 Assert.NotNull(objective);
                 Assert.Equal("New task", objective.Name);
                 Assert.Equal(UserIdA, objective.UserId);
@@ -130,7 +130,7 @@ namespace UnitTests
             {
                 var result = context.Objectives.Add(obj);
                 context.SaveChanges();
-                id = result.Entity.ObjectiveId;
+                id = result.Entity.Id;
             }, dbSignature);
             return id;
         }
