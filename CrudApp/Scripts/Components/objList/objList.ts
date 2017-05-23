@@ -14,7 +14,7 @@ class ObjList {
     //Fields
     public elements: ObjListElement[] = [];
     public get inputText(): string {
-        return this.newElementInput.text();
+        return this.newElementInput.val();
     }
     // JQuery
     public root = $(`<ul class="w3-ul w3-white"></ul>`);
@@ -67,7 +67,7 @@ class ObjList {
     }
 
     public clearInput() {
-        this.newElementInput.text("");
+        this.newElementInput.val("");
     }
 
     ///Events

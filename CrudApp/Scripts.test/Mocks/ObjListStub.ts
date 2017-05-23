@@ -20,7 +20,15 @@ class ObjListStub extends ObjList {
     }
 
     public addTextToInputField(text: string) {
-        this.newElementInput.text(text);
+        this.newElementInput.val(text);
     }
 
+    public addStubElement(text: string): ObjListStubElement {
+        this.addTextToInputField(text);
+        this.pressAddNewButton();
+        let stub = new ObjListStubElement(this.elements[0].objective);
+        if (this.elements[0].onupdate !== undefined)
+            stub.onupdate = this.elements[0].onupdate;
+        return stub;
+    }
 }

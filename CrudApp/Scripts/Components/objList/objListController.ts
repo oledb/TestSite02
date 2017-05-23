@@ -12,10 +12,11 @@ class ObjListController {
     private onaddNew = () => {
         let text = this.view.inputText;
         let value: IObjective = { name: text };
+        console.log(text);
         this.model.Post(value, (result) => {
+            console.log(value.name);
             this.view.addElement({ id: result, name: text });
             this.view.clearInput();
         })
-        
     }
 }

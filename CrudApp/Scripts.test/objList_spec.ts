@@ -63,4 +63,22 @@ describe("ObjListApp", () => {
             expect(view.elements.length).toEqual(1);
         });
     });
+    describe("Editing element", () => {
+        it("should update element on element.update", () => {
+            let obj = { id: 2, name: "test", status: ObjectiveStatus.New };
+            let element = new ObjListElement(obj);
+            element.update({ name: "updated", status: ObjectiveStatus.Completed });
+
+            expect(element.text).toEqual("updated");
+            expect(element.objective.status).toEqual(ObjectiveStatus.Completed);
+        });
+
+        it("should rising update event when save button pressed", () => {
+            var result = { used: false };
+            let element = view.addStubElement("Test");
+            element.onupdate = () => { result.used = true; };
+            element.triggerSaveBtn();
+            expect(result.used).toBeTruthy("Update was not rised")
+        })
+    });
 });

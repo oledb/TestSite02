@@ -4,6 +4,7 @@ class ObjListElement {
     constructor(public objective: IObjective) {
         this.createView();
         this.text = objective.name;
+        this.setEvents();
     }
 
     ///
@@ -29,8 +30,8 @@ class ObjListElement {
 
     //edit    
     private rootEdit = $(`<div class="ov-edit" style="display: none;"></div>`);
-    private rootEditInput = $(`<input class="w3-white ov-input" type="text">`);
-    private rootEditSaveBtn = $(`<button class="w3-button w3-red">Save</button>`);
+    protected rootEditInput = $(`<input class="w3-white ov-input" type="text">`);
+    protected rootEditSaveBtn = $(`<button class="w3-button w3-red">Save</button>`);
 
 
     ///
@@ -42,6 +43,7 @@ class ObjListElement {
 
     public set text(value: string) {
         this.rootTableText.text(value);
+        this.objective.name = value;
     }
 
     ///
@@ -73,6 +75,27 @@ class ObjListElement {
     }
 
     private setEvents() {
-
+        this.rootTableText.on("click", this.editModeOn);
+        this.rootEditInput.on("focusout", this.editModeOff);
     }
+
+    private editModeOn = () => {
+        this.rootTable.hide();
+        this.rootEdit.show();
+        this.rootEditInput.val(this.text);
+        this.rootEditInput.trigger("focus");
+    }
+
+    private editModeOff = () => {
+        this.rootTable.show();
+        this.rootEdit.hide();
+    }
+
+    public update(obj: IObjective): void {
+        this.text = obj.name;
+        this.objective.status = obj.status;
+    }
+
+    /// Events
+    public onupdate: () => void;
 }
