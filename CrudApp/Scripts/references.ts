@@ -1,7 +1,4 @@
-﻿/// <reference path="Components/List/ListController.ts" />
-/// <reference path="Components/List/ListElementView.ts" />
-/// <reference path="Components/List/ListView.ts" />
-/// <reference path="Components/List/ListApp.ts" />
+﻿
 /// <reference path="Components/objList/objListElement.ts"/>
 /// <reference path="Components/objList/objList.ts"/>
 /// <reference path="Components/objList/objListController.ts" />

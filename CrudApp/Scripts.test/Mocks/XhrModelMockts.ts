@@ -11,16 +11,14 @@ class XhrModelMock implements IXhrModel {
     public error: (xhr, status, error) => void =
         (xhr, status, error) => this.errorIndex++;
 
-    public setResult: () => any;
+    public setResultForGet: () => any;
     public Get(success: (result: any) => void) {
         this.getIndex++;
         let result;
-        if (this.setResult !== undefined)
-            result = this.setResult();
+        if (this.setResultForGet !== undefined)
+            result = this.setResultForGet();
         else
-            result = [
-                { id: 4, name: "Test 01", status: ObjectiveStatus.New },
-                { id: 5, name: "Test 02", status: ObjectiveStatus.New } ]
+            result = [];
         success(result);
     }
 

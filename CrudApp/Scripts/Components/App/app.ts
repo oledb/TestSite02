@@ -12,7 +12,6 @@ class App {
             this.objListApp = new ObjListApp("#objList");
         });
     }
-    public list: ListApp;
     public notification: NotificationView;
     public objListApp: ObjListApp;
 

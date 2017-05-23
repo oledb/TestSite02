@@ -66,6 +66,10 @@ class ObjList {
         this.elements.splice(index, 1);
     }
 
+    public clearInput() {
+        this.newElementInput.text("");
+    }
+
     ///Events
     public onaddNewElement: () => void;
 }

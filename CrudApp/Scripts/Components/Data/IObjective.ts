@@ -1,5 +1,5 @@
 ﻿interface IObjective {
-    id: number,
+    id?: number,
     userId?: string,
     name: string,
     status?: ObjectiveStatus

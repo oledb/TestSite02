@@ -1,17 +1,17 @@
 ﻿/// <reference path="../Scripts/references.ts"/>
 
 describe("ObjListApp", () => {
-    describe("Add new element", () => {
-        let view: ObjListStub;
-        let controller: ObjListController;
-        let model: XhrModelMock;
-        beforeEach(() => {
-            setFixtures(`<div id="objList"></div>`);
-            view = new ObjListStub("#objList");
-            model = new XhrModelMock();
-            controller = new ObjListController(view, model);
-        });
+    let view: ObjListStub;
+    let controller: ObjListController;
+    let model: XhrModelMock;
+    beforeEach(() => {
+        setFixtures(`<div id="objList"></div>`);
+        view = new ObjListStub("#objList");
+        model = new XhrModelMock();
+        controller = new ObjListController(view, model);
+    });
 
+    describe("Adding new elements", () => {
         it("should create a new element on addElement", () => {
             view.addElement({ id: 1, name: "test" });
             expect(view.elements.length).toEqual(1);
@@ -40,6 +40,27 @@ describe("ObjListApp", () => {
             view.addTextToInputField("using input text");
             view.pressAddNewButton();
             expect(view.elements[0].objective.name).toEqual("using input text");
+        });
+
+        it("should using model.post when added new element", () => {
+            view.addTextToInputField("using model.post");
+            view.pressAddNewButton();
+            expect(model.postText).toEqual("using model.post");
+        })
+
+        it("should clear input field if adding was success", () => {
+            view.addTextToInputField("using model.post");
+            view.pressAddNewButton();
+            expect(view.inputText).toEqual("");
+        });
+    });
+    describe("Loading exist elements", () => {
+        it("should load elements from model when controller is creating", () => {
+            model = new XhrModelMock();
+            model.setResultForGet = () => { return [{ id: 1, name: "Hello" }] };
+            controller = new ObjListController(view, model);
+
+            expect(view.elements.length).toEqual(1);
         });
     });
 });
