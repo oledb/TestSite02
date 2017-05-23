@@ -3,7 +3,6 @@
 class ObjListElement {
     constructor(public objective: IObjective) {
         this.createView();
-        this.setEvents();
         this.text = objective.name;
     }
 
@@ -46,14 +45,6 @@ class ObjListElement {
     }
 
     ///
-    /// Events
-    ///
-    public eventUpdate: (obj: IObjective) => boolean;
-    public eventChangeText: (obj: IObjective) => boolean;
-    public eventDestroyElement: (obj: IObjective) => void;
-    public eventRemoveObj: (id: number) => boolean;
-
-    ///
     /// Methods
     ///
 
@@ -79,55 +70,9 @@ class ObjListElement {
         //Edit
         this.rootEdit.append(this.rootEditInput, editBtns);
         editBtns.append(this.rootEditSaveBtn, cancelBtn);
-        this.rootTableText.on("click", this.editModeTurnOn);
-        this.rootEditInput.on("focusout", this.editModeTurnOff);
     }
 
     private setEvents() {
-        this.rootTableIcon.on("click", this.changeStatusToCompelte);
-        this.rootEditSaveBtn.on("mousedown", this.saveWhenEdit);
-    }
 
-    // Actions
-    private changeStatusToCompelte = () => {
-        console.log("press complete");
-        if (!this.eventUpdate(this.objective))
-            return;
-        console.log("start play animation");
-        this.animateFadeOut();
-        setTimeout(this.hide, 500);
-    }
-
-    private editModeTurnOn = () => {
-        this.rootTable.hide();
-        this.rootEdit.show();
-        this.rootEditInput.val(this.text);
-        this.rootEditInput.trigger("focus");
-    }
-
-    private editModeTurnOff = () => {
-        
-        this.rootTable.show();
-        this.rootEdit.hide();
-    }
-
-    private saveWhenEdit = (e: JQueryKeyEventObject) => {
-        console.log(e);
-        this.objective.name = this.text;
-        this.eventUpdate(this.objective);
-    }
-
-    private animateFadeOut() {
-        this.rootTableIcon.text("check_box");
-        this.root.addClass("animated fadeOut");
-    }
-
-    private animateZoomOut() {
-        this.root.addClass("animated zoomOut");
-    }
-
-    private hide = () => {
-        this.root.hide();
-        this.eventDestroyElement(this.objective);
     }
 }

@@ -9,30 +9,18 @@ class ObjListStub extends ObjList {
         super(idSelector, riseError);
     }
 
-    public triggerEventAddNewElement(text: string): void {
-        this.eventAddNewElement(text);
+    public pressAddNewButton() {
+        this.SaveNewBtn.trigger("mousedown");
     }
 
-    public triggerEvenetCompleteElement(): void {
-        let element = this.getElement();
-        if (element.eventDestroyElement === undefined)
-            throw "eventDestroyElement of first element is undefined";
-        element.objective.status = ObjectiveStatus.Completed;
-        element.eventUpdate(element.objective);
-        element.eventDestroyElement(element.objective);
+    public pressEnterInInputField() {
+        let keypress = $.Event("keypress");
+        keypress.which = 13;
+        this.newElementInput.trigger(keypress);
     }
 
-    public triggerEventUpdateTextElement(text: string): void {
-        let element = this.getElement();
-        element.objective.name = text;
-        element.eventUpdate(element.objective);
+    public addTextToInputField(text: string) {
+        this.newElementInput.text(text);
     }
 
-    private getElement(): ObjListElement {
-        if (this.elements.length == 0)
-            throw "View.elements is empty. Can't raise the event";
-        if (this.elements[0].eventUpdate === undefined)
-            throw "eventChangeStatus of first element is undefined";
-        return this.elements[0];
-    }
 }

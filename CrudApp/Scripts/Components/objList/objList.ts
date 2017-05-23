@@ -9,22 +9,20 @@ class ObjList {
             this.riseError("idSelector is not define");
         this.createView();
         this.setAnimation();
-        this.setEvents();
     }
-    // Events
-    public eventAddNewElement: (text: string) => void;
-    public eventIsValidText: (text: string) => boolean;
-    public eventCreate: () => void;
 
     //Fields
     public elements: ObjListElement[] = [];
+    public get inputText(): string {
+        return this.newElementInput.text();
+    }
     // JQuery
     public root = $(`<ul class="w3-ul w3-white"></ul>`);
 
     private newElement = $(`<li class="ov-element"></li>`);
-    public newElementInput = $(`<input class="w3-white ov-input" placeholder="Новая задача" type="text">`);
+    protected newElementInput = $(`<input class="w3-white ov-input" placeholder="Новая задача" type="text">`);
     private newElementBtns = $(`<div id="buttons" style="display: none;"></div>`);
-    public SaveNewBtn = $(`<button class="w3-button w3-red">Сохранить</button>`);
+    protected SaveNewBtn = $(`<button class="w3-button w3-red">Сохранить</button>`);
     private CancelNewBtn = $(`<button class="w3-button w3-white w3-margin-left">Отмена</button>`);
 
     private createView() {
@@ -41,22 +39,14 @@ class ObjList {
         this.newElement.on("focusout", () => {
             this.newElementBtns.hide();
         });
-    }
-
-    private setEvents() {
-        // Add new
-        this.SaveNewBtn.on("mousedown", this.saveNewElement);
-        this.newElementInput.keypress(this.saveNewElement);
-    }
-
-    private saveNewElement = (e?: JQueryKeyEventObject) => {
-        let key = e.which;
-        if (e.type == "mousedown" || key == 13) {
-            console.log("save");
-            let text = this.newElementInput.val();
-            this.eventAddNewElement(text);
-            this.newElementInput.val("");
-        }
+        this.SaveNewBtn.on("mousedown", () => {
+            this.onaddNewElement();
+        })
+        this.newElementInput.on("keypress", (e) => {
+            if (e.which == 13) {
+                this.onaddNewElement();
+            }
+        })
     }
 
     public addElement(obj: IObjective): ObjListElement{
@@ -75,4 +65,7 @@ class ObjList {
         element[0].root.remove();
         this.elements.splice(index, 1);
     }
+
+    ///Events
+    public onaddNewElement: () => void;
 }
