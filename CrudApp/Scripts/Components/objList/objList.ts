@@ -20,7 +20,7 @@ class ObjList {
     public elements: ObjListElement[] = [];
     // JQuery
     public root = $(`<ul class="w3-ul w3-white"></ul>`);
-    
+
     private newElement = $(`<li class="ov-element"></li>`);
     public newElementInput = $(`<input class="w3-white ov-input" placeholder="Новая задача" type="text">`);
     private newElementBtns = $(`<div id="buttons" style="display: none;"></div>`);
@@ -34,32 +34,29 @@ class ObjList {
         $(this.idSelector).append(this.root);
     }
 
-    private saveNewElement() {
-        let text = this.newElementInput.val();
-        this.eventAddNewElement(text);
-        this.newElementInput.val("");
-    }
-
     private setAnimation() {
         this.newElement.on("focusin", () => {
-                this.newElementBtns.show();
+            this.newElementBtns.show();
         });
         this.newElement.on("focusout", () => {
-                this.newElementBtns.hide();
+            this.newElementBtns.hide();
         });
     }
 
     private setEvents() {
         // Add new
-        this.SaveNewBtn.on("mousedown", () => {
-            this.saveNewElement();
-        });
-        this.newElementInput.keypress((e) => {
-            let key = e.which;
-            if (key == 13) { // Enter
-                this.saveNewElement();
-            }
-        });
+        this.SaveNewBtn.on("mousedown", this.saveNewElement);
+        this.newElementInput.keypress(this.saveNewElement);
+    }
+
+    private saveNewElement = (e?: JQueryKeyEventObject) => {
+        let key = e.which;
+        if (e.type == "mousedown" || key == 13) {
+            console.log("save");
+            let text = this.newElementInput.val();
+            this.eventAddNewElement(text);
+            this.newElementInput.val("");
+        }
     }
 
     public addElement(obj: IObjective): ObjListElement{

@@ -37,7 +37,7 @@ class ObjListElement {
     ///
     /// Properties
     ///
-    public get text(): string{
+    public get text(): string {
         return this.rootTableText.text();
     }
 
@@ -48,7 +48,7 @@ class ObjListElement {
     ///
     /// Events
     ///
-    public eventChangeStatus: (obj: IObjective) => boolean;
+    public eventUpdate: (obj: IObjective) => boolean;
     public eventChangeText: (obj: IObjective) => boolean;
     public eventDestroyElement: (obj: IObjective) => void;
     public eventRemoveObj: (id: number) => boolean;
@@ -64,7 +64,7 @@ class ObjListElement {
         let dropIcon = $(`<a class="material-icons">more_horiz</a>`);
         let dropContent = $(`<div class="dropdown-content w3-card-2"></div>`);
         let editBtns = $(`<div></div>`);
-        let cancelBtn = $(`<button class="content-button">Отмена</button>`);
+        let cancelBtn = $(`<button class="w3-button w3-white w3-margin-left">Отмена</button>`);
 
         //Appends
         this.root.append(this.rootTable, this.rootEdit);
@@ -79,23 +79,51 @@ class ObjListElement {
         //Edit
         this.rootEdit.append(this.rootEditInput, editBtns);
         editBtns.append(this.rootEditSaveBtn, cancelBtn);
+        this.rootTableText.on("click", this.editModeTurnOn);
+        this.rootEditInput.on("focusout", this.editModeTurnOff);
     }
 
     private setEvents() {
         this.rootTableIcon.on("click", this.changeStatusToCompelte);
+        this.rootEditSaveBtn.on("mousedown", this.saveWhenEdit);
     }
 
     // Actions
     private changeStatusToCompelte = () => {
-        if (!this.eventChangeStatus(this.objective))
+        console.log("press complete");
+        if (!this.eventUpdate(this.objective))
             return;
+        console.log("start play animation");
         this.animateFadeOut();
         setTimeout(this.hide, 500);
+    }
+
+    private editModeTurnOn = () => {
+        this.rootTable.hide();
+        this.rootEdit.show();
+        this.rootEditInput.val(this.text);
+        this.rootEditInput.trigger("focus");
+    }
+
+    private editModeTurnOff = () => {
+        
+        this.rootTable.show();
+        this.rootEdit.hide();
+    }
+
+    private saveWhenEdit = (e: JQueryKeyEventObject) => {
+        console.log(e);
+        this.objective.name = this.text;
+        this.eventUpdate(this.objective);
     }
 
     private animateFadeOut() {
         this.rootTableIcon.text("check_box");
         this.root.addClass("animated fadeOut");
+    }
+
+    private animateZoomOut() {
+        this.root.addClass("animated zoomOut");
     }
 
     private hide = () => {

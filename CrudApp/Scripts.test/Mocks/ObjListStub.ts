@@ -14,15 +14,25 @@ class ObjListStub extends ObjList {
     }
 
     public triggerEvenetCompleteElement(): void {
+        let element = this.getElement();
+        if (element.eventDestroyElement === undefined)
+            throw "eventDestroyElement of first element is undefined";
+        element.objective.status = ObjectiveStatus.Completed;
+        element.eventUpdate(element.objective);
+        element.eventDestroyElement(element.objective);
+    }
+
+    public triggerEventUpdateTextElement(text: string): void {
+        let element = this.getElement();
+        element.objective.name = text;
+        element.eventUpdate(element.objective);
+    }
+
+    private getElement(): ObjListElement {
         if (this.elements.length == 0)
             throw "View.elements is empty. Can't raise the event";
-        if (this.elements[0].eventChangeStatus === undefined)
+        if (this.elements[0].eventUpdate === undefined)
             throw "eventChangeStatus of first element is undefined";
-        if (this.elements[0].eventDestroyElement === undefined)
-            throw "eventDestroyElement of first element is undefined";
-        let temp = this.elements[0].objective;
-        temp.status = ObjectiveStatus.Completed;
-        this.elements[0].eventChangeStatus(temp);
-        this.elements[0].eventDestroyElement(temp);
+        return this.elements[0];
     }
 }

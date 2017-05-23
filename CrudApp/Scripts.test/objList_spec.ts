@@ -65,7 +65,9 @@ describe("ObjList test", () => {
         });
         it("should use put when change the status of an element", () => {
             view.triggerEvenetCompleteElement();
-            expect((<IObjective>model.putValue).status !== undefined).toBeTruthy("value is not IObjective");
+            let obj = <IObjective>model.putValue;
+            expect(obj.status == ObjectiveStatus.Completed).toBeTruthy("value is not IObjective");
+
         });
         it("should use put when change the name");
         it("should use delete when remove an element");
@@ -89,7 +91,9 @@ describe("ObjList test", () => {
             expect(view.elements.length).toEqual(0);
         });
         it("should remove from list when remove btn pressed");
-        it("should remove from list when icon btn pressed");
-        it("should update text on save editting");
+        it("should update text on save editting", () => {
+            view.triggerEventUpdateTextElement("Updated text");
+            expect(view.elements[0].text).toEqual("Updated text");
+        });
     })
 });

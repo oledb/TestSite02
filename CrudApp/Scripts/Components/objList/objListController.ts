@@ -10,7 +10,6 @@ class ObjListController {
     }
 
     /// View events
-
     public onaddNewElement = (text: string) => {
         if (this.isValidText(text)) {
             let temp = this.getNewObjective(text);
@@ -27,11 +26,11 @@ class ObjListController {
         return true;
     }
 
-    /// View Eleemnts event
-
-    public onchangeStatus = (obj: IObjective) => {
-        let res = false;
-        this.model.Put(obj, () => { res = true; });
+    /// View Elements event
+    public onupdateElement = (obj: IObjective) => {
+        var res = false;
+        this.model.Put(obj, () => { res = true; console.log("res is " + res) });
+        console.log("after res is " + res);
         return res;
     }
 
@@ -40,11 +39,10 @@ class ObjListController {
     }
 
     private setEventsToElement(element: ObjListElement) {
-        element.eventChangeStatus = this.onchangeStatus;
+        
+        element.eventUpdate = this.onupdateElement;
         element.eventDestroyElement = this.ondestroyElement;
     }
-
-
 
     private getNewObjective(text: string): IObjective {
         return { id: 1, name: text };
