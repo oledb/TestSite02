@@ -30,6 +30,7 @@ class XhrModelMock implements IXhrModel {
     public Put(value: any, success: (result) => void) {
         this.putText = value.name;
         this.putValue = value;
+        success(null);
     }
 
     public removeId = -10000;

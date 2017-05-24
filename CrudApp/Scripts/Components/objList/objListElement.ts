@@ -15,9 +15,9 @@ class ObjListElement {
     //view
     private rootTable = $(`<table class="ov-table"></table`);
     private rootTableIcon = $(`<td class="ov-icon material-icons">check_box_outline_blank</td>`);
-    private rootTableText = $(`<td class="ov-text"></td>`);
+    protected rootTableText = $(`<td class="ov-text"></td>`);
     private rootTableDrop = $(`<td class="ov-menu dropdown"></td>`);
-    private rootMenu = {
+    protected rootMenu = {
         editBtn: $(`<button class="content-button">Редактировать</button>`),
         removeBtn: $(`<button class="content-button">Удалить</button>`),
         setProjectBtn: $(`<button class="content-button">Назначить проект</button>`),
@@ -38,12 +38,20 @@ class ObjListElement {
     /// Properties
     ///
     public get text(): string {
-        return this.rootTableText.text();
+        return this.objective.name;
     }
 
     public set text(value: string) {
         this.rootTableText.text(value);
         this.objective.name = value;
+    }
+
+    public get status(): ObjectiveStatus {
+        return this.objective.status;
+    }
+
+    public set status(value: ObjectiveStatus) {
+        this.updateStatus(value);
     }
 
     ///
@@ -77,6 +85,27 @@ class ObjListElement {
     private setEvents() {
         this.rootTableText.on("click", this.editModeOn);
         this.rootEditInput.on("focusout", this.editModeOff);
+        this.rootEditSaveBtn.on("mousedown", () => {
+            this.onupdate(this, { name: this.rootEditInput.val() });
+        });
+
+        this.rootMenu.editBtn.on("click", this.editModeOn);
+        this.rootMenu.wipBtn.on("click", () => {
+            this.updateStatus(ObjectiveStatus.WorkInProgress);
+            this.onupdate(this, this.objective);
+        });
+        this.rootMenu.waitBtn.on("click", () => {
+            this.updateStatus(ObjectiveStatus.Waiting);
+            this.onupdate(this, this.objective);
+        });
+        this.rootMenu.newBtn.on("click", () => {
+            this.updateStatus(ObjectiveStatus.New);
+            this.onupdate(this, this.objective);
+        });
+        this.rootMenu.cancelBtn.on("click", () => {
+            this.updateStatus(ObjectiveStatus.Cancel);
+            this.onupdate(this, this.objective);
+        });
     }
 
     private editModeOn = () => {
@@ -93,9 +122,33 @@ class ObjListElement {
 
     public update(obj: IObjective): void {
         this.text = obj.name;
-        this.objective.status = obj.status;
+        this.status = obj.status;
     }
 
+    private updateStatus(status: ObjectiveStatus) {
+        this.objective.status = status;
+        this.root.removeClass("status-wip status-cancel status-complete status-wait status-new");
+        let statusClass: string;
+        switch (status) {
+            case ObjectiveStatus.Cancel:
+                statusClass = "status-cancel";
+                break;
+            case ObjectiveStatus.WorkInProgress:
+                statusClass = "status-wip";
+                break;
+            case ObjectiveStatus.Completed:
+                statusClass = "status-complete";
+                break;
+            case ObjectiveStatus.Waiting:
+                statusClass = "status-wait";
+                break;
+            case ObjectiveStatus.New:
+                statusClass = "status-new";
+                break;
+        }
+        this.root.addClass(statusClass);
+    } 
+
     /// Events
-    public onupdate: () => void;
+    public onupdate: (sender: ObjListElement, obj: IObjective) => void;
 }

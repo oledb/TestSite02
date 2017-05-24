@@ -5,18 +5,28 @@ class ObjListController {
         view.onaddNewElement = this.onaddNew;
         this.model.Get((result) => {
             for (let obj of result)
-                view.addElement(<IObjective>obj);
+                this.setEventsForElement(view.addElement(<IObjective>obj));
         });
     }
 
     private onaddNew = () => {
         let text = this.view.inputText;
         let value: IObjective = { name: text };
-        console.log(text);
         this.model.Post(value, (result) => {
-            console.log(value.name);
-            this.view.addElement({ id: result, name: text });
+            let element = this.view.addElement(
+                { id: result, name: text, status: ObjectiveStatus.New });
+            this.setEventsForElement(element);
             this.view.clearInput();
         })
     }
+
+    private setEventsForElement(element: ObjListElement) {
+        element.onupdate = this.updateElement;
+    }
+
+    private updateElement = (sender: ObjListElement, obj: IObjective) => {
+        this.model.Put(obj, (result) => {
+            sender.update(obj);
+        }) 
+    };
 }

@@ -1,21 +1,31 @@
-.status.wip {
-    background-color: #b7d7e8 !important;
+.status-wip {
+    border-left-color: #b7d7e8 !important;
+    border-left-style: solid;
+    border-left-width: 4px;
 }
 
-.status.cancel {
-    background-color: #ff6f69 !important;
+.status-cancel {
+    border-left-color: #ff6f69 !important;
+    border-left-style: solid;
+    border-left-width: 4px;
 }
 
-.status.complete {
-    background-color: #96ceb4 !important;
+.status-complete {
+    border-left-color: #96ceb4 !important;
+    border-left-style: solid;
+    border-left-width: 4px;
 }
 
-.status.wait {
-    background-color: #ffeead !important;
+.status-wait {
+    border-left-color: #ffeead !important;
+    border-left-style: solid;
+    border-left-width: 4px;
 }
 
-.status.new {
-    background-color: white !important;
+.status-new {
+    border-left-color: white !important;
+    border-left-style: solid;
+    border-left-width: 4px;
 }
 
 li.ov-element .ov-menu {
@@ -26,6 +36,9 @@ li.ov-element .ov-menu {
     display: block !important;
 }
 
+li.ov-element{
+    padding: 8px;
+}
 li.ov-element:hover .ov-menu {
     display: list-item;
 }
@@ -93,7 +106,7 @@ input.ov-input:focus {
         margin: 2px;
         outline: 0;
         overflow: hidden;
-        padding: 8px 16px;
+        padding: 4px;
         text-align: left;
         text-decoration: none;
         white-space: nowrap;

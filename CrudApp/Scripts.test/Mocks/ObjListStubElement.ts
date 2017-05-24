@@ -5,7 +5,28 @@ class ObjListStubElement extends ObjListElement {
         super(objective);
     }
 
-    public triggerSaveBtn() {
+    public pressSaveBtn() {
         this.rootEditSaveBtn.trigger("mousedown");
+    }
+
+    public triggerEditModeOnAndInputText(text: string) {
+        this.rootTableText.trigger("click");
+        this.rootEditInput.val(text);
+    }
+
+    public pressWipButton() {
+        this.rootMenu.wipBtn.trigger("click");
+    }
+
+    public pressWaitButton() {
+        this.rootMenu.waitBtn.trigger("click");
+    }
+
+    public pressCancelButton() {
+        this.rootMenu.cancelBtn.trigger("click");
+    }
+
+    public pressNewButton() {
+        this.rootMenu.newBtn.trigger("click");
     }
 }

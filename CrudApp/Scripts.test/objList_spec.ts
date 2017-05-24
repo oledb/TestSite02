@@ -42,6 +42,12 @@ describe("ObjListApp", () => {
             expect(view.elements[0].objective.name).toEqual("using input text");
         });
 
+        it("New element should have a new status after creating", () => {
+            view.addTextToInputField("new status");
+            view.pressAddNewButton();
+            expect(view.elements[0].objective.status).toEqual(ObjectiveStatus.New);
+        })
+
         it("should using model.post when added new element", () => {
             view.addTextToInputField("using model.post");
             view.pressAddNewButton();
@@ -77,8 +83,36 @@ describe("ObjListApp", () => {
             var result = { used: false };
             let element = view.addStubElement("Test");
             element.onupdate = () => { result.used = true; };
-            element.triggerSaveBtn();
+            element.pressSaveBtn();
             expect(result.used).toBeTruthy("Update was not rised")
+        });
+
+        it("should update element if changeStatus buttons were pressed", () => {
+            let element = view.addStubElement("Test");
+            element.pressWipButton();
+            expect(element.status).toEqual(ObjectiveStatus.WorkInProgress);
+            element.pressCancelButton();
+            expect(element.status).toEqual(ObjectiveStatus.Cancel);
+            element.pressWaitButton();
+            expect(element.status).toEqual(ObjectiveStatus.Waiting);
+            element.pressNewButton();
+            expect(element.status).toEqual(ObjectiveStatus.New);
+        });
+
+        it("should used model.post when element was be updated", () => {
+            let element = view.addStubElement("Test task");
+            element.triggerEditModeOnAndInputText("used model.post");
+            element.pressSaveBtn();
+            let result = <IObjective>model.putValue;
+            expect(result.name).toEqual("used model.post");
+            expect(element.text).toEqual("used model.post");
+        });
+
+        it("shuld used model.post when status was changed", () => {
+            let element = view.addStubElement("Test task");
+            element.pressWaitButton();
+            let result = <IObjective>model.putValue;
+            expect(result.status).toEqual(ObjectiveStatus.Waiting);
         })
     });
 });
