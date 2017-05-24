@@ -29,4 +29,8 @@ class ObjListStubElement extends ObjListElement {
     public pressNewButton() {
         this.rootMenu.newBtn.trigger("click");
     }
+
+    public pressRemoveButton() {
+        this.rootMenu.removeBtn.trigger("click");
+    }
 }

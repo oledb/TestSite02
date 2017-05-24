@@ -36,5 +36,6 @@ class XhrModelMock implements IXhrModel {
     public removeId = -10000;
     public Delete(id: number, success: (result) => void) {
         this.removeId = id;
+        success(null);
     }
 }

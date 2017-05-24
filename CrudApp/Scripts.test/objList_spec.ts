@@ -115,4 +115,33 @@ describe("ObjListApp", () => {
             expect(result.status).toEqual(ObjectiveStatus.Waiting);
         })
     });
+    describe("Removing element", () => {
+        it("should remove element when view used removeElement", () => {
+            view.addStubElement("temp");
+            view.removeElement(view.elements[0].objective);
+            expect(view.elements.length).toEqual(0);
+        });
+
+        it("should rise remove event when remove button pressed", () => {
+            let result = { used: false }
+            let element = view.addStubElement("Test task");
+            element.onremove = (e, o) => {
+                result.used = true;
+            }
+            element.pressRemoveButton();
+            expect(result.used).toBeTruthy("remove event was not used");
+        });
+
+        it("should remove element from list when remove button pressed", () => {
+            let element = view.addStubElement("Test task");
+            element.pressRemoveButton();
+            expect(view.elements.length).toEqual(0);
+        });
+
+        it("should completed and remove element when element.complete used");
+
+        it("should rise complete event when icon pressed");
+
+        it("should use model.put when complete element");
+    });
 });

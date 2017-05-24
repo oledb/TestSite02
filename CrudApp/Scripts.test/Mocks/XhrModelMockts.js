@@ -28,6 +28,7 @@ var XhrModelMock = (function () {
     };
     XhrModelMock.prototype.Delete = function (id, success) {
         this.removeId = id;
+        success(null);
     };
     return XhrModelMock;
 }());

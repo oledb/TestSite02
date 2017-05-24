@@ -17,6 +17,7 @@ class ObjListElement {
     private rootTableIcon = $(`<td class="ov-icon material-icons">check_box_outline_blank</td>`);
     protected rootTableText = $(`<td class="ov-text"></td>`);
     private rootTableDrop = $(`<td class="ov-menu dropdown"></td>`);
+    private dropContent = $(`<div class="dropdown-content w3-card-2"></div>`);
     protected rootMenu = {
         editBtn: $(`<button class="content-button">Редактировать</button>`),
         removeBtn: $(`<button class="content-button">Удалить</button>`),
@@ -63,7 +64,6 @@ class ObjListElement {
         //locals
         let tr = $("<tr></tr>");
         let dropIcon = $(`<a class="material-icons">more_horiz</a>`);
-        let dropContent = $(`<div class="dropdown-content w3-card-2"></div>`);
         let editBtns = $(`<div></div>`);
         let cancelBtn = $(`<button class="w3-button w3-white w3-margin-left">Отмена</button>`);
 
@@ -72,9 +72,9 @@ class ObjListElement {
         //Table
         this.rootTable.append(tr);
         tr.append(this.rootTableIcon, this.rootTableText, this.rootTableDrop);
-        this.rootTableDrop.append(dropIcon, dropContent);
+        this.rootTableDrop.append(dropIcon, this.dropContent);
         for (let elem in this.rootMenu) {
-            dropContent.append(this.rootMenu[elem]);
+            this.dropContent.append(this.rootMenu[elem]);
         }
 
         //Edit
@@ -90,6 +90,12 @@ class ObjListElement {
         });
 
         this.rootMenu.editBtn.on("click", this.editModeOn);
+        this.rootMenu.removeBtn.on("click", () => {
+            if (this.onremove === undefined)
+                console.log("onremove is undefined");
+            this.onremove(this, this.objective);
+            this.dropContent.hide();
+        });
         this.rootMenu.wipBtn.on("click", () => {
             this.updateStatus(ObjectiveStatus.WorkInProgress);
             this.onupdate(this, this.objective);
@@ -125,6 +131,15 @@ class ObjListElement {
         this.status = obj.status;
     }
 
+    public destroy() {
+        this.root.addClass("animated zoomOutLeft");
+        console.log("start destroy");
+        setTimeout(() => {
+            this.root.remove();
+            console.log("end destroy")
+        }, 700); 
+    }
+
     private updateStatus(status: ObjectiveStatus) {
         this.objective.status = status;
         this.root.removeClass("status-wip status-cancel status-complete status-wait status-new");
@@ -151,4 +166,5 @@ class ObjListElement {
 
     /// Events
     public onupdate: (sender: ObjListElement, obj: IObjective) => void;
+    public onremove: (sender: ObjListElement, obj: IObjective) => void;
 }

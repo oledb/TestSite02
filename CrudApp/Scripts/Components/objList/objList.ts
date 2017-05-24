@@ -62,7 +62,7 @@ class ObjList {
         if (element.length == 0 || element.length > 1)
             throw `Internal error with objective ${obj.id} ${obj.name}`;
         let index = this.elements.indexOf(element[0]);
-        element[0].root.remove();
+        //element[0].root.remove();
         this.elements.splice(index, 1);
     }
 

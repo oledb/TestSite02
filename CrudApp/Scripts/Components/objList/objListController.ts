@@ -22,11 +22,20 @@ class ObjListController {
 
     private setEventsForElement(element: ObjListElement) {
         element.onupdate = this.updateElement;
+        element.onremove = this.removeElement;
     }
 
     private updateElement = (sender: ObjListElement, obj: IObjective) => {
         this.model.Put(obj, (result) => {
             sender.update(obj);
         }) 
-    };
+    }
+
+    private removeElement = (sender: ObjListElement, obj: IObjective) => {
+        this.model.Delete(obj.id, (result) => {
+            this.view.removeElement(obj);
+            sender.destroy();
+        });
+        
+    }
 }
