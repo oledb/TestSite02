@@ -8,28 +8,41 @@ namespace UnitTests
     public class ObjectivesTest
     {
         private readonly string UserIdA = "e8769835-3c14-4243-99a7-970cf91d4816";
+        private Objective ObjNew;
+        private Objective ObjComplete;
         private Objectives Create(string dbName)
         {
+            ObjNew = new Objective
+            {
+                Name = "New Objective",
+                UserId = UserIdA,
+                Status = ObjectiveStatus.New
+            };
+            ObjComplete = new Objective
+            {
+                Name = "Complete Objective",
+                UserId = UserIdA,
+                Status = ObjectiveStatus.Completed
+            };
             return new Objectives(new CrudDbContextInMemory(dbName, null));
         }
 
         [Fact]
-        public void GetObjectives_AllObjectives_Success()
+        public void GetObjectives_AllObjectivesWithoutCompleted_Success()
         {
             //Arrange
             var bd = "694d7a74-84c2-45c8-9f4e-c64b472398f2";
             Objectives obj = Create(bd);
-            AddObjectiveToDb(new Objective
-            {
-                Name = "GetObjectives_AllObjectives",
-                UserId = UserIdA
-            }, bd);
+            AddObjectiveToDb(ObjNew, bd);
+            AddObjectiveToDb(ObjComplete, bd);
 
             //Act
             var list = obj.GetObjectives(UserIdA).ToList();
 
             //Assert
+            Assert.Equal(1, list.Count);
             Assert.Equal(UserIdA, list[0].UserId);
+            Assert.Equal(ObjectiveStatus.New, list[0].Status);
         }
 
         [Fact]

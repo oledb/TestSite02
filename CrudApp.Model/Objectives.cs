@@ -22,7 +22,9 @@ namespace CrudApp.Model
 
         public IEnumerable<Objective> GetObjectives(string userId)
         {
-            return _context.Objectives.Where(u => u.UserId == userId);
+            return _context.Objectives.Where(
+                u => u.UserId == userId && 
+                u.Status != ObjectiveStatus.Completed);
         }
 
         public void RemoveObjective(int id, string userId)
@@ -51,7 +53,7 @@ namespace CrudApp.Model
                 .Where(o => o.Id == obj.Id
                 && o.UserId == userId).SingleOrDefault();
             if (temp == null)
-                throw new NullReferenceException($"Element with id {obj.UserId} not found");
+                throw new NullReferenceException($"Element with user {obj.UserId} and id {obj.Id} not found");
             temp.Name = obj.Name;
             _context.SaveChanges();
         }
