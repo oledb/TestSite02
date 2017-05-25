@@ -9,9 +9,10 @@ using TestSite02.AbstractModel;
 namespace CrudApp.Model.Migrations
 {
     [DbContext(typeof(CrudDbContext))]
-    partial class CrudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170525100030_ChangeObjective")]
+    partial class ChangeObjective
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

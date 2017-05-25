@@ -39,7 +39,7 @@ namespace TestSite02.FaketModel
         public int SaveObjective(Objective obj, string userId)
         {
             obj.UserId = userId;
-            obj.Id = obj.Id == 0 ? id++ : obj.Id;
+            obj.Id = id++;
             _list.Add(obj);
             return obj.Id;
         }

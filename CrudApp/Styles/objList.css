@@ -43,6 +43,10 @@ li.ov-element:hover .ov-menu {
     display: list-item;
 }
 
+li.ov-element:hover{
+    background-color: snow;
+}
+
 .material-icons:hover {
     color: #cddc39;
     cursor: pointer;
