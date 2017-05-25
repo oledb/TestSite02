@@ -31,6 +31,8 @@ class ObjListStub extends ObjList {
             stub.onupdate = this.elements[0].onupdate;
         if (this.elements[0].onremove !== undefined)
             stub.onremove = this.elements[0].onremove;
+        if (this.elements[0].oncomplete !== undefined)
+            stub.oncomplete = this.elements[0].oncomplete;
         return stub;
     }
 }

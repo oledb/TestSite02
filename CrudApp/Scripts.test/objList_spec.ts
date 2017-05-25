@@ -138,10 +138,27 @@ describe("ObjListApp", () => {
             expect(view.elements.length).toEqual(0);
         });
 
-        it("should completed and remove element when element.complete used");
+        it("should rise complete event when icon pressed", () => {
+            let result = { used: false }
+            let element = view.addStubElement("Test task");
+            element.oncomplete = (e, o) => {
+                result.used = true;
+            };
+            element.pressIconButton();
+            expect(result.used).toBeTruthy("oncomplete was not used");
+        });
 
-        it("should rise complete event when icon pressed");
+        it("should completed and remove element when icon pressed", () => {
+            let element = view.addStubElement("Test task");
+            element.pressIconButton();
+            expect(view.elements.length).toEqual(0);
+        });
 
-        it("should use model.put when complete element");
+        it("should use model.put when complete element", () => {
+            let element = view.addStubElement("use model.put when complete element");
+            element.pressIconButton();
+            let result = <IObjective>model.putValue
+            expect(result.name).toEqual(element.objective.name);
+        });
     });
 });

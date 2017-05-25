@@ -33,4 +33,8 @@ class ObjListStubElement extends ObjListElement {
     public pressRemoveButton() {
         this.rootMenu.removeBtn.trigger("click");
     }
+
+    public pressIconButton() {
+        this.rootTableIcon.trigger("click");
+    }
 }

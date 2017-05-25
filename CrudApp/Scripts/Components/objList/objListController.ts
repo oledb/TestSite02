@@ -23,6 +23,7 @@ class ObjListController {
     private setEventsForElement(element: ObjListElement) {
         element.onupdate = this.updateElement;
         element.onremove = this.removeElement;
+        element.oncomplete = this.completeElement;
     }
 
     private updateElement = (sender: ObjListElement, obj: IObjective) => {
@@ -36,6 +37,12 @@ class ObjListController {
             this.view.removeElement(obj);
             sender.destroy();
         });
-        
+    }
+
+    private completeElement = (sender: ObjListElement, obj: IObjective) => {
+        this.model.Put(obj, (result) => {
+            this.view.removeElement(obj);
+            sender.complete();
+        }); 
     }
 }

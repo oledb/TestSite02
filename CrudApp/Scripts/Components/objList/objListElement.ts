@@ -14,13 +14,13 @@ class ObjListElement {
 
     //view
     private rootTable = $(`<table class="ov-table"></table`);
-    private rootTableIcon = $(`<td class="ov-icon material-icons">check_box_outline_blank</td>`);
+    protected rootTableIcon = $(`<td class="ov-icon material-icons">check_box_outline_blank</td>`);
     protected rootTableText = $(`<td class="ov-text"></td>`);
     private rootTableDrop = $(`<td class="ov-menu dropdown"></td>`);
     private dropContent = $(`<div class="dropdown-content w3-card-2"></div>`);
     protected rootMenu = {
+        removeBtn: $(`<button class="content-button w3-text-red">Удалить</button>`),
         editBtn: $(`<button class="content-button">Редактировать</button>`),
-        removeBtn: $(`<button class="content-button">Удалить</button>`),
         setProjectBtn: $(`<button class="content-button">Назначить проект</button>`),
         hr: $(`<hr/>`),
         wipBtn: $(`<button class="content-button">В процессе</button>`),
@@ -112,6 +112,9 @@ class ObjListElement {
             this.updateStatus(ObjectiveStatus.Cancel);
             this.onupdate(this, this.objective);
         });
+        this.rootTableIcon.on("click", () => {
+            this.oncomplete(this, this.objective);
+        });
     }
 
     private editModeOn = () => {
@@ -133,11 +136,17 @@ class ObjListElement {
 
     public destroy() {
         this.root.addClass("animated zoomOutLeft");
-        console.log("start destroy");
         setTimeout(() => {
             this.root.remove();
-            console.log("end destroy")
         }, 700); 
+    }
+
+    public complete() {
+        this.root.addClass("animated fadeOut");
+        this.rootTableIcon.text("check_box");
+        setTimeout(() => {
+            this.root.remove();
+        }, 1000); 
     }
 
     private updateStatus(status: ObjectiveStatus) {
@@ -167,4 +176,5 @@ class ObjListElement {
     /// Events
     public onupdate: (sender: ObjListElement, obj: IObjective) => void;
     public onremove: (sender: ObjListElement, obj: IObjective) => void;
+    public oncomplete: (sender: ObjListElement, obj: IObjective) => void;
 }
