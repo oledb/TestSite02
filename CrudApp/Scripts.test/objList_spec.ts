@@ -159,6 +159,7 @@ describe("ObjListApp", () => {
             element.pressIconButton();
             let result = <IObjective>model.putValue
             expect(result.name).toEqual(element.objective.name);
+            expect(result.status).toEqual(ObjectiveStatus.Completed);
         });
     });
 });

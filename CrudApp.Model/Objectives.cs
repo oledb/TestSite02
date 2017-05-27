@@ -55,6 +55,7 @@ namespace CrudApp.Model
             if (temp == null)
                 throw new NullReferenceException($"Element with user {obj.UserId} and id {obj.Id} not found");
             temp.Name = obj.Name;
+            temp.Status = obj.Status;
             _context.SaveChanges();
         }
     }

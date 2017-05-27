@@ -4,8 +4,10 @@ class ObjListController {
     constructor(public view: ObjList, public model: IXhrModel) {
         view.onaddNewElement = this.onaddNew;
         this.model.Get((result) => {
-            for (let obj of result)
+            for (let obj of result) {
+                console.log(obj);
                 this.setEventsForElement(view.addElement(<IObjective>obj));
+            }
         });
     }
 
@@ -27,7 +29,10 @@ class ObjListController {
     }
 
     private updateElement = (sender: ObjListElement, obj: IObjective) => {
+        console.log("send update")
+        console.log(obj);
         this.model.Put(obj, (result) => {
+            
             sender.update(obj);
         }) 
     }

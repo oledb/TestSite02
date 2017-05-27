@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TestSite02.AbstractModel
+﻿namespace TestSite02.AbstractModel
 {
     public enum ObjectiveStatus
     {
-        New,
-        WorkInProgress,
-        Waiting,
-        Cancel,
-        Completed
+        New = 0,
+        WorkInProgress = 1,
+        Waiting = 2,
+        Cancel = 3,
+        Completed = 4
     }
 }

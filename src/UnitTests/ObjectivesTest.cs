@@ -135,6 +135,38 @@ namespace UnitTests
             }, bd);
         }
 
+        [Fact]
+        void UpdateObjective_NewStatus_Success()
+        {
+            // Arrange
+            var bd = "2eee3cf8-329f-4aff-bc56-2ba4851d245c";
+            Objectives obj = Create(bd);
+            var id = AddObjectiveToDb(new Objective
+            {
+                Name = "Task",
+                UserId = UserIdA,
+                Status = ObjectiveStatus.Waiting
+            }, bd);
+
+            // Act
+            obj.UpdateObjective(new Objective
+            {
+                Id = id,
+                Name = "Task",
+                UserId = UserIdA,
+                Status = ObjectiveStatus.Cancel
+            }, UserIdA);
+
+            // Assert
+            CrudDbContextInMemory.Use((context) =>
+            {
+                var result = context.Objectives
+                .Where(o => o.Id == id)
+                .SingleOrDefault();
+                Assert.Equal(ObjectiveStatus.Cancel, result.Status);
+            }, bd);
+        }
+
         //Helpers
         private int AddObjectiveToDb(Objective obj, string dbSignature)
         {

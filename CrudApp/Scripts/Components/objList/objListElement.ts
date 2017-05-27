@@ -4,6 +4,7 @@ class ObjListElement {
     constructor(public objective: IObjective) {
         this.createView();
         this.text = objective.name;
+        this.status = objective.status;
         this.setEvents();
     }
 
@@ -21,7 +22,7 @@ class ObjListElement {
     protected rootMenu = {
         removeBtn: $(`<button class="content-button w3-text-red">Удалить</button>`),
         editBtn: $(`<button class="content-button">Редактировать</button>`),
-        setProjectBtn: $(`<button class="content-button">Назначить проект</button>`),
+        //setProjectBtn: $(`<button class="content-button">Назначить проект</button>`),
         hr: $(`<hr/>`),
         wipBtn: $(`<button class="content-button">В процессе</button>`),
         waitBtn: $(`<button class="content-button">Ожидание</button>`),
@@ -86,7 +87,8 @@ class ObjListElement {
         this.rootTableText.on("click", this.editModeOn);
         this.rootEditInput.on("focusout", this.editModeOff);
         this.rootEditSaveBtn.on("mousedown", () => {
-            this.onupdate(this, { name: this.rootEditInput.val() });
+            this.objective.name = this.rootEditInput.val();
+            this.onupdate(this, this.objective);
         });
 
         this.rootMenu.editBtn.on("click", this.editModeOn);
@@ -113,6 +115,7 @@ class ObjListElement {
             this.onupdate(this, this.objective);
         });
         this.rootTableIcon.on("click", () => {
+            this.objective.status = ObjectiveStatus.Completed;
             this.oncomplete(this, this.objective);
         });
     }
