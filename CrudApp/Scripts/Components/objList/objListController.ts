@@ -5,7 +5,6 @@ class ObjListController {
         view.onaddNewElement = this.onaddNew;
         this.model.Get((result) => {
             for (let obj of result) {
-                console.log(obj);
                 this.setEventsForElement(view.addElement(<IObjective>obj));
             }
         });
@@ -13,10 +12,11 @@ class ObjListController {
 
     private onaddNew = () => {
         let text = this.view.inputText;
-        let value: IObjective = { name: text };
+        if (!this.isTextValid(text)) return;
+        let value: IObjective = { name: text, status: ObjectiveStatus.New };
         this.model.Post(value, (result) => {
-            let element = this.view.addElement(
-                { id: result, name: text, status: ObjectiveStatus.New });
+            value.id = result;
+            let element = this.view.addElement(value);
             this.setEventsForElement(element);
             this.view.clearInput();
         })
@@ -29,10 +29,7 @@ class ObjListController {
     }
 
     private updateElement = (sender: ObjListElement, obj: IObjective) => {
-        console.log("send update")
-        console.log(obj);
-        this.model.Put(obj, (result) => {
-            
+        this.model.Put(obj, (result) => {         
             sender.update(obj);
         }) 
     }
@@ -49,5 +46,9 @@ class ObjListController {
             this.view.removeElement(obj);
             sender.complete();
         }); 
+    }
+
+    private isTextValid(text: string): boolean {
+        return text != undefined && text.trim() != "";
     }
 }

@@ -31,11 +31,6 @@ describe("ObjListApp", () => {
             expect(result.used).toBeTruthy("onaddNewElement was not used");
         });
 
-        it("should add new element to list when rised addNew event", () => {
-            view.pressAddNewButton();
-            expect(view.elements.length).toEqual(1);
-        });
-
         it("should add new element using input text", () => {
             view.addTextToInputField("using input text");
             view.pressAddNewButton();
@@ -46,13 +41,25 @@ describe("ObjListApp", () => {
             view.addTextToInputField("new status");
             view.pressAddNewButton();
             expect(view.elements[0].objective.status).toEqual(ObjectiveStatus.New);
-        })
+        });
+
+        it("should not create new element if input field is empty", () => {
+            view.addTextToInputField("");
+            view.pressAddNewButton();
+            expect(view.elements.length).toEqual(0);
+        });
 
         it("should using model.post when added new element", () => {
             view.addTextToInputField("using model.post");
             view.pressAddNewButton();
             expect(model.postText).toEqual("using model.post");
-        })
+        });
+
+        it("should not create new element if input field contains spaces", () => {
+            view.addTextToInputField("        ");
+            view.pressAddNewButton();
+            expect(view.elements.length).toEqual(0);
+        });
 
         it("should clear input field if adding was success", () => {
             view.addTextToInputField("using model.post");

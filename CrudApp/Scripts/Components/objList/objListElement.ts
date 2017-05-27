@@ -93,8 +93,6 @@ class ObjListElement {
 
         this.rootMenu.editBtn.on("click", this.editModeOn);
         this.rootMenu.removeBtn.on("click", () => {
-            if (this.onremove === undefined)
-                console.log("onremove is undefined");
             this.onremove(this, this.objective);
             this.dropContent.hide();
         });
