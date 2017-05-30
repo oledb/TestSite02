@@ -1,43 +1,114 @@
-﻿.my-site-gray {
-    background-color: #2D2D2D;
-    color: #cddc39;
+﻿.my-navbar {
+    max-width: 1000px;
+    margin: auto;
 }
 
-h1, h2, h3, h4, h5, h6, .my-site-font-russo {
-    font-family: 'Russo One', sans-serif;
+.my-sidebar {
+    z-index: 2;
+    width: 30%;
+    min-width: 300px;
 }
 
-*, .my-site-font-podkova {
-    font-family: 'Podkova', serif;
+.my-padding-8 {
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+/*
+ Landing
+*/
+.landing-fix-height {
+    height: 500px;
 }
 
-.my-site-container{
-    max-width: 900px;
+.landing-fix-width {
+    max-width: 1000px;
+    margin: auto;
 }
 
-.my-site-box{
-    padding: 16px;
+.landing-welcome {
+    height: 500px;
+    background-image: url("~/images/back001.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-@media screen and (max-width: 820px) {
-    .my-site-box {
-        padding-left: 0px;
-        padding-right: 0px;
+.landing-welcome-box {
+    padding-top: 200px;
+    margin: 0px;
+    text-align: center;
+}
+
+.landing-welcome-box-h {
+    background-color: black;
+    color: snow;
+    padding: 4px 16px;
+    display: inline-block;
+    opacity: 0.8;
+    border-radius: 10px;
+}
+
+.landing-pict {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+@media (max-width: 600px) {
+    .landing-pict-image {
+        display: inline-block;
+        width: 100px;
+    }
+
+    .landing-pict-text {
+        display: inline-block;
+        max-width: 200px;
+        vertical-align: top;
     }
 }
 
-.my-site-padding-section {
-    padding-top: 96px;
-    padding-bottom: 96px;
+@media (min-width: 601px) {
+    .landing-pict-image {
+        display: inherit;
+        width: 100%;
+    }
+
+    .landing-pict-text {
+        display: inherit;
+        width: 100%;
+    }
 }
 
-.my-site-image-back {
-    background-image: url("images/back01.jpg");
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+.landing-pict-image {
+    border: 1px solid grey;
 }
 
-.w3-button {
-    border-radius: 6px;
+.landing-registry {
+    padding-top: 128px;
 }
+
+.landing-footer {
+    padding: 64px;
+    text-align: center;
+}
+/*
+    Forms
+ */
+.my-form-main {
+    padding-top: 128px;
+    margin: auto;
+    max-width: 480px;
+}
+
+.my-box-main {
+    padding-top: 128px;
+    margin: auto;
+    max-width: 960px;
+}
+
+.my-main-nav {
+    width: 30%;
+}
+
+/*.material-icons {
+    vertical-align: bottom !important;
+}*/

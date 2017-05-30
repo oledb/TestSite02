@@ -26,7 +26,6 @@
   <ItemGroup>
     <Content Include="Styles\site.css" />
     <Content Include="wwwroot\animate.css" />
-    <Content Include="wwwroot\site1.css" />
   </ItemGroup>
 
 
@@ -72,6 +71,7 @@
   </ItemGroup>
     
   <ItemGroup>
+    <None Include="wwwroot\landing.js" />
     <None Include="wwwroot\objListDesign.html" />
   </ItemGroup>
 

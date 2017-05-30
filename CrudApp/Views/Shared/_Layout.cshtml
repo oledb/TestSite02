@@ -1,52 +1,40 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using CrudApp.Models
-
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
-    @*<meta name="viewport" content="width=device-width" />*@
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Podkova|Russo+One" >
     <link rel="stylesheet" href="~/site.css" />
     <link rel="stylesheet" href="~/animate.css" />
-    <script src="~/site.min.js"></script>
-    <title>@ViewBag.Title</title>
 </head>
-
-<body class="w3-light-gray ">
-    <div class="w3-bar my-site-gray">
-        <a href="~/Default" class="w3-bar-item w3-button w3-hover-white"><strong>Home</strong></a>
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <a href="~/Default/Objective" class="w3-bar-item w3-button w3-hide-small w3-hover-lime">Задачи</a>
-            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="w3-right">
-                <input type="submit" class="w3-bar-item w3-button w3-hide-small w3-hover-lime" value="Выход"/>
-            </form>
-        }
-        else
-        {
-            <a href="~/Account/Login" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-lime">Вход</a>
-            <a href="~/Account/Registry" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-lime">Регистрация</a>
-        }
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="myFunction()">&#9776;</a>
-    </div>
-
-    <div class="my-site-box">
-        @RenderBody()
-    </div>
-    <environment names="Development">
-        <footer class="w3-bottom w3-container my-site-gray">
-            <div class="w3-text-white w3-padding-32 w3-center">
-                <div>Copyleft - @DateTime.Now.Year</div>
-                It's development version
+<body>
+    <!--top panel-->
+    <header>
+    <div class="w3-black">
+        <div class="w3-xlarge my-navbar">
+            <div class="w3-button w3-left my-padding-8 w3-hover-green" id="nav_menuOpen">☰</div>
+            <div class="w3-right">
+                <a href="login.html" class="w3-button my-padding-8 w3-hover-green">Вход</a>
             </div>
-        </footer>
-    </environment>
+            <div class="w3-center my-padding-8">Timewatch.pw</div>
+        </div>
+    </div>
+    <!-- Sidebar (hidden by default) -->
+    <nav class="w3-sidebar w3-bar-block w3-card-2 w3-top w3-large w3-animate-left my-sidebar" style="display: none" id="nav_side">
+        <a id="nav_closeSide" class="w3-bar-item w3-button w3-hover-red w3-text-red material-icons-box">
+            <span class="material-icons" style="width: 32px;">clear</span> 
+            Закрыть</a>
+        <a class="w3-bar-item w3-button">Вход</a>
+        <a class="w3-bar-item w3-button">Регистрация</a>
+        <a class="w3-bar-item w3-button">Сброс пароля</a>
+    </nav>
+    </header>
+        @RenderBody()
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="~/site.min.js"></script>
+    @RenderSection("script_landing")
 </body>
 </html>
