@@ -1,0 +1,26 @@
+﻿@model RegisterViewModel
+
+<div class="my-form-main">
+    <form asp-controller="Account"
+          asp-action="Registry"
+          asp-route-returnurl="@ViewData["ReturnUrl"]"
+          method="post" class="w3-container">
+        <p>
+            <label asp-for="Email">Почта</label>
+            <input asp-for="Email" class="w3-input w3-border w3-border-orange" type="email">
+        </p>
+        <p>
+            <label asp-for="Password">Пароль</label>
+            <input asp-for="Password" class="w3-input w3-border w3-border-orange" type="password">
+        </p>
+        <p>
+            <label asp-for="ConfirmPassword">Подтверждение пароля</label>
+            <input asp-for="ConfirmPassword" class="w3-input w3-border w3-border-orange" type="password">
+        </p>
+        <input class="w3-button w3-red" type="submit" value="Зарегистрироваться">
+        @if (ViewBag.isFailedRegistry)
+        {
+            <p class="w3-text-red w3-section">Упс, что-то пошло не так!</p>
+        }
+    </form>
+</div>

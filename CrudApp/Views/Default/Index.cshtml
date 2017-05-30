@@ -1,4 +1,8 @@
-﻿<!--welcome page-->
+﻿@{
+    var regbtn = new { @class = "w3-btn w3-white w3-xlarge w3-hover-green" };
+}
+
+<!--welcome page-->
 <div id="welcompage">
     <div class="landing-welcome">
         <div class="landing-welcome-box">
@@ -42,24 +46,23 @@
         </div>
     </div>
 </div>
+<!-- registry -->
 <div id="lorem2">
     <div class="w3-black landing-fix-height landing-registry">
         <div class="w3-center my-registry">
             <h2>Зарегестрируй уже сейчас</h2>
             <p>И получи больше возможностей</p>
             <div>
-                <button class="w3-btn w3-white w3-xlarge w3-hover-green">Регистрация </button>
-                <button class="w3-btn w3-white w3-xlarge w3-hover-green">Вход</button>
+                @Html.ActionLink("Регистрация", "Registry", "Account", null, regbtn)
+                @Html.ActionLink("Вход", "Login", "Account", null, regbtn)
             </div>
         </div>
     </div>
 </div>
+
+<!-- footer -->
 <footer class="landing-footer">
     <div class="landing-footer-text">
         Copyleft - 2017, A. Kopeykin
     </div>
 </footer>
-
-@section script_landing{
-    <script src="~/landing.js"></script>
-}

@@ -1,0 +1,21 @@
+﻿@model LoginViewModel
+<div class="my-form-main">
+    <form asp-controller="Account" 
+          asp-action="Login" 
+          asp-route-returnurl="@ViewData["ReturnUrl"]" 
+          method="post" class="w3-container">
+        <p>
+            <label asp-for="Email">Почта</label>
+            <input asp-for="Email" class="w3-input w3-border w3-border-orange" type="email">
+        </p>
+        <p>
+            <label asp-for="Password">Пароль</label>
+            <input asp-for="Password" class="w3-input w3-border w3-border-orange" type="password">
+        </p>
+        <input class="w3-button w3-red" type="submit" value="Войти">
+        @if (ViewBag?.isFailedLogin)
+        {
+            <p class="w3-text-red w3-section">Неправильные логин и\или пароль!</p>
+        }
+    </form>
+</div>

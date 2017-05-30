@@ -31,32 +31,33 @@ namespace CrudApp.Controllers.Pages
         [HttpGet]
         public IActionResult Registry(string ReturnUrl = null)
         {
+            ViewBag.isFailedRegistry = false;
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Registry(RegisterViewModel register, string ReturnUrl = null)
         {
+            ViewBag.isFailedRegistry = true;
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = register.Email, Email = register.Email };
                 var result = await _userManager.CreateAsync(user, register.Password);
                 if (result.Succeeded)
                 {
-                   
+                    ViewBag.isFailedRegistry = false;
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                   // _logger.LogInformation(3, "User created a new account with password.");
                     return RedirectToLocal("~/Default/Objective");
                 }
             }
-
-            // If we got this far, something failed, redisplay form
+            
             return View(register);
         }
 
         [HttpGet]
         public IActionResult Login(string ReturnUrl = null)
         {
+            ViewBag.isFailedLogin = false;
             return View();
         }
 
@@ -64,6 +65,7 @@ namespace CrudApp.Controllers.Pages
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewBag.isFailedLogin = true;
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -76,7 +78,7 @@ namespace CrudApp.Controllers.Pages
                     lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                   // _logger.LogInformation(1, "User logged in.");
+                    ViewBag.isFailedLogin = false;
                     return RedirectToLocal("~/Default/Objective");
                 }
             }
