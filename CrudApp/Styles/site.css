@@ -9,9 +9,8 @@
     min-width: 300px;
 }
 
-.my-padding-8 {
-    padding-bottom: 4px;
-    padding-top: 4px;
+.my-navbar-padding{
+    padding: 4px 24px;
 }
 /*
  Landing
@@ -27,7 +26,7 @@
 
 .landing-welcome {
     height: 500px;
-    background-image: url("~/images/back001.jpg");
+    background-image: url("images/back001.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -108,7 +107,3 @@
 .my-main-nav {
     width: 30%;
 }
-
-/*.material-icons {
-    vertical-align: bottom !important;
-}*/
