@@ -27,6 +27,7 @@ namespace CrudApp.Controllers.Pages
             _signInManager = signInManager;
             //_logger = logger;
         }
+
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Registry(string ReturnUrl = null)

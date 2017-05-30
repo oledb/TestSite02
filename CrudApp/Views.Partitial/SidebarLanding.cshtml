@@ -1,0 +1,10 @@
+﻿@{
+    var sideBarBtn = new { @class = "w3-bar-item w3-button" };
+}
+
+<nav class="w3-sidebar w3-bar-block w3-card-2 w3-top w3-large w3-animate-left my-sidebar" style="display: none" id="nav_side">
+    <a id="nav_closeSide" class="w3-bar-item w3-button w3-hover-red w3-text-red">Закрыть</a>
+    @Html.ActionLink("Вход", "Login", "Account", null, sideBarBtn)
+    @Html.ActionLink("Регистрация", "Registry", "Account", null, sideBarBtn)
+    @Html.ActionLink("Сборс пароля", "ResetPassword", "Account", null, sideBarBtn)
+</nav>

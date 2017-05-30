@@ -107,3 +107,9 @@
 .my-main-nav {
     width: 30%;
 }
+
+.my-form-linkbox {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}

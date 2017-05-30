@@ -1,12 +1,11 @@
 ﻿<!DOCTYPE html>
-@{ 
-    var sideBarBtn = new { @class = "w3-bar-item w3-button" };
-}
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Podkova" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="~/site.css" />
     <link rel="stylesheet" href="~/animate.css" />
@@ -16,7 +15,10 @@
     <header>
     <div class="w3-black">
         <div class="w3-xlarge my-navbar">
-            <div class="w3-button w3-left my-navbar-padding w3-hover-green" id="nav_menuOpen">☰</div>
+            <div class="w3-left">
+            @Html.ActionLink("home", "Index", "Default", null,
+                    new { @class = "w3-button my-navbar-padding w3-hover-green material-icons" })
+            </div>
             <div class="w3-right">
                 @Html.ActionLink("Вход", "Login", "Account", null, 
                     new { @class= "w3-button my-navbar-padding w3-hover-green" })
@@ -24,13 +26,6 @@
             <div class="w3-center my-navbar-padding">Timewatch.pw</div>
         </div>
     </div>
-    <!-- Sidebar (hidden by default) -->
-    <nav class="w3-sidebar w3-bar-block w3-card-2 w3-top w3-large w3-animate-left my-sidebar" style="display: none" id="nav_side">
-        <a id="nav_closeSide" class="w3-bar-item w3-button w3-hover-red w3-text-red">Закрыть</a>
-        @Html.ActionLink("Вход", "Login", "Account", null, sideBarBtn)
-        @Html.ActionLink("Регистрация", "Registry", "Account", null, sideBarBtn)
-        @Html.ActionLink("Сборс пароля", "ResetPassword", "Account", null, sideBarBtn)
-    </nav>
     </header>
 
     @RenderBody()
