@@ -15,12 +15,12 @@ namespace CrudApp.Controllers.Pages
 {
     public class DefaultController : Controller
     {
-        EmailSender _sender;
+        IEmailSender _sender;
 
         public DefaultController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signManager,
-            EmailSender sender)
+            IEmailSender sender)
         {
             _sender = sender;
         }
@@ -28,7 +28,6 @@ namespace CrudApp.Controllers.Pages
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            await _sender.SendEmailAsync("", "Привет", "Это тестовое сообщение от <span style=\"color: green\">админа</span>");
             return View();
         }
 

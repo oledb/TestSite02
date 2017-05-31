@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using CrudApp.Models;
 using CrudApp.Models.Account;
+using CrudApp.Service.Email;
 
 namespace CrudApp.Controllers.Pages
 {
@@ -18,14 +19,16 @@ namespace CrudApp.Controllers.Pages
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailSender _sender;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            IEmailSender sender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            //_logger = logger;
+            _sender = sender;
         }
 
         // GET: /<controller>/
@@ -37,6 +40,7 @@ namespace CrudApp.Controllers.Pages
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registry(RegisterViewModel register, string ReturnUrl = null)
         {
             ViewBag.isFailedRegistry = true;
@@ -46,9 +50,11 @@ namespace CrudApp.Controllers.Pages
                 var result = await _userManager.CreateAsync(user, register.Password);
                 if (result.Succeeded)
                 {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    await _sender.SendVerifyEmailAsync(user.Email, callbackUrl);
                     ViewBag.isFailedRegistry = false;
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToLocal("~/Default/Objective");
+                    return RedirectToAction("NeedVerifyEmail", "Account");
                 }
             }
             
@@ -63,24 +69,23 @@ namespace CrudApp.Controllers.Pages
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             ViewBag.isFailedLogin = true;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager
                     .PasswordSignInAsync(
-                    model.Email,
-                    model.Password,
-                    model.RememberMe,
-                    lockoutOnFailure: false);
+                        model.Email,
+                        model.Password,
+                        model.RememberMe,
+                        lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     ViewBag.isFailedLogin = false;
-                    return RedirectToLocal("~/Default/Objective");
+                    return RedirectToAction("Objective", "Default");
                 }
                 if (result.IsNotAllowed)
                 {
@@ -98,6 +103,22 @@ namespace CrudApp.Controllers.Pages
         {
             await _signInManager.SignOutAsync();
             return RedirectToLocal("~/default/index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         [HttpGet]

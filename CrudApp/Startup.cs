@@ -13,7 +13,7 @@ using TestSite02.FaketModel;
 using CrudApp.Model;
 using CrudApp.Service.Email;
 using Microsoft.AspNetCore.HttpOverrides;
-using System;
+using System.IO;
 
 namespace CrudApp
 {
@@ -27,13 +27,18 @@ namespace CrudApp
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
 
+            if (env.IsDevelopment())
+            {
+                builder.AddJsonFile("C:\\pass\\loginPass.json");
+            }
+
             Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<SecurityDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
@@ -45,10 +50,7 @@ namespace CrudApp
 
             services.AddMvc();
 
-            if (Convert.ToBoolean(Configuration["UseFake"]))
-                services.AddSingleton<IObjectives, FakeObjectives>();
-            else
-                services.AddTransient<IObjectives, Objectives>();
+            services.AddTransient<IObjectives, Objectives>();
 
             var login = new EmailLoginFrom()
             {
@@ -63,7 +65,6 @@ namespace CrudApp
 
             services.AddDbContext<CrudDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CrudDbConnection")));
-            
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -79,7 +80,6 @@ namespace CrudApp
             loggerFactory.AddDebug();
 
             app.UseDeveloperExceptionPage();
-
 
             app.UseStaticFiles();
 
