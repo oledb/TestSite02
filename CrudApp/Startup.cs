@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using TestSite02.AbstractModel;
 using TestSite02.FaketModel;
 using CrudApp.Model;
+using CrudApp.Service.Email;
 using Microsoft.AspNetCore.HttpOverrides;
 using System;
 
@@ -34,15 +35,13 @@ namespace CrudApp
             services.AddDbContext<SecurityDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("SecurityConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<SecurityDBContext>()
-                .AddDefaultTokenProviders();
-
-            services.Configure<IdentityOptions>(option =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
-                option.Cookies.ApplicationCookie.LoginPath =
-                new PathString("/account/login");
-            });
+                config.SignIn.RequireConfirmedEmail = true;
+                config.Cookies.ApplicationCookie.LoginPath =
+                    new PathString("/account/login");
+            }).AddEntityFrameworkStores<SecurityDBContext>()
+              .AddDefaultTokenProviders();
 
             services.AddMvc();
 
@@ -50,6 +49,17 @@ namespace CrudApp
                 services.AddSingleton<IObjectives, FakeObjectives>();
             else
                 services.AddTransient<IObjectives, Objectives>();
+
+            var login = new EmailLoginFrom()
+            {
+                Login = Configuration["EmailLogin"],
+                Password = Configuration["EmailPassword"]
+            };
+
+            services.AddSingleton<IEmailSender, EmailSender>(factory =>
+            {
+                return new EmailSender(login);
+            });
 
             services.AddDbContext<CrudDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("CrudDbConnection")));

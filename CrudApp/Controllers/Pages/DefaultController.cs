@@ -9,21 +9,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using CrudApp.Models;
+using CrudApp.Service.Email;
 
 namespace CrudApp.Controllers.Pages
 {
     public class DefaultController : Controller
     {
+        EmailSender _sender;
+
         public DefaultController(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signManager)
+            SignInManager<ApplicationUser> signManager,
+            EmailSender sender)
         {
-
+            _sender = sender;
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _sender.SendEmailAsync("", "Привет", "Это тестовое сообщение от <span style=\"color: green\">админа</span>");
             return View();
         }
 

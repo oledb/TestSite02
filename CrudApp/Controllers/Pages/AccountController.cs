@@ -82,11 +82,10 @@ namespace CrudApp.Controllers.Pages
                     ViewBag.isFailedLogin = false;
                     return RedirectToLocal("~/Default/Objective");
                 }
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View(model);
+                if (result.IsNotAllowed)
+                {
+                    return RedirectToAction("NeedVerifyEmail", "Account");
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -103,6 +102,12 @@ namespace CrudApp.Controllers.Pages
 
         [HttpGet]
         public IActionResult ResetPassword(string ReturnUrl = null)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult NeedVerifyEmail()
         {
             return View();
         }
