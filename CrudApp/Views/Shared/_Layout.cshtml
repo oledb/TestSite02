@@ -18,12 +18,10 @@
     <div class="w3-black">
         <div class="w3-xlarge my-navbar">
             <div class="w3-left">
-            @Html.ActionLink("home", "Index", "Default", null,
-                    new { @class = "w3-button my-navbar-padding w3-hover-green material-icons" })
+                @await Html.PartialAsync("_HomeButton")
             </div>
             <div class="w3-right">
-                @Html.ActionLink("Вход", "Login", "Account", null, 
-                    new { @class= "w3-button my-navbar-padding w3-hover-green" })
+                @await Html.PartialAsync("_LoginButton")
             </div>
             <div class="w3-center my-navbar-padding">Timewatch.pw</div>
         </div>

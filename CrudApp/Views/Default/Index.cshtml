@@ -53,8 +53,10 @@
             <h2>Зарегестрируй уже сейчас</h2>
             <p>И получи больше возможностей</p>
             <div>
-                @Html.ActionLink("Регистрация", "Registry", "Account", null, regbtn)
-                @Html.ActionLink("Вход", "Login", "Account", null, regbtn)
+                <a asp-controller="Account" asp-action="Registry" 
+                   class="w3-btn w3-white w3-xlarge w3-hover-green">Регистрация</a>
+                <a asp-controller="Account" asp-action="Login"
+                   class="w3-btn w3-white w3-xlarge w3-hover-green">Вход</a>
             </div>
         </div>
     </div>

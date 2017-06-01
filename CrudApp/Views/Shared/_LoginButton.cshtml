@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using CrudApp.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        <input type="submit" class="w3-button my-navbar-padding w3-hover-green" value="Выход" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login"
+       class="w3-button my-navbar-padding w3-hover-green">Вход</a>
+}

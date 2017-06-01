@@ -16,9 +16,9 @@
         <div>
             <input class="w3-button w3-red" type="submit" value="Войти">
             <div class="my-form-linkbox">
-                @Html.ActionLink("Я забыл пароль", "ResetPassword", "Account", null,
-            new { style = "display: block;" })
-                @Html.ActionLink("У меня нет учетной записи", "Registry", "Account")
+                <a asp-controller="Account" asp-action="ResetPassword" 
+                   style="display: block">Я забыл пароль</a>
+                <a asp-controller="Account" asp-action="Registry">У меня нет учетной записи</a>
             </div>
         </div>
 @if (ViewBag?.isFailedLogin)

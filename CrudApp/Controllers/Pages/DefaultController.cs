@@ -16,18 +16,26 @@ namespace CrudApp.Controllers.Pages
     public class DefaultController : Controller
     {
         IEmailSender _sender;
+        UserManager<ApplicationUser> _userManager;
+        SignInManager<ApplicationUser> _signManager;
 
         public DefaultController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signManager,
             IEmailSender sender)
         {
+            _userManager = userManager;
+            _signManager = signManager;
             _sender = sender;
         }
 
         // GET: /<controller>/
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
+            if(_signManager.IsSignedIn(User))
+            {
+               return RedirectToAction("Objective", "Default");
+            }
             return View();
         }
 
