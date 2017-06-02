@@ -7,5 +7,6 @@ namespace CrudApp.Service.Email
         Task SendEmailAsync(string email, string subject, string message);
         Task SendEmailTemplateAsync(string email, string subject, string path);
         Task SendVerifyEmailAsync(string email, string url);
+        Task SendResetPasswordEmailAsync(string email, string url);
     }
 }

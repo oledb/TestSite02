@@ -8,15 +8,17 @@
         <p>
             <label asp-for="Email">Почта</label>
             <input asp-for="Email" class="w3-input w3-border w3-border-orange" type="email">
+            <span asp-validation-for="Email" class="w3-text-red"></span>
         </p>
         <p>
             <label asp-for="Password">Пароль</label>
             <input asp-for="Password" class="w3-input w3-border w3-border-orange" type="password">
+            <span asp-validation-for="Password" class="w3-text-red"></span>
         </p>
         <div>
             <input class="w3-button w3-red" type="submit" value="Войти">
             <div class="my-form-linkbox">
-                <a asp-controller="Account" asp-action="ResetPassword" 
+                <a asp-controller="Account" asp-action="ForgotPassword" 
                    style="display: block">Я забыл пароль</a>
                 <a asp-controller="Account" asp-action="Registry">У меня нет учетной записи</a>
             </div>
@@ -27,3 +29,5 @@
 }
     </form>
 </div>
+
+@await Html.PartialAsync("_ValidationScript")

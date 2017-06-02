@@ -31,6 +31,7 @@ namespace CrudApp.Controllers.Pages
             _sender = sender;
         }
 
+#region Registry
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Registry(string ReturnUrl = null)
@@ -62,6 +63,30 @@ namespace CrudApp.Controllers.Pages
         }
 
         [HttpGet]
+        public IActionResult NeedVerifyEmail()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+        #endregion
+
+#region Login-Logout
+        [HttpGet]
         public IActionResult Login(string ReturnUrl = null)
         {
             ViewBag.isFailedLogin = false;
@@ -87,7 +112,7 @@ namespace CrudApp.Controllers.Pages
                     ViewBag.isFailedLogin = false;
                     return RedirectToAction("Objective", "Default");
                 }
-                if (result.IsNotAllowed)
+                if (result.IsNotAllowed )
                 {
                     return RedirectToAction("NeedVerifyEmail", "Account");
                 }
@@ -104,35 +129,76 @@ namespace CrudApp.Controllers.Pages
             await _signInManager.SignOutAsync();
             return RedirectToLocal("~/default/index");
         }
+        #endregion
+
+#region ResetPassword
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                {
+                    return View("ForgotPasswordConfirm");
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { email = model.Email, userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _sender.SendResetPasswordEmailAsync(model.Email, callbackUrl);
+                return View("ForgotPasswordConfirm");
+            }
+
+            return View(model);
+        }
 
         [HttpGet]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public IActionResult ForgotPasswordConfirm()
         {
-            if (userId == null || code == null)
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string code = null, string email = null)
+        {
+            return (code == null && email == null) ? View("Error") : View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
             {
-                return View("Error");
+                return View(model);
             }
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
-                return View("Error");
+                return RedirectToAction("ResetPasswordConfirm", "Account");
             }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
-
-        [HttpGet]
-        public IActionResult ResetPassword(string ReturnUrl = null)
-        {
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("ResetPasswordConfirm", "Account");
+            }
             return View();
         }
 
         [HttpGet]
-        public IActionResult NeedVerifyEmail()
+        public IActionResult ResetPasswordConfirm()
         {
             return View();
         }
 
+        #endregion
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

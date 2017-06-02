@@ -32,7 +32,6 @@ namespace CrudApp.Service.Email
                 await client.ConnectAsync("smtp.yandex.ru", 25, false);
                 await client.AuthenticateAsync(_login.Login, _login.Password);
                 await client.SendAsync(emailMessage);
-
                 await client.DisconnectAsync(true);
             }
         }
@@ -50,12 +49,18 @@ namespace CrudApp.Service.Email
             await SendEmailAsync(email, "Подтверждение", template);
         }
 
+        public async Task SendResetPasswordEmailAsync(string email, string url)
+        {
+            var template = getTemplateSource("ResetPasswordEmail.html")
+                .Replace("%%url%%", url);
+            await SendEmailAsync(email, "Сброс пароля", template);
+        }
+
         private string getTemplateSource(string path)
         {
             var file = Path.Combine(Directory.GetCurrentDirectory(), "Emails", path);
             if (!File.Exists(file))
                 throw new FileNotFoundException($"File '{path}' not found");
-
             return File.ReadAllText(file);
         }
     }
