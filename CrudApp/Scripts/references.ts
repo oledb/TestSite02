@@ -6,6 +6,7 @@
 /// <reference path="Components/Design/UiDesigner.ts" />
 /// <reference path="Components/App/app.ts" />
 /// <reference path="Components/Notification/NotificationView.ts" />
+/// <reference path="Components/Router/Router.ts" />
 
 /// <reference path="Components/Data/IObjective.ts" />
 

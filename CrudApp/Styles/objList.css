@@ -73,7 +73,7 @@ input.ov-input {
     margin: 4px;
 }
 
-.w3-button {
+.ov-element > div > .w3-button {
     border-radius: 6px;
 }
 

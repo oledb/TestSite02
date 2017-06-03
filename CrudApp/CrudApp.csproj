@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Scripts\Misc\jquery.routes.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="Styles\site.css" />
     <Content Include="wwwroot\animate.css" />
   </ItemGroup>

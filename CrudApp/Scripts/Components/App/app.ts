@@ -7,13 +7,15 @@ class App {
     private Init(): void {
         
         $(document).ready(() => {
-            //this.list = new ListApp("test_list", "/api/Objective", this.error);
             this.notification = new NotificationView("notif");
             this.objListApp = new ObjListApp("#objList");
+            this.router = new Router("Objectives");
+            this.router.onactionChange = this.actionChanged;
         });
     }
     public notification: NotificationView;
     public objListApp: ObjListApp;
+    public router: Router;
 
     public error = (xhr, status, error) => {
         this.notification.ShowError("Что-то пошло не так. Операцию выполнить невозможно");
@@ -21,5 +23,9 @@ class App {
 
     public showError = (text: string) => {
         this.notification.ShowError(text);
+    }
+
+    public actionChanged = (action: string) => {
+        console.log(action);
     }
 }
