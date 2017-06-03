@@ -1,29 +1,41 @@
 ﻿class Router {
-    public constructor(private defaultAction: string = null,
+    public constructor(protected defaultActionName: string = null,
                        public actions: IAction[] = []) {
-        if (this.defaultAction == null)
-            this.defaultAction = "default";
-        this.action = this.defaultAction;
-        
-        $(window).on("hashchange", () => {
-            if (typeof this.onactionChange === "function")
-                this.onactionChange(this.action);
-        });
+        if (this.defaultActionName == null)
+            this.defaultActionName = "default";
+        this.actionName = this.defaultActionName;
+        this.setEvents();
+        this.runAction(this.defaultActionName);
     }
 
-    public get action(): string {
+    protected setEvents() {
+        $(window).on("hashchange", this.hashchange);
+    }
+
+    protected hashchange = () => {
+        let name = this.actionName;
+        if (typeof this.onactionChange === "function")
+            this.onactionChange(name);
+        this.runAction(name);
+    }
+
+    public get actionName(): string {
         let temp = $(location).attr("href").split('#')[1];
         return temp === undefined ? "" : temp;
     }
 
-    public set action(value: string){
+    public set actionName(value: string){
         $(location).attr("href", "#" + value);
     }
 
     public onactionChange: (action: string) => void;
 
-    public runAction(name: string) {
-
+    private runAction(name: string) {
+        for (let element of this.actions) {
+            if (element.name.toUpperCase() === name.toUpperCase()) {
+                element.action();
+            }
+        }
     }
 }
 

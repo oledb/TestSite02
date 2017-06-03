@@ -17,7 +17,7 @@ class NotificationView {
                 <div id="modaltextcontainer"class="w3-container w3-center w3-padding-32">
                 </div>
             </div>
-        </div>`).appendTo("#" + selector);
+        </div>`).appendTo(selector);
         $("#modalheader").append(this.closeButton, this.caption);
         $("#modaltextcontainer").append(this.textContainer);
         this.closeButton.on("click", () => {

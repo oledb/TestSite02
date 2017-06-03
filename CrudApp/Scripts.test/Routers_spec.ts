@@ -6,9 +6,9 @@ describe("Routers tests", () => {
         $(location).attr("href", "#");
     });
 
-    it("Should get default action if url does not contain #", () => {
+    it("Should get default actionName if url does not contain #", () => {
         let router = new Router();
-        expect(router.action !== "")
+        expect(router.actionName !== "")
             .toBeTruthy("Router action is undefined");
         expect($(location).attr("href").split('#')[1] !== undefined)
             .toBeTruthy("Router has not default action");
@@ -16,20 +16,40 @@ describe("Routers tests", () => {
 
     it("Should set default action on create", () => {
         let router = new Router("Objectives");
-        expect(router.action == "Objectives")
+        expect(router.actionName == "Objectives")
             .toBeTruthy("Action does not set to defaultAction");
     })
 
-    //This is not testable because it's working correctly only with $(document).ready
-    it("Should rise onactionChange if href in location changed", () => {
-        let router = new Router();
+    it("Should run onactionChange when change action", () => {
         let act = "default";
+        let router = new RouterStub();
         router.onactionChange = (action: string) => {
             act = action;
-        }
-        router.action = "Test";
-        $(location).attr("href", "#Test");
-        $(location).trigger("hashchange");
+        };
+        router.riseHashChange("Test");
         expect(act).toEqual("Test");
+    });
+
+    it("Should run action when actionName change", () => {
+        let wasRunning = false;
+        let action: IAction = {
+            name: "test", action: () => {
+                wasRunning = true;
+            }
+        }
+        let router = new RouterStub("default", [action]);
+        router.riseHashChange("Test");
+        expect(wasRunning).toBeTruthy("test action was running");
+    });
+
+    it("Should run default action on create", () => {
+        let wasRunning = false;
+        let action: IAction = {
+            name: "default", action: () => {
+                wasRunning = true;
+            }
+        }
+        let router = new RouterStub("default", [action]);
+        expect(wasRunning).toBeTruthy("test action was running");
     });
 });
