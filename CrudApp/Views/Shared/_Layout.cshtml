@@ -31,5 +31,15 @@
     @RenderBody()
 
     <script src="~/landing.js"></script>
+    <environment names="Development">
+        <script>
+            console.log("Developmnet v.0.8");
+        </script>
+    </environment>
+    <environment names="Production">
+        <script>
+            console.log("Production v.0.8");
+        </script>
+    </environment>
 </body>
 </html>

@@ -5,6 +5,7 @@
 /// <reference path="Components/Design/UiDesigner.ts" />
 /// <reference path="Components/App/app.ts" />
 /// <reference path="Components/App/StubApp.ts" />
+/// <reference path="Components/CookieMonster/CookieMonster.ts" />
 /// <reference path="Components/Notification/NotificationView.ts" />
 /// <reference path="Components/Router/Router.ts" />
 

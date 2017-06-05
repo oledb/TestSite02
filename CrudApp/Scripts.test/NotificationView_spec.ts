@@ -5,7 +5,7 @@ describe("NotificationView tests", () => {
     let baseSelector = "#notifications";
     beforeEach(() => {
         setFixtures('<div id="notifications"></div>');
-        view = new NotificationView("notifications");
+        view = new NotificationView(baseSelector);
     })
 
     it("Should create modal when create view", () => {
