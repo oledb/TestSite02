@@ -4,4 +4,6 @@ class ProjListController {
     constructor(private view: ProjListView, private model: IXhrModel) {
 
     }
+
+
 }

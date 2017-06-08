@@ -14,6 +14,7 @@
 /// <reference path="Components/Router/Router.ts" />
 
 /// <reference path="Components/Data/IObjective.ts" />
+/// <reference path="Components/Data/IProject.ts" />
 
 /// <reference path="Models/XhrModel.ts" />
 /// <reference path="Models/IXhrModel.ts" />

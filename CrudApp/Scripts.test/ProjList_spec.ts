@@ -1,6 +1,6 @@
 ﻿/// <reference path="../Scripts/references.ts" />
 
-describe("ProjectList Tests", () => {
+describe("ProjectListApp", () => {
     let view: ProjListView;
     let controller: ProjListController;
     let model: XhrModelMock;
@@ -12,6 +12,11 @@ describe("ProjectList Tests", () => {
     });
 
     describe("Add new project", () => {
-        it("Should create new element on ProjListView.Add");
+        it("Should create new element on ProjListView.Add", () => {
+            view.addElement({ id: 1, name: "Test" });
+            expect(view.elements.length).toEqual(1);
+        });
+
+        it("Should rise addnewElement event on add new button pressed");
     });
 });
