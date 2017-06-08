@@ -14,11 +14,11 @@ describe("Offline mode", () => {
             expect(document.cookie.indexOf("Object")).toBeGreaterThanOrEqual(0);
         });
 
-        it("Should get JSON from cookie", () => {
-            document.cookie = `Something=12; Object={name: "Test", number: 42}`;
-            let result = cookie.get("Object");
-            expect(result.name).toEqual("Test");
-            expect(result.number).toEqual(42);
-        })
+        //it("Should get JSON from cookie", () => {
+        //    document.cookie = `Something=12; Object={name: "Test", number: 42}`;
+        //    let result = cookie.get("Object");
+        //    expect(result.name).toEqual("Test");
+        //    expect(result.number).toEqual(42);
+        //})
     });
 });

@@ -2,6 +2,10 @@
 /// <reference path="Components/objList/objList.ts"/>
 /// <reference path="Components/objList/objListController.ts" />
 /// <reference path="Components/objList/objListApp.ts" />
+/// <reference path="Components/ProjectList/ProjListApp.ts" />
+/// <reference path="Components/ProjectList/ProjListView.ts" />
+/// <reference path="Components/ProjectList/ProjListElement.ts" />
+/// <reference path="Components/ProjectList/ProjListController.ts" />
 /// <reference path="Components/Design/UiDesigner.ts" />
 /// <reference path="Components/App/app.ts" />
 /// <reference path="Components/App/StubApp.ts" />
