@@ -14,7 +14,7 @@ using CrudApp.Service.Email;
 
 namespace CrudApp.Controllers.Pages
 {
-    
+
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -31,7 +31,7 @@ namespace CrudApp.Controllers.Pages
             _sender = sender;
         }
 
-#region Registry
+        #region Registry
         // GET: /<controller>/
         [HttpGet]
         public IActionResult Registry(string ReturnUrl = null)
@@ -58,7 +58,7 @@ namespace CrudApp.Controllers.Pages
                     return RedirectToAction("NeedVerifyEmail", "Account");
                 }
             }
-            
+
             return View(register);
         }
 
@@ -85,7 +85,7 @@ namespace CrudApp.Controllers.Pages
         }
         #endregion
 
-#region Login-Logout
+        #region Login-Logout
         [HttpGet]
         public IActionResult Login(string ReturnUrl = null)
         {
@@ -112,7 +112,7 @@ namespace CrudApp.Controllers.Pages
                     ViewBag.isFailedLogin = false;
                     return RedirectToAction("Objective", "Default");
                 }
-                if (result.IsNotAllowed )
+                if (result.IsNotAllowed)
                 {
                     return RedirectToAction("NeedVerifyEmail", "Account");
                 }
@@ -127,11 +127,11 @@ namespace CrudApp.Controllers.Pages
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToLocal("~/default/index");
+            return RedirectToAction("Index", "Default");
         }
         #endregion
 
-#region ResetPassword
+        #region ResetPassword
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -199,16 +199,5 @@ namespace CrudApp.Controllers.Pages
         }
 
         #endregion
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(DefaultController.Index), "Objecitve");
-            }
-        }
     }
 }
